@@ -1,0 +1,67 @@
+import { Link } from "@tanstack/react-router";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import logo from "@/assets/logo-conemag.png";
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-primary text-primary-foreground">
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-4 gap-10">
+          <div className="md:col-span-2">
+            <img src={logo} alt="Conemag" className="h-10 w-auto mb-4" />
+            <p className="text-primary-foreground/70 max-w-md leading-relaxed">
+              Más de 25 años fabricando equipos de alto rendimiento para el procesamiento
+              de chatarra metálica. Ahora expandiéndonos a toda Latinoamérica.
+            </p>
+            <div className="flex gap-3 mt-6">
+              <a
+                href="https://www.instagram.com/prensasconemag/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full border border-primary-foreground/20 grid place-items-center hover:bg-primary-foreground hover:text-primary transition"
+              >
+                <Instagram size={18} />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-display text-sm uppercase tracking-widest text-primary-foreground/60 mb-4">
+              Navegación
+            </h4>
+            <ul className="space-y-2">
+              {[
+                ["/equipos", "Equipos"],
+                ["/servicios", "Servicios"],
+                ["/nosotros", "Nosotros"],
+                ["/contacto", "Contacto"],
+              ].map(([to, label]) => (
+                <li key={to}>
+                  <Link to={to} className="text-primary-foreground/80 hover:text-primary-foreground transition">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-display text-sm uppercase tracking-widest text-primary-foreground/60 mb-4">
+              Contacto
+            </h4>
+            <ul className="space-y-3 text-primary-foreground/80 text-sm">
+              <li className="flex gap-2"><Phone size={16} className="mt-0.5" /> +55 (16) 3333-8966</li>
+              <li className="flex gap-2"><Mail size={16} className="mt-0.5" /> latam@conemag.com</li>
+              <li className="flex gap-2"><MapPin size={16} className="mt-0.5" /> Araraquara, SP — Brasil</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-6 border-t border-primary-foreground/10 text-sm text-primary-foreground/50 flex flex-wrap justify-between gap-4">
+          <p>© {new Date().getFullYear()} Conemag Latinoamérica. Todos los derechos reservados.</p>
+          <p>Valorizando el futuro · Recycling technology</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
