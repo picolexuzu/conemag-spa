@@ -44,7 +44,7 @@ export const Route = createFileRoute("/equipos/$slug")({
 });
 
 function EquipmentDetailPage() {
-  const { eq } = Route.useLoaderData();
+  const { eq } = Route.useLoaderData() as { eq: Equipment };
   const related = equipment.filter((e) => e.slug !== eq.slug).slice(0, 3);
 
   return (
