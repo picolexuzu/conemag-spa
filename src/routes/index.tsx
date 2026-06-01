@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Conemag Latinoamérica — Equipos para reciclaje de chatarra" },
-      { name: "description", content: "Prensas, tijeras, briquetadoras y trituradores Conemag. Tecnología brasileña con 25+ años de experiencia, ahora en toda Latinoamérica." },
+      { name: "description", content: "Prensas, cizallas, briquetadoras y trituradores Conemag. Tecnología brasileña con 25+ años de experiencia, ahora en toda Latinoamérica." },
       { property: "og:title", content: "Conemag Latinoamérica" },
       { property: "og:description", content: "Equipos de alto rendimiento para el procesamiento de chatarra metálica." },
     ],
@@ -50,7 +50,7 @@ function HomePage() {
             Tecnología que <span className="italic font-light">transforma</span> chatarra en <span className="text-primary-glow">valor</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
-            Más de 25 años fabricando prensas, tijeras y trituradores de alto rendimiento
+            Más de 25 años fabricando prensas, cizallas y trituradores de alto rendimiento
             para la industria del reciclaje metálico.
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
