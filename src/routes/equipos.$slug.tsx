@@ -4,7 +4,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { equipment, getEquipmentBySlug, type Equipment } from "@/lib/equipment";
 
 export const Route = createFileRoute("/equipos/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { eq: Equipment } => {
     const eq = getEquipmentBySlug(params.slug);
     if (!eq) throw notFound();
     return { eq };
