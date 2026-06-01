@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { equipment, getEquipmentBySlug } from "@/lib/equipment";
+import { equipment, getEquipmentBySlug, type Equipment } from "@/lib/equipment";
 
 export const Route = createFileRoute("/equipos/$slug")({
   loader: ({ params }) => {
