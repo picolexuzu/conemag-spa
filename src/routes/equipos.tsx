@@ -35,8 +35,10 @@ function EquiposPage() {
       <section className="py-20">
         <div className="container mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {equipment.map((eq) => (
-            <article
+            <Link
               key={eq.code}
+              to="/equipos/$slug"
+              params={{ slug: eq.slug }}
               className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1"
             >
               <div className="aspect-square bg-gradient-to-br from-secondary to-accent/30 p-6 grid place-items-center">
@@ -48,8 +50,11 @@ function EquiposPage() {
                   {eq.code} <span className="text-muted-foreground font-normal text-base">— {eq.name}</span>
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{eq.description}</p>
+                <div className="mt-4 inline-flex items-center gap-1 text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+                  Ver detalles <ArrowRight size={14} />
+                </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
