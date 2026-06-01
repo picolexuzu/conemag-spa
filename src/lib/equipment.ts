@@ -19,7 +19,7 @@ export type Equipment = {
 export const equipment: Equipment[] = [
   {
     code: "GTX",
-    name: "Tijera Giratoria Hidráulica",
+    name: "Cizalla Giratoria Hidráulica",
     category: "Cizallamiento",
     image: gtx,
     description:
@@ -27,7 +27,7 @@ export const equipment: Equipment[] = [
   },
   {
     code: "TPX",
-    name: "Prensa Tijera Automática",
+    name: "Prensa Cizalla Automática",
     category: "Prensado y corte",
     image: tpx,
     description:
@@ -51,7 +51,7 @@ export const equipment: Equipment[] = [
   },
   {
     code: "THX",
-    name: "Tijera Horizontal",
+    name: "Cizalla Horizontal",
     category: "Cizallamiento",
     image: thx,
     description:
@@ -59,11 +59,11 @@ export const equipment: Equipment[] = [
   },
   {
     code: "TVX",
-    name: "Tijera Vertical",
+    name: "Cizalla Vertical",
     category: "Cizallamiento",
     image: tvx,
     description:
-      "Tijera vertical automática para procesamiento intensivo de chatarra, optimizando el uso de contenedores y agregando valor al material.",
+      "Cizalla vertical automática para procesamiento intensivo de chatarra, optimizando el uso de contenedores y agregando valor al material.",
   },
   {
     code: "PSX",
@@ -75,7 +75,7 @@ export const equipment: Equipment[] = [
   },
   {
     code: "TJX",
-    name: "Tijera Caimán",
+    name: "Cizalla Caimán",
     category: "Cizallamiento",
     image: tjx,
     description:
