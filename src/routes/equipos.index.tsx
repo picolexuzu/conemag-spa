@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { equipment } from "@/lib/equipment";
 
-export const Route = createFileRoute("/equipos")({
+export const Route = createFileRoute("/equipos/")({
   head: () => ({
     meta: [
       { title: "Equipos — Conemag Latinoamérica" },
