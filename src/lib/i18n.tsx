@@ -181,7 +181,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valuing the future · Recycling technology",
 
     "home.badge": "Market leader in Brazil",
-    "home.hero.title": "Leadership and Innovation in Metal Scrap Equipment",
+    "home.hero.title": "Technology that transforms scrap into value",
     "home.hero.sub": "Over 25 years manufacturing high-performance presses, shears and shredders for the metal recycling industry.",
     "home.hero.cta1": "See equipment",
     "home.hero.cta2": "Request a quote",
