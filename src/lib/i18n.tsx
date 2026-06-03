@@ -192,8 +192,8 @@ const dictionaries: Record<Locale, Dict> = {
 
     "home.stats.years": "years of experience",
     "home.stats.lines": "equipment lines",
-    "home.stats.own": "in-house manufacturing",
-    "home.stats.region": "regional presence",
+    "home.stats.own": "customers served",
+    "home.stats.region": "international presence",
 
     "home.why": "Why Conemag",
     "home.why.title": "Leaders in scrap metal processing equipment",
@@ -349,8 +349,8 @@ const dictionaries: Record<Locale, Dict> = {
 
     "home.stats.years": "años de experiencia",
     "home.stats.lines": "líneas de equipos",
-    "home.stats.own": "fabricación propia",
-    "home.stats.region": "presencia regional",
+    "home.stats.own": "clientes atendidos",
+    "home.stats.region": "presencia internacional",
 
     "home.why": "Por qué Conemag",
     "home.why.title": "Líderes en equipos para chatarra metálica",
