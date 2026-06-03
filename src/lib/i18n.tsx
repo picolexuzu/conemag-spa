@@ -27,7 +27,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valorizando o futuro · Tecnologia em reciclagem",
 
     "home.badge": "Líder no Brasil",
-    "home.hero.title": "Liderança e Inovação em Equipamentos para Sucatas Metálicas",
+    "home.hero.title": "Tecnologia que transforma sucata em valor",
     "home.hero.sub": "Mais de 25 anos fabricando prensas, tesouras e trituradores de alto rendimento para a indústria da reciclagem metálica.",
     "home.hero.cta1": "Ver equipamentos",
     "home.hero.cta2": "Solicitar orçamento",
@@ -181,7 +181,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valuing the future · Recycling technology",
 
     "home.badge": "Market leader in Brazil",
-    "home.hero.title": "Leadership and Innovation in Metal Scrap Equipment",
+    "home.hero.title": "Technology that transforms scrap into value",
     "home.hero.sub": "Over 25 years manufacturing high-performance presses, shears and shredders for the metal recycling industry.",
     "home.hero.cta1": "See equipment",
     "home.hero.cta2": "Request a quote",
@@ -335,7 +335,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valorizando el futuro · Recycling technology",
 
     "home.badge": "Líder en Brasil",
-    "home.hero.title": "Liderazgo e Innovación en Equipos para Chatarra Metálica",
+    "home.hero.title": "Tecnología que transforma chatarra en valor",
     "home.hero.sub": "Más de 25 años fabricando prensas, cizallas y trituradores de alto rendimiento para la industria del reciclaje metálico.",
     "home.hero.cta1": "Ver equipos",
     "home.hero.cta2": "Solicitar cotización",
