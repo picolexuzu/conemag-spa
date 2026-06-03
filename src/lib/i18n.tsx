@@ -113,7 +113,7 @@ const dictionaries: Record<Locale, Dict> = {
     "serv.rental.badge": "Contratos flexíveis",
     "serv.rental.b1": "Redução de custos: acesso a tecnologia de ponta sem o investimento inicial.",
     "serv.rental.b2": "Flexibilidade: contratos adaptados à duração do seu projeto.",
-    "serv.rental.b3": "Manutenção inclusa: equipamentos sempre em perfeito estado de operação.",
+    "serv.rental.b3": "Suporte técnico especializado: equipe pronta para manutenções preventivas e corretivas.",
     "serv.rental.b4": "Atendimento especializado: equipe técnica pronta para tirar suas dúvidas.",
     "serv.fin.kicker": "Financiamento",
     "serv.fin.title": "Adquira com condições sob medida",
