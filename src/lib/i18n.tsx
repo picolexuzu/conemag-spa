@@ -335,7 +335,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valorizando el futuro · Recycling technology",
 
     "home.badge": "Líder en Brasil",
-    "home.hero.title": "Liderazgo e Innovación en Equipos para Chatarra Metálica",
+    "home.hero.title": "Tecnología que transforma chatarra en valor",
     "home.hero.sub": "Más de 25 años fabricando prensas, cizallas y trituradores de alto rendimiento para la industria del reciclaje metálico.",
     "home.hero.cta1": "Ver equipos",
     "home.hero.cta2": "Solicitar cotización",
