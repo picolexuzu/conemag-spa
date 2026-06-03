@@ -70,6 +70,11 @@ const dictionaries: Record<Locale, Dict> = {
     "equipos.filter.all": "Todos",
     "detail.datasheet": "Baixar datasheet",
 
+    "home.services.title": "Mais que máquinas: soluções completas",
+    "home.services.sub": "Aluguel e financiamento para você acessar a melhor tecnologia sem comprometer o caixa.",
+    "home.services.viewAll": "Ver todos os serviços",
+    "home.services.know": "Saiba mais",
+
     "home.cta.title": "Pronto para transformar sua operação?",
     "home.cta.sub": "Fale com nosso time e receba um orçamento personalizado para o seu projeto.",
     "home.cta.button": "Falar com um especialista",
@@ -219,6 +224,11 @@ const dictionaries: Record<Locale, Dict> = {
     "equipos.filter.all": "All",
     "detail.datasheet": "Download datasheet",
 
+    "home.services.title": "More than machines: complete solutions",
+    "home.services.sub": "Rental and financing so you can access the best technology without straining cash flow.",
+    "home.services.viewAll": "View all services",
+    "home.services.know": "Learn more",
+
     "home.cta.title": "Ready to transform your operation?",
     "home.cta.sub": "Talk to our team and get a tailored quote for your project.",
     "home.cta.button": "Talk to a specialist",
@@ -367,6 +377,11 @@ const dictionaries: Record<Locale, Dict> = {
 
     "equipos.filter.all": "Todos",
     "detail.datasheet": "Descargar datasheet",
+
+    "home.services.title": "Más que máquinas: soluciones completas",
+    "home.services.sub": "Alquiler y financiamiento para acceder a la mejor tecnología sin comprometer el flujo de caja.",
+    "home.services.viewAll": "Ver todos los servicios",
+    "home.services.know": "Saber más",
 
     "home.cta.title": "¿Listo para transformar su operación?",
     "home.cta.sub": "Hable con nuestro equipo y reciba una cotización personalizada para su proyecto.",
