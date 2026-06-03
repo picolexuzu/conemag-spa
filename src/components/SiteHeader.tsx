@@ -35,7 +35,7 @@ export function SiteHeader() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Conemag Latinoamérica" className="h-9 md:h-10 w-auto" />
+          <img src={logo} alt="Conemag" className="h-9 md:h-10 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
