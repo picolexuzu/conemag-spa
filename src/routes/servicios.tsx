@@ -40,10 +40,6 @@ function ServiciosPage() {
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <img src={rental} alt={t("serv.rental.kicker")} className="rounded-2xl shadow-elegant aspect-[4/3] object-cover" />
-            <div className="absolute -bottom-6 -right-6 bg-gradient-primary text-primary-foreground rounded-2xl p-6 shadow-glow max-w-[200px]">
-              <div className="text-3xl font-display font-bold">100%</div>
-              <div className="text-xs uppercase tracking-widest mt-1">{t("serv.rental.badge")}</div>
-            </div>
           </div>
           <div>
             <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("serv.rental.kicker")}</span>
