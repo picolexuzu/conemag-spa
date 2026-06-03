@@ -480,8 +480,8 @@ export function equipmentSlugExists(slug: string): boolean {
   return equipmentRaw.some((e) => e.slug === slug);
 }
 
-// Variações (modelos) disponíveis por código de equipamento.
-// Os números representam capacidade/tamanho do modelo.
+// Variations (models) available per equipment code.
+// Numbers represent model capacity/size.
 export const equipmentVariants: Record<string, string[]> = {
   GTX: ["500"],
   TPX: ["200", "500", "600"],
@@ -493,4 +493,22 @@ export const equipmentVariants: Record<string, string[]> = {
   TJX: ["100", "200", "300", "500"],
   PLX: ["200", "300", "400", "500"],
 };
+
+/** Total number of models in the catalog, counting variants. */
+export function getTotalModelCount(): number {
+  return equipmentRaw.reduce((total, e) => {
+    const variants = equipmentVariants[e.code] ?? [];
+    return total + (variants.length > 0 ? variants.length : 1);
+  }, 0);
+}
+
+/** Number of models for a given category, counting variants. */
+export function getCategoryModelCount(categoryKey: CategoryKey): number {
+  return equipmentRaw
+    .filter((e) => e.categoryKey === categoryKey)
+    .reduce((total, e) => {
+      const variants = equipmentVariants[e.code] ?? [];
+      return total + (variants.length > 0 ? variants.length : 1);
+    }, 0);
+}
 
