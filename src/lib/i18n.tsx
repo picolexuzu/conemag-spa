@@ -35,8 +35,8 @@ const dictionaries: Record<Locale, Dict> = {
 
     "home.stats.years": "anos de experiência",
     "home.stats.lines": "linhas de equipamentos",
-    "home.stats.own": "fabricação própria",
-    "home.stats.region": "presença regional",
+    "home.stats.own": "clientes atendidos",
+    "home.stats.region": "presença internacional",
 
     "home.why": "Por que Conemag",
     "home.why.title": "Líderes em equipamentos para sucata metálica",
