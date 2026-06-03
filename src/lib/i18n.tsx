@@ -26,7 +26,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.rights": "Todos os direitos reservados.",
     "footer.motto": "Valorizando o futuro · Tecnologia em reciclagem",
 
-    "home.badge": "Agora na América Latina",
+    "home.badge": "Líder no Brasil",
     "home.hero.title.1": "Tecnologia que",
     "home.hero.title.transforms": "transforma",
     "home.hero.title.2": "sucata em",
@@ -48,7 +48,7 @@ const dictionaries: Record<Locale, Dict> = {
     "home.feature2.title": "Alto rendimento",
     "home.feature2.desc": "Equipamentos projetados para operação contínua com máxima produtividade e eficiência energética.",
     "home.feature3.title": "Suporte técnico",
-    "home.feature3.desc": "Assistência especializada e disponibilidade de peças em toda a América Latina.",
+    "home.feature3.desc": "Assistência especializada e disponibilidade de peças em todo o território nacional.",
     "home.feature4.title": "Sustentabilidade",
     "home.feature4.desc": "Tecnologia que impulsiona a economia circular e a valorização de materiais.",
 
@@ -58,7 +58,7 @@ const dictionaries: Record<Locale, Dict> = {
     "card.viewDetails": "Ver detalhes",
 
     "home.cta.title": "Pronto para transformar sua operação?",
-    "home.cta.sub": "Fale com nosso time e receba um orçamento personalizado para o seu projeto na América Latina.",
+    "home.cta.sub": "Fale com nosso time e receba um orçamento personalizado para o seu projeto.",
     "home.cta.button": "Falar com um especialista",
 
     "equipos.kicker": "Catálogo",
@@ -105,13 +105,13 @@ const dictionaries: Record<Locale, Dict> = {
     "serv.fin.b3": "Acesso a equipamentos modernos de alta eficiência operacional.",
     "serv.fin.b4": "Preserva seu capital de giro para outras áreas do negócio.",
     "serv.fin.b5": "Suporte contínuo e assessoria técnica permanente.",
-    "serv.support.title": "Assistência técnica e peças em toda a América Latina",
+    "serv.support.title": "Assistência técnica e peças em todo o Brasil",
     "serv.support.sub": "Equipe altamente qualificada para manutenções preventivas e corretivas, com disponibilidade de peças para garantir a continuidade das suas operações.",
     "serv.support.cta": "Solicitar atendimento",
 
     "about.kicker": "Quem somos",
     "about.title": "26 anos transformando o mercado da reciclagem",
-    "about.sub": "Liderança e inovação em equipamentos para sucata metálica, agora se expandindo por toda a América Latina.",
+    "about.sub": "Liderança e inovação em equipamentos para sucata metálica, referência no mercado brasileiro.",
     "about.history": "Nossa história",
     "about.history.p1": "Com mais de 25 anos de atuação no mercado de equipamentos para o processamento e preparação de sucata metálica, a Conemag iniciou suas atividades baseando-se nos três pilares da sustentabilidade: valores ambientais, sociais e econômicos.",
     "about.history.p2": "Sempre focados em soluções e inovações do nosso setor, mantemo-nos atualizados com os procedimentos técnicos e comerciais que envolvem o nosso negócio. Nossa planta está estrategicamente localizada no centro do estado de São Paulo, na cidade de Araraquara, garantindo confiabilidade na entrega e assistência técnica dos nossos equipamentos.",
@@ -131,7 +131,7 @@ const dictionaries: Record<Locale, Dict> = {
 
     "contact.kicker": "Contato",
     "contact.title": "Vamos falar do seu projeto",
-    "contact.sub": "Nossa equipe está pronta para te orientar e oferecer a melhor solução para sua operação na América Latina.",
+    "contact.sub": "Nossa equipe está pronta para te orientar e oferecer a melhor solução para sua operação.",
     "contact.phone": "Telefone",
     "contact.whatsapp": "WhatsApp",
     "contact.email": "E-mail",
