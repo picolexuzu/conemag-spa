@@ -10,6 +10,8 @@ import plx from "@/assets/equipment/plx.jpg";
 
 import type { Locale } from "./i18n";
 
+export type CategoryKey = "prensas" | "tesouras" | "briquetadeiras" | "trituradores";
+
 type Localized = {
   name: string;
   category: string;
@@ -24,6 +26,7 @@ export type EquipmentRaw = {
   code: string;
   slug: string;
   image: string;
+  categoryKey: CategoryKey;
   i18n: Record<Locale, Localized>;
 };
 
@@ -31,6 +34,7 @@ export type Equipment = {
   code: string;
   slug: string;
   image: string;
+  categoryKey: CategoryKey;
 } & Localized;
 
 export const equipmentRaw: EquipmentRaw[] = [
