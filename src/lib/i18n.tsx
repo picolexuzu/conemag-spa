@@ -162,7 +162,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.rights": "All rights reserved.",
     "footer.motto": "Valuing the future · Recycling technology",
 
-    "home.badge": "Now in Latin America",
+    "home.badge": "Market leader in Brazil",
     "home.hero.title.1": "Technology that",
     "home.hero.title.transforms": "transforms",
     "home.hero.title.2": "scrap into",
@@ -184,7 +184,7 @@ const dictionaries: Record<Locale, Dict> = {
     "home.feature2.title": "High performance",
     "home.feature2.desc": "Equipment designed for continuous operation with maximum productivity and energy efficiency.",
     "home.feature3.title": "Technical support",
-    "home.feature3.desc": "Specialized assistance and parts availability across Latin America.",
+    "home.feature3.desc": "Specialized assistance and parts availability throughout Brazil.",
     "home.feature4.title": "Sustainability",
     "home.feature4.desc": "Technology driving the circular economy and material valorization.",
 
@@ -194,7 +194,7 @@ const dictionaries: Record<Locale, Dict> = {
     "card.viewDetails": "View details",
 
     "home.cta.title": "Ready to transform your operation?",
-    "home.cta.sub": "Talk to our team and get a tailored quote for your project in Latin America.",
+    "home.cta.sub": "Talk to our team and get a tailored quote for your project.",
     "home.cta.button": "Talk to a specialist",
 
     "equipos.kicker": "Catalog",
@@ -241,13 +241,13 @@ const dictionaries: Record<Locale, Dict> = {
     "serv.fin.b3": "Access to modern, highly efficient equipment.",
     "serv.fin.b4": "Preserves your working capital for other business areas.",
     "serv.fin.b5": "Continuous support and permanent technical advisory.",
-    "serv.support.title": "Technical support and parts across Latin America",
+    "serv.support.title": "Technical support and parts across Brazil",
     "serv.support.sub": "Highly qualified team for preventive and corrective maintenance, with parts availability to ensure the continuity of your operations.",
     "serv.support.cta": "Request service",
 
     "about.kicker": "Who we are",
     "about.title": "26 years transforming the recycling market",
-    "about.sub": "Leadership and innovation in scrap metal equipment, now expanding across Latin America.",
+    "about.sub": "Leadership and innovation in scrap metal equipment, a reference in the Brazilian market.",
     "about.history": "Our history",
     "about.history.p1": "With over 25 years in the scrap metal processing equipment market, Conemag started its activities based on the three pillars of sustainability: environmental, social and economic values.",
     "about.history.p2": "Always focused on solutions and innovations in our sector, we keep up with technical and commercial procedures involving our business. Our plant is strategically located in the center of São Paulo state, in Araraquara, ensuring reliability in delivery and technical support of our equipment.",
@@ -267,7 +267,7 @@ const dictionaries: Record<Locale, Dict> = {
 
     "contact.kicker": "Contact",
     "contact.title": "Let's talk about your project",
-    "contact.sub": "Our team is ready to advise you and offer the best solution for your operation in Latin America.",
+    "contact.sub": "Our team is ready to advise you and offer the best solution for your operation.",
     "contact.phone": "Phone",
     "contact.whatsapp": "WhatsApp",
     "contact.email": "Email",
