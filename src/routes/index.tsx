@@ -36,8 +36,8 @@ function HomePage() {
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
     [`+${totalModels}`, t("home.stats.lines")],
-    ["100%", t("home.stats.own")],
-    ["BRASIL", t("home.stats.region")],
+    ["+1000", t("home.stats.own")],
+    ["LATAM", t("home.stats.region")],
   ];
   return (
     <SiteLayout>
