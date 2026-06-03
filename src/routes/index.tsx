@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog } from "lucide-react";
+import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getEquipmentList, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
