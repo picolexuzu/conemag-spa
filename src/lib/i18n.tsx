@@ -156,7 +156,7 @@ const dictionaries: Record<Locale, Dict> = {
     "nav.quote": "Request a quote",
     "nav.menu": "Menu",
 
-    "footer.tagline": "Over 25 years manufacturing high-performance equipment for scrap metal processing. Now expanding across Latin America.",
+    "footer.tagline": "Over 25 years manufacturing high-performance equipment for scrap metal processing. Market leader in Brazil.",
     "footer.nav": "Navigation",
     "footer.contact": "Contact",
     "footer.rights": "All rights reserved.",
