@@ -39,7 +39,7 @@ export type Equipment = {
 
 export const equipmentRaw: EquipmentRaw[] = [
   {
-    code: "GTX", slug: "gtx", image: gtx,
+    code: "GTX", categoryKey: "tesouras", slug: "gtx", image: gtx,
     i18n: {
       pt: {
         name: "Tesoura Giratória Hidráulica",
@@ -89,7 +89,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "TPX", slug: "tpx", image: tpx,
+    code: "TPX", categoryKey: "prensas", slug: "tpx", image: tpx,
     i18n: {
       pt: {
         name: "Prensa Tesoura Automática", category: "Prensagem e corte",
@@ -136,7 +136,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "BMX", slug: "bmx", image: bmx,
+    code: "BMX", categoryKey: "briquetadeiras", slug: "bmx", image: bmx,
     i18n: {
       pt: {
         name: "Briquetadeira Automática", category: "Briquetes",
@@ -183,7 +183,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "TRX", slug: "trx", image: trx,
+    code: "TRX", categoryKey: "trituradores", slug: "trx", image: trx,
     i18n: {
       pt: {
         name: "Trituradores", category: "Trituração",
@@ -230,7 +230,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "THX", slug: "thx", image: thx,
+    code: "THX", categoryKey: "tesouras", slug: "thx", image: thx,
     i18n: {
       pt: {
         name: "Tesoura Horizontal", category: "Cisalhamento",
@@ -277,7 +277,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "TVX", slug: "tvx", image: tvx,
+    code: "TVX", categoryKey: "tesouras", slug: "tvx", image: tvx,
     i18n: {
       pt: {
         name: "Tesoura Vertical", category: "Cisalhamento",
@@ -324,7 +324,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "PSX", slug: "psx", image: psx,
+    code: "PSX", categoryKey: "prensas", slug: "psx", image: psx,
     i18n: {
       pt: {
         name: "Prensa Jacaré", category: "Prensagem",
@@ -371,7 +371,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "TJX", slug: "tjx", image: tjx,
+    code: "TJX", categoryKey: "tesouras", slug: "tjx", image: tjx,
     i18n: {
       pt: {
         name: "Tesoura Jacaré", category: "Cisalhamento",
@@ -418,7 +418,7 @@ export const equipmentRaw: EquipmentRaw[] = [
     },
   },
   {
-    code: "PLX", slug: "plx", image: plx,
+    code: "PLX", categoryKey: "prensas", slug: "plx", image: plx,
     i18n: {
       pt: {
         name: "Prensa Automática para Alumínio", category: "Prensagem",
@@ -467,13 +467,13 @@ export const equipmentRaw: EquipmentRaw[] = [
 ];
 
 export function getEquipmentList(locale: Locale): Equipment[] {
-  return equipmentRaw.map((e) => ({ code: e.code, slug: e.slug, image: e.image, ...e.i18n[locale] }));
+  return equipmentRaw.map((e) => ({ code: e.code, slug: e.slug, image: e.image, categoryKey: e.categoryKey, ...e.i18n[locale] }));
 }
 
 export function getEquipmentBySlugLocalized(slug: string, locale: Locale): Equipment | undefined {
   const e = equipmentRaw.find((x) => x.slug === slug);
   if (!e) return undefined;
-  return { code: e.code, slug: e.slug, image: e.image, ...e.i18n[locale] };
+  return { code: e.code, slug: e.slug, image: e.image, categoryKey: e.categoryKey, ...e.i18n[locale] };
 }
 
 export function equipmentSlugExists(slug: string): boolean {
