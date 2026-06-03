@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { getEquipmentList, type CategoryKey } from "@/lib/equipment";
+import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
 
@@ -32,9 +32,10 @@ function HomePage() {
     { key: "briquetadeiras", icon: Package },
     { key: "trituradores", icon: Cog },
   ];
+  const totalModels = getTotalModelCount();
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
-    ["+9", t("home.stats.lines")],
+    [`+${totalModels}`, t("home.stats.lines")],
     ["100%", t("home.stats.own")],
     ["BRASIL", t("home.stats.region")],
   ];
@@ -137,7 +138,7 @@ function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((c) => {
-              const count = equipment.filter((e) => e.categoryKey === c.key).length;
+              const count = getCategoryModelCount(c.key);
               return (
                 <Link
                   key={c.key}
