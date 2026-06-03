@@ -20,7 +20,7 @@ const dictionaries: Record<Locale, Dict> = {
     "nav.quote": "Solicitar orçamento",
     "nav.menu": "Menu",
 
-    "footer.tagline": "Mais de 25 anos fabricando equipamentos de alto rendimento para o processamento de sucata metálica. Agora expandindo para toda a América Latina.",
+    "footer.tagline": "Mais de 25 anos fabricando equipamentos de alto rendimento para o processamento de sucata metálica. Líder de mercado no Brasil.",
     "footer.nav": "Navegação",
     "footer.contact": "Contato",
     "footer.rights": "Todos os direitos reservados.",
