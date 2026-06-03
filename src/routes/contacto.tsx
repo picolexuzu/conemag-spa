@@ -6,10 +6,10 @@ import { useT } from "@/lib/i18n";
 export const Route = createFileRoute("/contacto")({
   head: () => ({
     meta: [
-      { title: "Contacto — Conemag Latinoamérica" },
-      { name: "description", content: "Solicite una cotización o hable con un especialista. Atención en toda Latinoamérica para equipos de reciclaje metálico." },
-      { property: "og:title", content: "Contacto — Conemag" },
-      { property: "og:description", content: "Hable con nuestro equipo de especialistas en Latinoamérica." },
+      { title: "Contato — Conemag" },
+      { name: "description", content: "Solicite um orçamento ou fale com um especialista. Atendimento no Brasil para equipamentos de reciclagem de sucata." },
+      { property: "og:title", content: "Contato — Conemag" },
+      { property: "og:description", content: "Fale com nossa equipe de especialistas no Brasil." },
     ],
   }),
   component: ContactoPage,
@@ -36,7 +36,7 @@ function ContactoPage() {
             {[
               { icon: Phone, title: t("contact.phone"), value: "+55 (16) 3333-8966" },
               { icon: MessageCircle, title: t("contact.whatsapp"), value: "+55 (16) 99999-0000" },
-              { icon: Mail, title: t("contact.email"), value: "latam@conemag.com" },
+              { icon: Mail, title: t("contact.email"), value: "contato@conemag.com" },
               { icon: MapPin, title: t("contact.hq"), value: t("contact.hq.value") },
             ].map((c) => (
               <div key={c.title} className="p-6 bg-card border border-border rounded-2xl flex gap-4 hover:shadow-card transition">

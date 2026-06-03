@@ -7,7 +7,7 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/equipos/")({
   head: () => ({
     meta: [
-      { title: "Equipos — Conemag Latinoamérica" },
+      { title: "Equipamentos — Conemag" },
       { name: "description", content: "Línea completa de equipos Conemag: prensas, cizallas, briquetadoras, trituradores y más para el procesamiento de chatarra metálica." },
       { property: "og:title", content: "Equipos Conemag" },
       { property: "og:description", content: "Prensas, cizallas, briquetadoras y trituradores para chatarra metálica." },

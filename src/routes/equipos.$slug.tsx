@@ -15,7 +15,7 @@ export const Route = createFileRoute("/equipos/$slug")({
     const eq = raw.i18n.pt;
     return {
       meta: [
-        { title: `${raw.code} ${eq.name} — Conemag Latinoamérica` },
+        { title: `${raw.code} ${eq.name} — Conemag` },
         { name: "description", content: eq.description },
         { property: "og:title", content: `${raw.code} ${eq.name} — Conemag` },
         { property: "og:description", content: eq.description },
