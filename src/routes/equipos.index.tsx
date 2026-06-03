@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { equipment } from "@/lib/equipment";
+import { getEquipmentList } from "@/lib/equipment";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/equipos/")({
   head: () => ({
@@ -16,18 +17,19 @@ export const Route = createFileRoute("/equipos/")({
 });
 
 function EquiposPage() {
+  const { t, locale } = useI18n();
+  const equipment = getEquipmentList(locale);
   return (
     <SiteLayout>
       <section className="pt-40 pb-16 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative">
-          <span className="text-sm uppercase tracking-widest text-primary-glow font-semibold">Catálogo</span>
+          <span className="text-sm uppercase tracking-widest text-lime font-semibold">{t("equipos.kicker")}</span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance max-w-4xl">
-            Equipos para cada etapa del reciclaje
+            {t("equipos.title")}
           </h1>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            Desde el corte y prensado hasta la briquetadora y trituración: una línea completa
-            para procesar chatarra metálica con máxima eficiencia.
+            {t("equipos.sub")}
           </p>
         </div>
       </section>
@@ -51,7 +53,7 @@ function EquiposPage() {
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{eq.description}</p>
                 <div className="mt-4 inline-flex items-center gap-1 text-primary font-semibold text-sm group-hover:gap-2 transition-all">
-                  Ver detalles <ArrowRight size={14} />
+                  {t("card.viewDetails")} <ArrowRight size={14} />
                 </div>
               </div>
             </Link>
@@ -61,12 +63,12 @@ function EquiposPage() {
 
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">¿Necesita un equipo a medida?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">{t("equipos.custom.title")}</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Diseñamos soluciones personalizadas según el tipo y volumen de material que procesa.
+            {t("equipos.custom.sub")}
           </p>
           <Link to="/contacto" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
-            Contactar a un especialista <ArrowRight size={18} />
+            {t("equipos.custom.cta")} <ArrowRight size={18} />
           </Link>
         </div>
       </section>

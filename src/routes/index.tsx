@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { equipment } from "@/lib/equipment";
+import { getEquipmentList } from "@/lib/equipment";
+import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -16,14 +17,21 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const features = [
-  { icon: Shield, title: "Calidad certificada", desc: "Cumplimos con los más altos estándares de seguridad NR12 y normas internacionales." },
-  { icon: Zap, title: "Alto rendimiento", desc: "Equipos diseñados para operación continua con máxima productividad y eficiencia energética." },
-  { icon: Wrench, title: "Soporte técnico", desc: "Asistencia especializada y disponibilidad de repuestos en toda Latinoamérica." },
-  { icon: Recycle, title: "Sostenibilidad", desc: "Tecnología que impulsa la economía circular y la valorización de materiales." },
-];
-
 function HomePage() {
+  const { t, locale } = useI18n();
+  const equipment = getEquipmentList(locale);
+  const features = [
+    { icon: Shield, title: t("home.feature1.title"), desc: t("home.feature1.desc") },
+    { icon: Zap, title: t("home.feature2.title"), desc: t("home.feature2.desc") },
+    { icon: Wrench, title: t("home.feature3.title"), desc: t("home.feature3.desc") },
+    { icon: Recycle, title: t("home.feature4.title"), desc: t("home.feature4.desc") },
+  ];
+  const stats: [string, string][] = [
+    ["+26", t("home.stats.years")],
+    ["+9", t("home.stats.lines")],
+    ["100%", t("home.stats.own")],
+    ["LATAM", t("home.stats.region")],
+  ];
   return (
     <SiteLayout>
       {/* HERO */}
@@ -44,34 +52,33 @@ function HomePage() {
         <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
           <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-lime/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-lime">
             <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
-            Ahora en Latinoamérica
+            {t("home.badge")}
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
-            Tecnología que <span className="italic font-light">transforma</span> chatarra en <span className="text-lime">valor</span>
+            {t("home.hero.title.1")} <span className="italic font-light">{t("home.hero.title.transforms")}</span> {t("home.hero.title.2")} <span className="text-lime">{t("home.hero.title.value")}</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
-            Más de 25 años fabricando prensas, cizallas y trituradores de alto rendimiento
-            para la industria del reciclaje metálico.
+            {t("home.hero.sub")}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
             <Link
               to="/equipos"
               className="group inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition-all"
             >
-              Ver equipos
+              {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/contacto"
               className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition"
             >
-              Solicitar cotización
+              {t("home.hero.cta2")}
             </Link>
           </div>
         </div>
 
         <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 text-xs uppercase tracking-widest flex-col items-center gap-2 animate-pulse">
-          <span>Scroll</span>
+          <span>{t("home.scroll")}</span>
           <div className="w-px h-12 bg-gradient-to-b from-primary-foreground/60 to-transparent" />
         </div>
       </section>
@@ -79,12 +86,7 @@ function HomePage() {
       {/* STATS */}
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-          {[
-            ["+26", "años de experiencia"],
-            ["+9", "líneas de equipos"],
-            ["100%", "fabricación propia"],
-            ["LATAM", "presencia regional"],
-          ].map(([num, label]) => (
+          {stats.map(([num, label]) => (
             <div key={label}>
               <div className="text-4xl md:text-6xl font-display font-bold text-lime">{num}</div>
               <div className="mt-2 text-sm uppercase tracking-widest text-primary-foreground/70">{label}</div>
@@ -97,9 +99,9 @@ function HomePage() {
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mb-16">
-            <span className="text-sm uppercase tracking-widest text-primary font-semibold">Por qué Conemag</span>
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.why")}</span>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">
-              Líderes en equipos para chatarra metálica
+              {t("home.why.title")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -124,13 +126,13 @@ function HomePage() {
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-16">
             <div className="max-w-2xl">
-              <span className="text-sm uppercase tracking-widest text-primary font-semibold">Línea de productos</span>
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.products.kicker")}</span>
               <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">
-                Nuestros equipos
+                {t("home.products.title")}
               </h2>
             </div>
             <Link to="/equipos" className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all">
-              Ver todos <ChevronRight size={18} />
+              {t("home.products.viewAll")} <ChevronRight size={18} />
             </Link>
           </div>
 
@@ -156,7 +158,7 @@ function HomePage() {
                   </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">{eq.description}</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-primary font-semibold text-sm group-hover:gap-2 transition-all">
-                    Ver detalles <ChevronRight size={14} />
+                    {t("card.viewDetails")} <ChevronRight size={14} />
                   </div>
                 </div>
               </Link>
@@ -170,16 +172,16 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">
-            ¿Listo para transformar su operación?
+            {t("home.cta.title")}
           </h2>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">
-            Hable con nuestro equipo y reciba una cotización personalizada para su proyecto en Latinoamérica.
+            {t("home.cta.sub")}
           </p>
           <Link
             to="/contacto"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
           >
-            Hablar con un especialista <ArrowRight size={18} />
+            {t("home.cta.button")} <ArrowRight size={18} />
           </Link>
         </div>
       </section>
