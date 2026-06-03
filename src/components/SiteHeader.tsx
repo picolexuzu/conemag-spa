@@ -40,16 +40,16 @@ export function SiteHeader() {
             <Link
               key={item.to}
               to={item.to}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/85 hover:text-primary-foreground transition-colors relative group"
-              activeProps={{ className: "text-primary-foreground" }}
+              className="px-4 py-2 text-sm font-medium text-primary-foreground/85 hover:text-lime transition-colors relative group"
+              activeProps={{ className: "text-lime" }}
             >
               {item.label}
-              <span className="absolute inset-x-4 -bottom-0.5 h-px bg-primary-foreground scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              <span className="absolute inset-x-4 -bottom-0.5 h-px bg-lime scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </Link>
           ))}
           <Link
             to="/contacto"
-            className="ml-4 inline-flex items-center rounded-full bg-primary-foreground text-primary px-5 py-2 text-sm font-semibold hover:bg-primary-foreground/90 transition shadow-glow"
+            className="ml-4 inline-flex items-center rounded-full bg-lime text-lime-foreground px-5 py-2 text-sm font-semibold hover:bg-lime/90 transition shadow-lime-glow"
           >
             Cotizar ahora
           </Link>

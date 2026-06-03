@@ -42,12 +42,12 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-radial opacity-60" />
 
         <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-pulse" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-lime/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-lime">
+            <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
             Ahora en Latinoamérica
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
-            Tecnología que <span className="italic font-light">transforma</span> chatarra en <span className="text-primary-glow">valor</span>
+            Tecnología que <span className="italic font-light">transforma</span> chatarra en <span className="text-lime">valor</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
             Más de 25 años fabricando prensas, cizallas y trituradores de alto rendimiento
@@ -56,7 +56,7 @@ function HomePage() {
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
             <Link
               to="/equipos"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary-foreground text-primary px-7 py-3.5 font-semibold hover:shadow-glow transition-all"
+              className="group inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition-all"
             >
               Ver equipos
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -86,7 +86,7 @@ function HomePage() {
             ["LATAM", "presencia regional"],
           ].map(([num, label]) => (
             <div key={label}>
-              <div className="text-4xl md:text-6xl font-display font-bold text-primary-glow">{num}</div>
+              <div className="text-4xl md:text-6xl font-display font-bold text-lime">{num}</div>
               <div className="mt-2 text-sm uppercase tracking-widest text-primary-foreground/70">{label}</div>
             </div>
           ))}
@@ -177,7 +177,7 @@ function HomePage() {
           </p>
           <Link
             to="/contacto"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary-foreground text-primary px-8 py-4 font-semibold hover:shadow-glow transition"
+            className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
           >
             Hablar con un especialista <ArrowRight size={18} />
           </Link>
