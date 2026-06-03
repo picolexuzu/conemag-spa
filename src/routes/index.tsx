@@ -8,9 +8,9 @@ import gtxHero from "@/assets/gtx-hero.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Conemag Latinoamérica — Equipos para reciclaje de chatarra" },
-      { name: "description", content: "Prensas, cizallas, briquetadoras y trituradores Conemag. Tecnología brasileña con 25+ años de experiencia, ahora en toda Latinoamérica." },
-      { property: "og:title", content: "Conemag Latinoamérica" },
+      { title: "Conemag — Equipamentos para reciclagem de sucata" },
+      { name: "description", content: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 25+ anos de experiência, líder de mercado no Brasil." },
+      { property: "og:title", content: "Conemag" },
       { property: "og:description", content: "Equipos de alto rendimiento para el procesamiento de chatarra metálica." },
     ],
   }),
@@ -30,7 +30,7 @@ function HomePage() {
     ["+26", t("home.stats.years")],
     ["+9", t("home.stats.lines")],
     ["100%", t("home.stats.own")],
-    ["LATAM", t("home.stats.region")],
+    ["BRASIL", t("home.stats.region")],
   ];
   return (
     <SiteLayout>

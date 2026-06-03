@@ -52,14 +52,14 @@ export function SiteFooter() {
             </h4>
             <ul className="space-y-3 text-primary-foreground/80 text-sm">
               <li className="flex gap-2"><Phone size={16} className="mt-0.5" /> +55 (16) 3333-8966</li>
-              <li className="flex gap-2"><Mail size={16} className="mt-0.5" /> latam@conemag.com</li>
+              <li className="flex gap-2"><Mail size={16} className="mt-0.5" /> contato@conemag.com</li>
               <li className="flex gap-2"><MapPin size={16} className="mt-0.5" /> Araraquara, SP — Brasil</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-primary-foreground/10 text-sm text-primary-foreground/50 flex flex-wrap justify-between gap-4">
-          <p>© {new Date().getFullYear()} Conemag Latinoamérica. {t("footer.rights")}</p>
+          <p>© {new Date().getFullYear()} Conemag. {t("footer.rights")}</p>
           <p>{t("footer.motto")}</p>
         </div>
       </div>

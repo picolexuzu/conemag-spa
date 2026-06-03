@@ -5,7 +5,7 @@ import { useT } from "@/lib/i18n";
 export const Route = createFileRoute("/nosotros")({
   head: () => ({
     meta: [
-      { title: "Nosotros — Conemag Latinoamérica" },
+      { title: "Sobre — Conemag" },
       { name: "description", content: "Más de 26 años fabricando equipos para el procesamiento de chatarra metálica. Conozca la historia, misión y valores de Conemag." },
       { property: "og:title", content: "Nosotros — Conemag" },
       { property: "og:description", content: "Historia, misión y valores de Conemag, líder en equipos para reciclaje metálico." },

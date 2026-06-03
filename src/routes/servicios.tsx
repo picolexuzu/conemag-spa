@@ -8,7 +8,7 @@ import financing from "@/assets/service-financing.jpg";
 export const Route = createFileRoute("/servicios")({
   head: () => ({
     meta: [
-      { title: "Servicios — Conemag Latinoamérica" },
+      { title: "Serviços — Conemag" },
       { name: "description", content: "Alquiler de equipos, financiamiento, asistencia técnica y repuestos. Soluciones completas para el reciclaje industrial." },
       { property: "og:title", content: "Servicios Conemag" },
       { property: "og:description", content: "Alquiler, financiamiento y asistencia técnica para sus operaciones." },
