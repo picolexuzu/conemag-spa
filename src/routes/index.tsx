@@ -214,6 +214,75 @@ function HomePage() {
 
       {/* CTA */}
       <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+        {/* spacer wrapper handled by sections below */}
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-16">
+            <div className="max-w-2xl">
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("serv.kicker")}</span>
+              <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.services.title")}</h2>
+              <p className="mt-4 text-muted-foreground">{t("home.services.sub")}</p>
+            </div>
+            <Link to="/servicios" className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all">
+              {t("home.services.viewAll")} <ChevronRight size={18} />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link
+              to="/servicios"
+              className="group relative p-10 rounded-3xl bg-card border border-border hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden"
+            >
+              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-primary text-primary-foreground grid place-items-center mb-6">
+                  <KeyRound size={24} />
+                </div>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">{t("serv.rental.kicker")}</span>
+                <h3 className="mt-2 text-2xl md:text-3xl font-display font-bold">{t("serv.rental.title")}</h3>
+                <p className="mt-4 text-muted-foreground leading-relaxed">{t("serv.rental.desc")}</p>
+                <ul className="mt-6 space-y-2 text-sm">
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b1")}</li>
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b2")}</li>
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b3")}</li>
+                </ul>
+                <div className="mt-8 inline-flex items-center gap-1 text-primary font-semibold group-hover:gap-2 transition-all">
+                  {t("home.services.know")} <ChevronRight size={16} />
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              to="/servicios"
+              className="group relative p-10 rounded-3xl bg-primary text-primary-foreground hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden"
+            >
+              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/20 group-hover:bg-lime/30 transition" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-lime text-lime-foreground grid place-items-center mb-6">
+                  <Landmark size={24} />
+                </div>
+                <span className="text-xs uppercase tracking-widest text-lime font-semibold">{t("serv.fin.kicker")}</span>
+                <h3 className="mt-2 text-2xl md:text-3xl font-display font-bold">{t("serv.fin.title")}</h3>
+                <p className="mt-4 text-primary-foreground/80 leading-relaxed">{t("serv.fin.desc")}</p>
+                <ul className="mt-6 space-y-2 text-sm">
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b1")}</li>
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b2")}</li>
+                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b4")}</li>
+                </ul>
+                <div className="mt-8 inline-flex items-center gap-1 text-lime font-semibold group-hover:gap-2 transition-all">
+                  {t("home.services.know")} <ChevronRight size={16} />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">
