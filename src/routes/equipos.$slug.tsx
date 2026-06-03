@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Download } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { equipmentRaw, equipmentSlugExists, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
@@ -83,12 +83,13 @@ function EquipmentDetailPage() {
                 >
                   {t("detail.requestQuote")} <ArrowRight size={18} />
                 </Link>
-                <Link
-                  to="/equipos"
+                <a
+                  href={`/datasheets/${eq.slug}.pdf`}
+                  download
                   className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition"
                 >
-                  {t("detail.viewAll")}
-                </Link>
+                  <Download size={18} /> {t("detail.datasheet")}
+                </a>
               </div>
             </div>
             <div className="aspect-square bg-gradient-to-br from-primary-foreground/10 to-primary-foreground/5 rounded-3xl p-10 grid place-items-center backdrop-blur-sm border border-primary-foreground/10">

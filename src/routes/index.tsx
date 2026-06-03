@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight } from "lucide-react";
+import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { getEquipmentList } from "@/lib/equipment";
+import { getEquipmentList, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
 
@@ -25,6 +25,12 @@ function HomePage() {
     { icon: Zap, title: t("home.feature2.title"), desc: t("home.feature2.desc") },
     { icon: Wrench, title: t("home.feature3.title"), desc: t("home.feature3.desc") },
     { icon: Recycle, title: t("home.feature4.title"), desc: t("home.feature4.desc") },
+  ];
+  const categories: { key: CategoryKey; icon: typeof Layers }[] = [
+    { key: "prensas", icon: Layers },
+    { key: "tesouras", icon: Scissors },
+    { key: "briquetadeiras", icon: Package },
+    { key: "trituradores", icon: Cog },
   ];
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
@@ -117,6 +123,45 @@ function HomePage() {
                 <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <div className="max-w-2xl mb-16">
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.cat.kicker")}</span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.cat.title")}</h2>
+            <p className="mt-4 text-muted-foreground">{t("home.cat.sub")}</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((c) => {
+              const count = equipment.filter((e) => e.categoryKey === c.key).length;
+              return (
+                <Link
+                  key={c.key}
+                  to="/equipos"
+                  search={{ cat: c.key }}
+                  className="group relative p-8 rounded-2xl bg-primary text-primary-foreground overflow-hidden hover:shadow-elegant transition-all hover:-translate-y-1"
+                >
+                  <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-lime text-lime-foreground grid place-items-center mb-5">
+                      <c.icon size={22} />
+                    </div>
+                    <h3 className="text-2xl font-display font-bold">{t(`cat.${c.key}`)}</h3>
+                    <p className="mt-3 text-sm text-primary-foreground/70 leading-relaxed">{t(`cat.${c.key}.desc`)}</p>
+                    <div className="mt-6 flex items-center justify-between">
+                      <span className="text-xs uppercase tracking-widest text-lime">{count} {count === 1 ? "modelo" : "modelos"}</span>
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-lime group-hover:gap-2 transition-all">
+                        {t("home.cat.viewLine")} <ChevronRight size={14} />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
