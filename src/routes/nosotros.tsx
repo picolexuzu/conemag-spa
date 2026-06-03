@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/nosotros")({
   head: () => ({
@@ -13,26 +14,25 @@ export const Route = createFileRoute("/nosotros")({
   component: NosotrosPage,
 });
 
-const values = [
-  { title: "Ética", desc: "Transparencia y respeto en cada relación comercial y técnica." },
-  { title: "Compromiso", desc: "Con la productividad y seguridad de nuestros clientes." },
-  { title: "Mejora continua", desc: "Procesos y productos en constante evolución." },
-  { title: "Innovación", desc: "Tecnología aplicada a las exigencias reales del mercado." },
-];
-
 function NosotrosPage() {
+  const t = useT();
+  const values = [
+    { title: t("about.v1.title"), desc: t("about.v1.desc") },
+    { title: t("about.v2.title"), desc: t("about.v2.desc") },
+    { title: t("about.v3.title"), desc: t("about.v3.desc") },
+    { title: t("about.v4.title"), desc: t("about.v4.desc") },
+  ];
   return (
     <SiteLayout>
       <section className="pt-40 pb-20 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative max-w-4xl">
-          <span className="text-sm uppercase tracking-widest text-primary-glow font-semibold">Quiénes somos</span>
+          <span className="text-sm uppercase tracking-widest text-lime font-semibold">{t("about.kicker")}</span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">
-            26 años transformando el mercado del reciclaje
+            {t("about.title")}
           </h1>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            Liderazgo e innovación en equipos para chatarra metálica, ahora expandiéndose
-            por toda Latinoamérica.
+            {t("about.sub")}
           </p>
         </div>
       </section>
@@ -40,42 +40,26 @@ function NosotrosPage() {
       <section className="py-24">
         <div className="container mx-auto px-6 max-w-4xl space-y-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Nuestra historia</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t("about.history")}</h2>
             <div className="prose prose-lg text-muted-foreground leading-relaxed space-y-4">
-              <p>
-                Con más de 25 años de actuación en el mercado de equipos para el procesamiento
-                y preparación de chatarra metálica, Conemag inició sus actividades basándose
-                en los tres pilares de la sostenibilidad: valores ambientales, sociales y económicos.
-              </p>
-              <p>
-                Siempre enfocados en soluciones e innovaciones de nuestro sector, nos mantenemos
-                actualizados con los procedimientos técnicos y comerciales que abarcan nuestro negocio.
-                Nuestra planta está estratégicamente ubicada en el centro del estado de São Paulo,
-                en la ciudad de Araraquara, garantizando confiabilidad en la entrega y asistencia
-                técnica de nuestros equipos.
-              </p>
+              <p>{t("about.history.p1")}</p>
+              <p>{t("about.history.p2")}</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-8 bg-card border border-border rounded-2xl shadow-card">
-              <h3 className="text-2xl font-bold">Misión</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">
-                Desarrollar y producir equipos de alta calidad que cumplan con los más exigentes
-                requisitos de seguridad y productividad.
-              </p>
+              <h3 className="text-2xl font-bold">{t("about.mission")}</h3>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{t("about.mission.desc")}</p>
             </div>
             <div className="p-8 bg-card border border-border rounded-2xl shadow-card">
-              <h3 className="text-2xl font-bold">Visión</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">
-                Ser reconocida como una empresa referencia en el desarrollo de soluciones para el
-                mercado de la chatarra metálica, garantizando la satisfacción de clientes, socios y colaboradores.
-              </p>
+              <h3 className="text-2xl font-bold">{t("about.vision")}</h3>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{t("about.vision.desc")}</p>
             </div>
           </div>
 
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Nuestros valores</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">{t("about.values")}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {values.map((v, i) => (
                 <div key={v.title} className="p-6 rounded-2xl bg-secondary border border-border">
