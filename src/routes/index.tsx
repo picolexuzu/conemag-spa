@@ -138,7 +138,7 @@ function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((c) => {
-              const count = equipment.filter((e) => e.categoryKey === c.key).length;
+              const count = getCategoryModelCount(c.key);
               return (
                 <Link
                   key={c.key}
