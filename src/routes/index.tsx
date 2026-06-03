@@ -55,7 +55,7 @@ function HomePage() {
             {t("home.badge")}
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
-            {t("home.hero.title.1")} <span className="italic font-light">{t("home.hero.title.transforms")}</span> {t("home.hero.title.2")} <span className="text-lime">{t("home.hero.title.value")}</span>
+            {t("home.hero.title")}
           </h1>
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
             {t("home.hero.sub")}
