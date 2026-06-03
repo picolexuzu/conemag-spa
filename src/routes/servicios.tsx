@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useT } from "@/lib/i18n";
 import rental from "@/assets/service-rental.jpg";
 import financing from "@/assets/service-financing.jpg";
 
@@ -16,33 +17,21 @@ export const Route = createFileRoute("/servicios")({
   component: ServiciosPage,
 });
 
-const rentalBenefits = [
-  "Reducción de costos: acceda a tecnología de punta sin la inversión inicial.",
-  "Flexibilidad: contratos adaptados a la duración de su proyecto.",
-  "Mantenimiento incluido: equipos siempre en perfecto estado de operación.",
-  "Atención especializada: equipo técnico listo para resolver sus dudas.",
-];
-
-const financingBenefits = [
-  "Plazos flexibles que se adaptan al flujo de caja de su empresa.",
-  "Tasas competitivas con condiciones accesibles.",
-  "Acceso a equipos modernos de alta eficiencia operativa.",
-  "Preserva su capital de trabajo para otras áreas del negocio.",
-  "Soporte continuo y asesoría técnica permanente.",
-];
-
 function ServiciosPage() {
+  const t = useT();
+  const rentalBenefits = [t("serv.rental.b1"), t("serv.rental.b2"), t("serv.rental.b3"), t("serv.rental.b4")];
+  const financingBenefits = [t("serv.fin.b1"), t("serv.fin.b2"), t("serv.fin.b3"), t("serv.fin.b4"), t("serv.fin.b5")];
   return (
     <SiteLayout>
       <section className="pt-40 pb-16 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative">
-          <span className="text-sm uppercase tracking-widest text-primary-glow font-semibold">Servicios</span>
+          <span className="text-sm uppercase tracking-widest text-lime font-semibold">{t("serv.kicker")}</span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance max-w-4xl">
-            Más que máquinas: soluciones completas
+            {t("serv.title")}
           </h1>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            Alquiler, financiamiento y asistencia técnica para que su operación nunca se detenga.
+            {t("serv.sub")}
           </p>
         </div>
       </section>
@@ -50,19 +39,17 @@ function ServiciosPage() {
       <section className="py-24">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <img src={rental} alt="Alquiler de equipos" className="rounded-2xl shadow-elegant aspect-[4/3] object-cover" />
+            <img src={rental} alt={t("serv.rental.kicker")} className="rounded-2xl shadow-elegant aspect-[4/3] object-cover" />
             <div className="absolute -bottom-6 -right-6 bg-gradient-primary text-primary-foreground rounded-2xl p-6 shadow-glow max-w-[200px]">
               <div className="text-3xl font-display font-bold">100%</div>
-              <div className="text-xs uppercase tracking-widest mt-1">Mantenimiento incluido</div>
+              <div className="text-xs uppercase tracking-widest mt-1">{t("serv.rental.badge")}</div>
             </div>
           </div>
           <div>
-            <span className="text-sm uppercase tracking-widest text-primary font-semibold">Alquiler de equipos</span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-bold">Equipos cuando los necesite</h2>
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("serv.rental.kicker")}</span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-bold">{t("serv.rental.title")}</h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              En Conemag ofrecemos más que máquinas: ofrecemos soluciones eficientes para su negocio.
-              Con años de experiencia y un portafolio diverso, sabemos que el éxito de sus operaciones
-              depende de equipos confiables y soporte técnico especializado.
+              {t("serv.rental.desc")}
             </p>
             <ul className="mt-8 space-y-3">
               {rentalBenefits.map((b) => (
@@ -81,15 +68,13 @@ function ServiciosPage() {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div className="lg:order-2 relative">
-            <img src={financing} alt="Financiamiento" className="rounded-2xl shadow-elegant aspect-[4/3] object-cover" />
+            <img src={financing} alt={t("serv.fin.kicker")} className="rounded-2xl shadow-elegant aspect-[4/3] object-cover" />
           </div>
           <div className="lg:order-1">
-            <span className="text-sm uppercase tracking-widest text-primary font-semibold">Financiamiento</span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-bold">Adquiera con condiciones a su medida</h2>
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("serv.fin.kicker")}</span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-bold">{t("serv.fin.title")}</h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              Sabemos que adquirir equipos de alta calidad es una inversión estratégica. Por eso
-              ofrecemos soluciones de financiamiento personalizadas que hacen más accesible la
-              compra de las máquinas que su empresa necesita.
+              {t("serv.fin.desc")}
             </p>
             <ul className="mt-8 space-y-3">
               {financingBenefits.map((b) => (
@@ -108,14 +93,13 @@ function ServiciosPage() {
       <section className="py-24">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">
-            Asistencia técnica y repuestos en toda Latinoamérica
+            {t("serv.support.title")}
           </h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Equipo altamente calificado para mantenimientos preventivos y correctivos,
-            con disponibilidad de repuestos para asegurar la continuidad de sus operaciones.
+            {t("serv.support.sub")}
           </p>
           <Link to="/contacto" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
-            Solicitar atención <ArrowRight size={18} />
+            {t("serv.support.cta")} <ArrowRight size={18} />
           </Link>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
@@ -15,15 +16,16 @@ export const Route = createFileRoute("/contacto")({
 });
 
 function ContactoPage() {
+  const t = useT();
   return (
     <SiteLayout>
       <section className="pt-40 pb-16 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative max-w-4xl">
-          <span className="text-sm uppercase tracking-widest text-primary-glow font-semibold">Contacto</span>
-          <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">Hablemos de su proyecto</h1>
+          <span className="text-sm uppercase tracking-widest text-lime font-semibold">{t("contact.kicker")}</span>
+          <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">{t("contact.title")}</h1>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            Nuestro equipo está listo para asesorarle y ofrecerle la mejor solución para su operación en Latinoamérica.
+            {t("contact.sub")}
           </p>
         </div>
       </section>
@@ -32,10 +34,10 @@ function ContactoPage() {
         <div className="container mx-auto px-6 grid lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2 space-y-4">
             {[
-              { icon: Phone, title: "Teléfono", value: "+55 (16) 3333-8966" },
-              { icon: MessageCircle, title: "WhatsApp", value: "+55 (16) 99999-0000" },
-              { icon: Mail, title: "E-mail", value: "latam@conemag.com" },
-              { icon: MapPin, title: "Sede", value: "Araraquara, SP — Brasil" },
+              { icon: Phone, title: t("contact.phone"), value: "+55 (16) 3333-8966" },
+              { icon: MessageCircle, title: t("contact.whatsapp"), value: "+55 (16) 99999-0000" },
+              { icon: Mail, title: t("contact.email"), value: "latam@conemag.com" },
+              { icon: MapPin, title: t("contact.hq"), value: t("contact.hq.value") },
             ].map((c) => (
               <div key={c.title} className="p-6 bg-card border border-border rounded-2xl flex gap-4 hover:shadow-card transition">
                 <div className="w-12 h-12 rounded-xl bg-gradient-primary grid place-items-center text-primary-foreground shrink-0">
@@ -51,30 +53,30 @@ function ContactoPage() {
 
           <form
             className="lg:col-span-3 bg-card border border-border rounded-2xl p-8 shadow-card space-y-5"
-            onSubmit={(e) => { e.preventDefault(); alert("¡Gracias! Le contactaremos a la brevedad."); }}
+            onSubmit={(e) => { e.preventDefault(); alert(t("contact.form.success")); }}
           >
             <div className="grid md:grid-cols-2 gap-5">
-              <Field label="Nombre completo" name="name" required />
-              <Field label="Empresa" name="company" />
-              <Field label="E-mail" name="email" type="email" required />
-              <Field label="Teléfono / WhatsApp" name="phone" />
+              <Field label={t("contact.form.name")} name="name" required />
+              <Field label={t("contact.form.company")} name="company" />
+              <Field label={t("contact.form.email")} name="email" type="email" required />
+              <Field label={t("contact.form.phone")} name="phone" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">País</label>
+              <label className="block text-sm font-medium mb-2">{t("contact.form.country")}</label>
               <select name="country" className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring">
-                <option>México</option><option>Argentina</option><option>Chile</option>
+                <option>Brasil</option><option>México</option><option>Argentina</option><option>Chile</option>
                 <option>Colombia</option><option>Perú</option><option>Uruguay</option>
                 <option>Paraguay</option><option>Bolivia</option><option>Ecuador</option>
-                <option>Venezuela</option><option>Otro</option>
+                <option>Venezuela</option><option>—</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">¿En qué podemos ayudarle?</label>
+              <label className="block text-sm font-medium mb-2">{t("contact.form.help")}</label>
               <textarea
                 name="message"
                 rows={5}
                 required
-                placeholder="Cuéntenos sobre su proyecto, tipo de material y volumen aproximado..."
+                placeholder={t("contact.form.placeholder")}
                 className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
               />
             </div>
@@ -82,7 +84,7 @@ function ContactoPage() {
               type="submit"
               className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-8 py-4 font-semibold hover:shadow-glow transition"
             >
-              Enviar mensaje
+              {t("contact.form.submit")}
             </button>
           </form>
         </div>

@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import logo from "@/assets/logo-conemag.png";
+import { useT } from "@/lib/i18n";
 
 export function SiteFooter() {
+  const t = useT();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-6 py-16">
@@ -10,8 +12,7 @@ export function SiteFooter() {
           <div className="md:col-span-2">
             <img src={logo} alt="Conemag" className="h-10 w-auto mb-4" />
             <p className="text-primary-foreground/70 max-w-md leading-relaxed">
-              Más de 25 años fabricando equipos de alto rendimiento para el procesamiento
-              de chatarra metálica. Ahora expandiéndonos a toda Latinoamérica.
+              {t("footer.tagline")}
             </p>
             <div className="flex gap-3 mt-6">
               <a
@@ -27,14 +28,14 @@ export function SiteFooter() {
 
           <div>
             <h4 className="font-display text-sm uppercase tracking-widest text-primary-foreground/60 mb-4">
-              Navegación
+              {t("footer.nav")}
             </h4>
             <ul className="space-y-2">
               {[
-                ["/equipos", "Equipos"],
-                ["/servicios", "Servicios"],
-                ["/nosotros", "Nosotros"],
-                ["/contacto", "Contacto"],
+                ["/equipos", t("nav.equipment")],
+                ["/servicios", t("nav.services")],
+                ["/nosotros", t("nav.about")],
+                ["/contacto", t("nav.contact")],
               ].map(([to, label]) => (
                 <li key={to}>
                   <Link to={to} className="text-primary-foreground/80 hover:text-primary-foreground transition">
@@ -47,7 +48,7 @@ export function SiteFooter() {
 
           <div>
             <h4 className="font-display text-sm uppercase tracking-widest text-primary-foreground/60 mb-4">
-              Contacto
+              {t("footer.contact")}
             </h4>
             <ul className="space-y-3 text-primary-foreground/80 text-sm">
               <li className="flex gap-2"><Phone size={16} className="mt-0.5" /> +55 (16) 3333-8966</li>
@@ -58,8 +59,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-primary-foreground/10 text-sm text-primary-foreground/50 flex flex-wrap justify-between gap-4">
-          <p>© {new Date().getFullYear()} Conemag Latinoamérica. Todos los derechos reservados.</p>
-          <p>Valorizando el futuro · Recycling technology</p>
+          <p>© {new Date().getFullYear()} Conemag Latinoamérica. {t("footer.rights")}</p>
+          <p>{t("footer.motto")}</p>
         </div>
       </div>
     </footer>
