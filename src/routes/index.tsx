@@ -32,9 +32,10 @@ function HomePage() {
     { key: "briquetadeiras", icon: Package },
     { key: "trituradores", icon: Cog },
   ];
+  const totalModels = getTotalModelCount();
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
-    ["+9", t("home.stats.lines")],
+    [`+${totalModels}`, t("home.stats.lines")],
     ["100%", t("home.stats.own")],
     ["BRASIL", t("home.stats.region")],
   ];
