@@ -480,3 +480,17 @@ export function equipmentSlugExists(slug: string): boolean {
   return equipmentRaw.some((e) => e.slug === slug);
 }
 
+// Variações (modelos) disponíveis por código de equipamento.
+// Os números representam capacidade/tamanho do modelo.
+export const equipmentVariants: Record<string, string[]> = {
+  GTX: ["500"],
+  TPX: ["200", "500", "600"],
+  BMX: ["800"],
+  TRX: ["100"],
+  THX: [],
+  TVX: ["600", "800"],
+  PSX: ["100", "200", "300", "400", "500", "600"],
+  TJX: ["100", "200", "300", "500"],
+  PLX: ["200", "300", "400", "500"],
+};
+
