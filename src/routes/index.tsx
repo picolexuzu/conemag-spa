@@ -212,11 +212,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
-        {/* spacer wrapper handled by sections below */}
-      </section>
-
       {/* SERVICES */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
