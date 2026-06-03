@@ -292,13 +292,13 @@ const dictionaries: Record<Locale, Dict> = {
     "nav.quote": "Cotizar ahora",
     "nav.menu": "Menú",
 
-    "footer.tagline": "Más de 25 años fabricando equipos de alto rendimiento para el procesamiento de chatarra metálica. Ahora expandiéndonos a toda Latinoamérica.",
+    "footer.tagline": "Más de 25 años fabricando equipos de alto rendimiento para el procesamiento de chatarra metálica. Líder de mercado en Brasil.",
     "footer.nav": "Navegación",
     "footer.contact": "Contacto",
     "footer.rights": "Todos los derechos reservados.",
     "footer.motto": "Valorizando el futuro · Recycling technology",
 
-    "home.badge": "Ahora en Latinoamérica",
+    "home.badge": "Líder en Brasil",
     "home.hero.title.1": "Tecnología que",
     "home.hero.title.transforms": "transforma",
     "home.hero.title.2": "chatarra en",
@@ -320,7 +320,7 @@ const dictionaries: Record<Locale, Dict> = {
     "home.feature2.title": "Alto rendimiento",
     "home.feature2.desc": "Equipos diseñados para operación continua con máxima productividad y eficiencia energética.",
     "home.feature3.title": "Soporte técnico",
-    "home.feature3.desc": "Asistencia especializada y disponibilidad de repuestos en toda Latinoamérica.",
+    "home.feature3.desc": "Asistencia especializada y disponibilidad de repuestos en todo Brasil.",
     "home.feature4.title": "Sostenibilidad",
     "home.feature4.desc": "Tecnología que impulsa la economía circular y la valorización de materiales.",
 
@@ -330,7 +330,7 @@ const dictionaries: Record<Locale, Dict> = {
     "card.viewDetails": "Ver detalles",
 
     "home.cta.title": "¿Listo para transformar su operación?",
-    "home.cta.sub": "Hable con nuestro equipo y reciba una cotización personalizada para su proyecto en Latinoamérica.",
+    "home.cta.sub": "Hable con nuestro equipo y reciba una cotización personalizada para su proyecto.",
     "home.cta.button": "Hablar con un especialista",
 
     "equipos.kicker": "Catálogo",
@@ -377,13 +377,13 @@ const dictionaries: Record<Locale, Dict> = {
     "serv.fin.b3": "Acceso a equipos modernos de alta eficiencia operativa.",
     "serv.fin.b4": "Preserva su capital de trabajo para otras áreas del negocio.",
     "serv.fin.b5": "Soporte continuo y asesoría técnica permanente.",
-    "serv.support.title": "Asistencia técnica y repuestos en toda Latinoamérica",
+    "serv.support.title": "Asistencia técnica y repuestos en todo Brasil",
     "serv.support.sub": "Equipo altamente calificado para mantenimientos preventivos y correctivos, con disponibilidad de repuestos para asegurar la continuidad de sus operaciones.",
     "serv.support.cta": "Solicitar atención",
 
     "about.kicker": "Quiénes somos",
     "about.title": "26 años transformando el mercado del reciclaje",
-    "about.sub": "Liderazgo e innovación en equipos para chatarra metálica, ahora expandiéndose por toda Latinoamérica.",
+    "about.sub": "Liderazgo e innovación en equipos para chatarra metálica, referencia en el mercado brasileño.",
     "about.history": "Nuestra historia",
     "about.history.p1": "Con más de 25 años de actuación en el mercado de equipos para el procesamiento y preparación de chatarra metálica, Conemag inició sus actividades basándose en los tres pilares de la sostenibilidad: valores ambientales, sociales y económicos.",
     "about.history.p2": "Siempre enfocados en soluciones e innovaciones de nuestro sector, nos mantenemos actualizados con los procedimientos técnicos y comerciales que abarcan nuestro negocio. Nuestra planta está estratégicamente ubicada en el centro del estado de São Paulo, en la ciudad de Araraquara, garantizando confiabilidad en la entrega y asistencia técnica de nuestros equipos.",
@@ -403,7 +403,7 @@ const dictionaries: Record<Locale, Dict> = {
 
     "contact.kicker": "Contacto",
     "contact.title": "Hablemos de su proyecto",
-    "contact.sub": "Nuestro equipo está listo para asesorarle y ofrecerle la mejor solución para su operación en Latinoamérica.",
+    "contact.sub": "Nuestro equipo está listo para asesorarle y ofrecerle la mejor solución para su operación.",
     "contact.phone": "Teléfono",
     "contact.whatsapp": "WhatsApp",
     "contact.email": "E-mail",
