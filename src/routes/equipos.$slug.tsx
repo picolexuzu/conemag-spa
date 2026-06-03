@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check, Download } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { equipmentRaw, equipmentSlugExists, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
+import { equipmentRaw, equipmentSlugExists, equipmentVariants, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/equipos/$slug")({
@@ -49,6 +49,7 @@ function EquipmentDetailPage() {
   const { t, locale } = useI18n();
   const eq = getEquipmentBySlugLocalized(slug, locale)!;
   const related = getEquipmentList(locale).filter((e) => e.slug !== eq.slug).slice(0, 3);
+  const variants = equipmentVariants[eq.code] ?? [];
 
   return (
     <SiteLayout>
@@ -158,8 +159,44 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
+      {/* MODELS / VARIATIONS */}
+      {variants.length > 0 && (
+        <section className="py-20 bg-secondary">
+          <div className="container mx-auto px-6">
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">
+              {t("detail.models.kicker")}
+            </span>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold">
+              {t("detail.models.title")}
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl">
+              {t("detail.models.sub")}
+            </p>
+            <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {variants.map((v) => (
+                <Link
+                  key={v}
+                  to="/contacto"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1"
+                >
+                  <div className="text-xs uppercase tracking-widest text-primary font-semibold">
+                    {eq.code}
+                  </div>
+                  <div className="mt-1 text-3xl md:text-4xl font-display font-bold">
+                    {eq.code} <span className="text-muted-foreground font-normal">– {v}</span>
+                  </div>
+                  <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    {t("detail.requestQuote")} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* RELATED */}
-      <section className="py-20 bg-secondary">
+      <section className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("detail.other")}</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
