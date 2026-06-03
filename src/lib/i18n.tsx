@@ -27,7 +27,7 @@ const dictionaries: Record<Locale, Dict> = {
     "footer.motto": "Valorizando o futuro · Tecnologia em reciclagem",
 
     "home.badge": "Líder no Brasil",
-    "home.hero.title": "Liderança e Inovação em Equipamentos para Sucatas Metálicas",
+    "home.hero.title": "Tecnologia que transforma sucata em valor",
     "home.hero.sub": "Mais de 25 anos fabricando prensas, tesouras e trituradores de alto rendimento para a indústria da reciclagem metálica.",
     "home.hero.cta1": "Ver equipamentos",
     "home.hero.cta2": "Solicitar orçamento",
