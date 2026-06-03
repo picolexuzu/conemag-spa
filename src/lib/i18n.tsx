@@ -110,7 +110,7 @@ const dictionaries: Record<Locale, Dict> = {
     "serv.rental.kicker": "Locação de equipamentos",
     "serv.rental.title": "Equipamentos quando você precisar",
     "serv.rental.desc": "Na Conemag oferecemos mais que máquinas: oferecemos soluções eficientes para o seu negócio. Com anos de experiência e um portfólio diverso, sabemos que o sucesso das suas operações depende de equipamentos confiáveis e suporte técnico especializado.",
-    "serv.rental.badge": "Manutenção inclusa",
+    "serv.rental.badge": "Contratos flexíveis",
     "serv.rental.b1": "Redução de custos: acesso a tecnologia de ponta sem o investimento inicial.",
     "serv.rental.b2": "Flexibilidade: contratos adaptados à duração do seu projeto.",
     "serv.rental.b3": "Manutenção inclusa: equipamentos sempre em perfeito estado de operação.",
