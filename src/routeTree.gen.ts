@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as IaRouteImport } from './routes/ia'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
 import { Route as EquiposSlugRouteImport } from './routes/equipos.$slug'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
@@ -24,6 +26,11 @@ const ServiciosRoute = ServiciosRouteImport.update({
 const NosotrosRoute = NosotrosRouteImport.update({
   id: '/nosotros',
   path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IaRoute = IaRouteImport.update({
+  id: '/ia',
+  path: '/ia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactoRoute = ContactoRouteImport.update({
@@ -46,20 +53,29 @@ const EquiposSlugRoute = EquiposSlugRouteImport.update({
   path: '/equipos/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
+  '/ia': typeof IaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
+  '/ia': typeof IaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos': typeof EquiposIndexRoute
 }
@@ -67,8 +83,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
+  '/ia': typeof IaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos/': typeof EquiposIndexRoute
 }
@@ -77,24 +95,30 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contacto'
+    | '/ia'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contacto'
+    | '/ia'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos'
   id:
     | '__root__'
     | '/'
     | '/contacto'
+    | '/ia'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos/'
   fileRoutesById: FileRoutesById
@@ -102,8 +126,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactoRoute: typeof ContactoRoute
+  IaRoute: typeof IaRoute
   NosotrosRoute: typeof NosotrosRoute
   ServiciosRoute: typeof ServiciosRoute
+  ApiChatRoute: typeof ApiChatRoute
   EquiposSlugRoute: typeof EquiposSlugRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
 }
@@ -122,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/nosotros'
       fullPath: '/nosotros'
       preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ia': {
+      id: '/ia'
+      path: '/ia'
+      fullPath: '/ia'
+      preLoaderRoute: typeof IaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacto': {
@@ -152,27 +185,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquiposSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
+  IaRoute: IaRoute,
   NosotrosRoute: NosotrosRoute,
   ServiciosRoute: ServiciosRoute,
+  ApiChatRoute: ApiChatRoute,
   EquiposSlugRoute: EquiposSlugRoute,
   EquiposIndexRoute: EquiposIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
