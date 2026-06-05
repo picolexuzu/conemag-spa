@@ -3,11 +3,26 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import ReactMarkdown from "react-markdown";
-import { Send, Lock, Loader2, Download, ImageIcon, FileText, Plus, Bot } from "lucide-react";
+import {
+  Send,
+  Lock,
+  Loader2,
+  Download,
+  ImageIcon,
+  FileText,
+  Plus,
+  Bot,
+  Paperclip,
+  Mic,
+  MicOff,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { jsPDF } from "jspdf";
+import { marked } from "marked";
 
 export const Route = createFileRoute("/ia")({
   head: () => ({
@@ -107,6 +122,12 @@ function loadMessages(): UIMessage[] {
 function Chat() {
   const [initial] = useState<UIMessage[]>(() => loadMessages());
   const [input, setInput] = useState("");
+  const [attachments, setAttachments] = useState<
+    { name: string; mediaType: string; url: string }[]
+  >([]);
+  const [recording, setRecording] = useState(false);
+  const recognitionRef = useRef<any>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -139,15 +160,74 @@ function Chat() {
   async function submit(e: FormEvent) {
     e.preventDefault();
     const text = input.trim();
-    if (!text || isLoading) return;
+    if ((!text && attachments.length === 0) || isLoading) return;
     setInput("");
-    await sendMessage({ text });
+    const parts: any[] = attachments.map((a) => ({
+      type: "file",
+      mediaType: a.mediaType,
+      url: a.url,
+      filename: a.name,
+    }));
+    if (text) parts.push({ type: "text", text });
+    setAttachments([]);
+    await sendMessage({ parts });
   }
 
   function newConversation() {
     if (isLoading) stop();
     setMessages([]);
     localStorage.removeItem(MESSAGES_KEY);
+  }
+
+  async function handleFiles(files: FileList | null) {
+    if (!files) return;
+    const newOnes: typeof attachments = [];
+    for (const file of Array.from(files)) {
+      if (file.size > 8 * 1024 * 1024) {
+        alert(`${file.name} é maior que 8MB e foi ignorado.`);
+        continue;
+      }
+      const url = await new Promise<string>((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(r.result as string);
+        r.onerror = () => reject(r.error);
+        r.readAsDataURL(file);
+      });
+      newOnes.push({ name: file.name, mediaType: file.type || "image/png", url });
+    }
+    setAttachments((prev) => [...prev, ...newOnes]);
+  }
+
+  function toggleRecording() {
+    const w = window as any;
+    const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
+    if (!SR) {
+      alert("Reconhecimento de voz não é suportado neste navegador. Use o Chrome no desktop ou Android.");
+      return;
+    }
+    if (recording) {
+      recognitionRef.current?.stop();
+      return;
+    }
+    const rec = new SR();
+    rec.lang = "pt-BR";
+    rec.interimResults = true;
+    rec.continuous = true;
+    let finalText = input ? input + " " : "";
+    rec.onresult = (e: any) => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finalText += t + " ";
+        else interim += t;
+      }
+      setInput((finalText + interim).trimStart());
+    };
+    rec.onend = () => setRecording(false);
+    rec.onerror = () => setRecording(false);
+    recognitionRef.current = rec;
+    rec.start();
+    setRecording(true);
   }
 
   return (
