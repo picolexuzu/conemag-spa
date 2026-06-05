@@ -15,6 +15,7 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
 import { Route as EquiposSlugRouteImport } from './routes/equipos.$slug'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
@@ -46,12 +47,18 @@ const EquiposSlugRoute = EquiposSlugRouteImport.update({
   path: '/equipos/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos/': typeof EquiposIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos': typeof EquiposIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/api/chat': typeof ApiChatRoute
   '/equipos/$slug': typeof EquiposSlugRoute
   '/equipos/': typeof EquiposIndexRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/nosotros'
     | '/servicios'
+    | '/api/chat'
     | '/equipos/$slug'
     | '/equipos/'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   NosotrosRoute: typeof NosotrosRoute
   ServiciosRoute: typeof ServiciosRoute
+  ApiChatRoute: typeof ApiChatRoute
   EquiposSlugRoute: typeof EquiposSlugRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
 }
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquiposSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   NosotrosRoute: NosotrosRoute,
   ServiciosRoute: ServiciosRoute,
+  ApiChatRoute: ApiChatRoute,
   EquiposSlugRoute: EquiposSlugRoute,
   EquiposIndexRoute: EquiposIndexRoute,
 }
