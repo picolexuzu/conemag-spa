@@ -268,8 +268,66 @@ function Chat() {
         onSubmit={submit}
         className="border-t border-border bg-card/60 px-4 py-3 backdrop-blur"
       >
-        <div className="mx-auto flex max-w-3xl items-end gap-2">
-          <Textarea
+        <div className="mx-auto max-w-3xl">
+          {attachments.length > 0 && (
+            <div className="mb-2 flex flex-wrap gap-2">
+              {attachments.map((a, idx) => (
+                <div
+                  key={idx}
+                  className="relative h-16 w-16 overflow-hidden rounded-lg border border-border bg-muted"
+                >
+                  {a.mediaType.startsWith("image/") ? (
+                    <img src={a.url} alt={a.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-xs">
+                      {a.name.slice(0, 8)}
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setAttachments((p) => p.filter((_, i) => i !== idx))}
+                    className="absolute right-0 top-0 rounded-bl bg-black/60 p-0.5 text-white"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="flex items-end gap-2">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              onChange={(e) => {
+                handleFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
+            <Button
+              type="button"
+              size="icon"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isLoading}
+              title="Anexar imagem"
+            >
+              <Paperclip className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              size="icon"
+              variant={recording ? "default" : "outline"}
+              onClick={toggleRecording}
+              disabled={isLoading}
+              title={recording ? "Parar gravação" : "Falar"}
+              className={cn(recording && "animate-pulse")}
+            >
+              {recording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+            </Button>
+            <Textarea
             ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -279,20 +337,25 @@ function Chat() {
                 submit(e as unknown as FormEvent);
               }
             }}
-            placeholder="Pergunte qualquer coisa, peça uma imagem ou um documento..."
+            placeholder="Pergunte, anexe imagens ou use o microfone..."
             rows={1}
             className="max-h-48 min-h-[44px] flex-1 resize-none"
             disabled={isLoading}
-          />
-          {isLoading ? (
-            <Button type="button" variant="outline" onClick={stop}>
-              Parar
-            </Button>
-          ) : (
-            <Button type="submit" size="icon" disabled={!input.trim()}>
-              <Send className="h-4 w-4" />
-            </Button>
-          )}
+            />
+            {isLoading ? (
+              <Button type="button" variant="outline" onClick={stop}>
+                Parar
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                size="icon"
+                disabled={!input.trim() && attachments.length === 0}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </form>
     </div>
@@ -358,6 +421,24 @@ function MessageBubble({ message }: { message: UIMessage }) {
               >
                 <ReactMarkdown>{part.text}</ReactMarkdown>
               </div>
+            );
+          }
+          if (part.type === "file") {
+            const p = part as { mediaType?: string; url: string; filename?: string };
+            if (p.mediaType?.startsWith("image/")) {
+              return (
+                <img
+                  key={i}
+                  src={p.url}
+                  alt={p.filename || "anexo"}
+                  className="max-h-64 rounded-lg border border-border"
+                />
+              );
+            }
+            return (
+              <a key={i} href={p.url} download={p.filename} className="underline">
+                {p.filename || "arquivo"}
+              </a>
             );
           }
           if (part.type === "tool-generate_image") {
@@ -434,6 +515,25 @@ function DocToolPart({ part }: { part: ToolPart }) {
     a.click();
     URL.revokeObjectURL(url);
   }
+  function downloadPdf() {
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
+    const html = marked.parse(out.markdown, { async: false }) as string;
+    const wrapper = document.createElement("div");
+    wrapper.style.width = "500px";
+    wrapper.style.fontFamily = "Helvetica, Arial, sans-serif";
+    wrapper.style.fontSize = "12px";
+    wrapper.style.lineHeight = "1.5";
+    wrapper.style.color = "#111";
+    wrapper.innerHTML = `<h1 style="font-size:18px;margin:0 0 12px">${out.title}</h1>${html}`;
+    doc.html(wrapper, {
+      callback: (d) => d.save(`${out.filename || "documento"}.pdf`),
+      x: 40,
+      y: 40,
+      width: 515,
+      windowWidth: 500,
+      autoPaging: "text",
+    });
+  }
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <div className="mb-2 flex items-center justify-between gap-2">
@@ -441,9 +541,14 @@ function DocToolPart({ part }: { part: ToolPart }) {
           <FileText className="h-4 w-4 text-primary" />
           {out.title}
         </div>
-        <Button size="sm" variant="outline" onClick={download}>
-          <Download className="mr-1 h-3 w-3" /> Baixar .md
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline" onClick={downloadPdf}>
+            <Download className="mr-1 h-3 w-3" /> PDF
+          </Button>
+          <Button size="sm" variant="outline" onClick={download}>
+            <Download className="mr-1 h-3 w-3" /> .md
+          </Button>
+        </div>
       </div>
       <div className="prose prose-sm max-w-none dark:prose-invert">
         <ReactMarkdown>{out.markdown}</ReactMarkdown>
