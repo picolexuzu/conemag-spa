@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useT } from "@/lib/i18n";
+import { useLeadModal } from "@/components/LeadModalProvider";
 import rental from "@/assets/service-rental.jpg";
 import financing from "@/assets/service-financing.jpg";
 
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/servicios")({
 
 function ServiciosPage() {
   const t = useT();
+  const { openLead } = useLeadModal();
   const rentalBenefits = [t("serv.rental.b1"), t("serv.rental.b2"), t("serv.rental.b3"), t("serv.rental.b4")];
   const financingBenefits = [t("serv.fin.b1"), t("serv.fin.b2"), t("serv.fin.b3"), t("serv.fin.b4"), t("serv.fin.b5")];
   return (
@@ -94,9 +96,9 @@ function ServiciosPage() {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             {t("serv.support.sub")}
           </p>
-          <Link to="/contacto" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
+          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
             {t("serv.support.cta")} <ArrowRight size={18} />
-          </Link>
+          </button>
         </div>
       </section>
     </SiteLayout>
