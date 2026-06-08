@@ -84,7 +84,7 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-xl">
         <div className="flex flex-col items-center text-center mb-6">
-          <div className="w-14 h-14 rounded-full bg-lime/10 flex items-center justify-center mb-3">
+          <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-3">
             <Lock className="text-lime" size={24} />
           </div>
           <h1 className="text-xl font-bold text-foreground">Painel Administrativo</h1>
@@ -194,7 +194,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
       <header className="border-b border-border bg-card">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-lime/10 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
               <Users className="text-lime" size={18} />
             </div>
             <div>
@@ -207,7 +207,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
               type="button"
               onClick={exportXlsx}
               disabled={filtered.length === 0}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-background px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-lime-foreground px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50"
             >
               <Download size={14} /> Exportar Excel
             </button>
@@ -304,7 +304,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
                         href={`https://wa.me/${l.whatsapp.replace(/\D/g, "")}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-lime hover:underline"
+                        className="text-primary hover:underline font-medium"
                       >
                         {l.whatsapp}
                       </a>

@@ -67,7 +67,7 @@ function EquipmentDetailPage() {
           </Link>
           <div className="mt-6 grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-sm uppercase tracking-widest text-lime font-semibold">
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold">
                 {eq.category}
               </span>
               <h1 className="mt-3 text-5xl md:text-6xl font-bold text-balance">

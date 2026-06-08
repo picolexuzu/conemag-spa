@@ -27,7 +27,7 @@ function NosotrosPage() {
       <section className="pt-40 pb-20 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative max-w-4xl">
-          <span className="text-sm uppercase tracking-widest text-lime font-semibold">{t("about.kicker")}</span>
+          <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("about.kicker")}</span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">
             {t("about.title")}
           </h1>
