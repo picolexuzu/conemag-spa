@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { LeadFormModal } from "@/components/LeadFormModal";
+import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
@@ -305,30 +306,7 @@ function HomePage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {equipment.slice(0, 6).map((eq) => (
-              <a
-                key={eq.code}
-                href="https://instagram.com/prensasconemag"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative aspect-square rounded-xl overflow-hidden border border-border bg-secondary hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-card"
-              >
-                <img
-                  src={eq.image}
-                  alt={eq.name}
-                  className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary-foreground">
-                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2"/>
-                    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/>
-                    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
+          <BeholdWidget feedId="CAFocuQCUqEea00KaUXW" />
 
           <div className="mt-8 text-center md:text-right">
             <a
