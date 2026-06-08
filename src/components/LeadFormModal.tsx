@@ -75,7 +75,7 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
 
         {done ? (
           <div className="text-center py-6">
-            <CheckCircle2 className="mx-auto text-lime mb-4" size={56} />
+            <CheckCircle2 className="mx-auto text-primary mb-4" size={56} />
             <h3 className="text-2xl font-bold text-foreground mb-3">Recebemos seu contato!</h3>
             <p className="text-muted-foreground leading-relaxed">
               Em breve um de nossos especialistas vai entrar em contato com você.
