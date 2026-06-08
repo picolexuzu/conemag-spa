@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 
 const ADMIN_USER = "admin";
@@ -31,27 +32,33 @@ export const submitLead = createServerFn({ method: "POST" })
       throw new Error("Não foi possível registrar o contato. Tente novamente.");
     }
 
-    // Try to send email notification (best-effort, never blocks)
+    // Best-effort email notification — never block the form submit
     try {
-      const baseUrl =
-        process.env.LOVABLE_APP_URL ||
-        process.env.VITE_PUBLIC_SITE_URL ||
-        "";
-      await fetch(`${baseUrl}/lovable/email/transactional/send`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-internal-notify": "1",
-        },
-        body: JSON.stringify({
-          templateName: "new-lead",
-          recipientEmail: NOTIFY_EMAIL,
-          idempotencyKey: `lead-${inserted.id}`,
-          templateData: { ...data, createdAt: inserted.created_at },
-        }),
-      }).catch(() => undefined);
-    } catch {
-      // ignore — email pipeline may not be configured yet
+      const req = getRequest();
+      const origin = new URL(req.url).origin;
+      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (serviceKey) {
+        const res = await fetch(`${origin}/lovable/email/transactional/send`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-internal-key": serviceKey,
+          },
+          body: JSON.stringify({
+            templateName: "new-lead",
+            recipientEmail: NOTIFY_EMAIL,
+            idempotencyKey: `lead-${inserted.id}`,
+            templateData: { ...data, createdAt: inserted.created_at },
+          }),
+        });
+        if (!res.ok) {
+          console.error("[submitLead] notify failed", res.status, await res.text().catch(() => ""));
+        }
+      } else {
+        console.warn("[submitLead] SUPABASE_SERVICE_ROLE_KEY not set; skipping email notify");
+      }
+    } catch (err) {
+      console.error("[submitLead] notify error", err);
     }
 
     return { ok: true, id: inserted.id };
