@@ -44,19 +44,22 @@ export const Route = createFileRoute("/lovable/email/transactional/send")({
           )
         }
 
-        // Verify the caller has a valid Supabase auth token.
-        // In TanStack, there is no Supabase gateway — we validate the JWT ourselves.
-        const authHeader = request.headers.get('Authorization')
-        if (!authHeader?.startsWith('Bearer ')) {
-          return Response.json({ error: 'Unauthorized' }, { status: 401 })
-        }
-
-        const token = authHeader.slice('Bearer '.length).trim()
+        // Accept either: (a) a valid Supabase user JWT, or (b) an internal
+        // server-to-server call with the service role key in `x-internal-key`.
         const supabase = createClient(supabaseUrl, supabaseServiceKey)
-        const { data: { user }, error: authError } = await supabase.auth.getUser(token)
+        const internalKey = request.headers.get('x-internal-key')
+        const isInternal = Boolean(internalKey) && internalKey === supabaseServiceKey
 
-        if (authError || !user) {
-          return Response.json({ error: 'Unauthorized' }, { status: 401 })
+        if (!isInternal) {
+          const authHeader = request.headers.get('Authorization')
+          if (!authHeader?.startsWith('Bearer ')) {
+            return Response.json({ error: 'Unauthorized' }, { status: 401 })
+          }
+          const token = authHeader.slice('Bearer '.length).trim()
+          const { data: { user }, error: authError } = await supabase.auth.getUser(token)
+          if (authError || !user) {
+            return Response.json({ error: 'Unauthorized' }, { status: 401 })
+          }
         }
 
         // Parse request body
