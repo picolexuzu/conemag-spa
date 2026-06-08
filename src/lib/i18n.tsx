@@ -79,6 +79,12 @@ const dictionaries: Record<Locale, Dict> = {
     "home.cta.sub": "Fale com nosso time e receba um orçamento personalizado para o seu projeto.",
     "home.cta.button": "Falar com um especialista",
 
+    "home.instagram.kicker": "Instagram",
+    "home.instagram.title": "Acompanhe a Conemag",
+    "home.instagram.sub": "Siga @prensasconemag e fique por dentro das novidades, equipamentos em ação e conteúdo exclusivo.",
+    "home.instagram.follow": "Seguir @prensasconemag",
+    "home.instagram.view": "Ver no Instagram",
+
     "equipos.kicker": "Catálogo",
     "equipos.title": "Equipamentos para cada etapa da reciclagem",
     "equipos.sub": "Do corte e prensagem à briquetagem e trituração: uma linha completa para processar sucata metálica com máxima eficiência.",
@@ -236,6 +242,12 @@ const dictionaries: Record<Locale, Dict> = {
     "home.cta.sub": "Talk to our team and get a tailored quote for your project.",
     "home.cta.button": "Talk to a specialist",
 
+    "home.instagram.kicker": "Instagram",
+    "home.instagram.title": "Follow Conemag",
+    "home.instagram.sub": "Follow @prensasconemag for the latest news, equipment in action and exclusive content.",
+    "home.instagram.follow": "Follow @prensasconemag",
+    "home.instagram.view": "View on Instagram",
+
     "equipos.kicker": "Catalog",
     "equipos.title": "Equipment for every recycling stage",
     "equipos.sub": "From cutting and pressing to briquetting and shredding: a complete line to process scrap metal with maximum efficiency.",
@@ -392,6 +404,12 @@ const dictionaries: Record<Locale, Dict> = {
     "home.cta.title": "¿Listo para transformar su operación?",
     "home.cta.sub": "Hable con nuestro equipo y reciba una cotización personalizada para su proyecto.",
     "home.cta.button": "Hablar con un especialista",
+
+    "home.instagram.kicker": "Instagram",
+    "home.instagram.title": "Siga a Conemag",
+    "home.instagram.sub": "Siga @prensasconemag y manténgase al día con las novedades, equipos en acción y contenido exclusivo.",
+    "home.instagram.follow": "Seguir @prensasconemag",
+    "home.instagram.view": "Ver en Instagram",
 
     "equipos.kicker": "Catálogo",
     "equipos.title": "Equipos para cada etapa del reciclaje",
