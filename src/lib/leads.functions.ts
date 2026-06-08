@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 
 const ADMIN_USER = "admin";
@@ -32,30 +31,60 @@ export const submitLead = createServerFn({ method: "POST" })
       throw new Error("Não foi possível registrar o contato. Tente novamente.");
     }
 
-    // Best-effort email notification — never block the form submit
+    // Best-effort: enqueue the notification email directly (avoids self-fetch
+    // limitations in serverless workers).
     try {
-      const req = getRequest();
-      const origin = new URL(req.url).origin;
-      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (serviceKey) {
-        const res = await fetch(`${origin}/lovable/email/transactional/send`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-internal-key": serviceKey,
-          },
-          body: JSON.stringify({
-            templateName: "new-lead",
-            recipientEmail: NOTIFY_EMAIL,
-            idempotencyKey: `lead-${inserted.id}`,
-            templateData: { ...data, createdAt: inserted.created_at },
-          }),
+      const React = await import("react");
+      const { render } = await import("@react-email/components");
+      const { template } = await import("@/lib/email-templates/new-lead");
+
+      const templateData = { ...data, createdAt: inserted.created_at };
+      const element = React.createElement(template.component, templateData);
+      const [html, plainText] = await Promise.all([
+        render(element),
+        render(element, { plainText: true }),
+      ]);
+      const subject =
+        typeof template.subject === "function"
+          ? template.subject(templateData)
+          : template.subject;
+
+      const SENDER_DOMAIN = "notify.conemagtestes.permutada.com.br";
+      const messageId = crypto.randomUUID();
+      const idempotencyKey = `lead-${inserted.id}`;
+
+      await supabaseAdmin.from("email_send_log").insert({
+        message_id: messageId,
+        template_name: "new-lead",
+        recipient_email: NOTIFY_EMAIL,
+        status: "pending",
+      });
+
+      const { error: enqueueError } = await supabaseAdmin.rpc("enqueue_email", {
+        queue_name: "transactional_emails",
+        payload: {
+          message_id: messageId,
+          to: NOTIFY_EMAIL,
+          from: `Conemag <noreply@${SENDER_DOMAIN}>`,
+          sender_domain: SENDER_DOMAIN,
+          subject,
+          html,
+          text: plainText,
+          purpose: "transactional",
+          label: "new-lead",
+          idempotency_key: idempotencyKey,
+          queued_at: new Date().toISOString(),
+        },
+      });
+      if (enqueueError) {
+        console.error("[submitLead] enqueue failed", enqueueError);
+        await supabaseAdmin.from("email_send_log").insert({
+          message_id: messageId,
+          template_name: "new-lead",
+          recipient_email: NOTIFY_EMAIL,
+          status: "failed",
+          error_message: enqueueError.message ?? "Failed to enqueue",
         });
-        if (!res.ok) {
-          console.error("[submitLead] notify failed", res.status, await res.text().catch(() => ""));
-        }
-      } else {
-        console.warn("[submitLead] SUPABASE_SERVICE_ROLE_KEY not set; skipping email notify");
       }
     } catch (err) {
       console.error("[submitLead] notify error", err);
