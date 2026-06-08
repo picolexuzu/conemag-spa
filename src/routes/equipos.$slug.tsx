@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Check, Download } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { equipmentRaw, equipmentSlugExists, equipmentVariants, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
+import { useLeadModal } from "@/components/LeadModalProvider";
 
 export const Route = createFileRoute("/equipos/$slug")({
   loader: ({ params }) => {
@@ -48,6 +49,7 @@ function EquipmentDetailPage() {
   const { slug } = Route.useLoaderData();
   const { t, locale } = useI18n();
   const eq = getEquipmentBySlugLocalized(slug, locale)!;
+  const { openLead } = useLeadModal();
   const related = getEquipmentList(locale).filter((e) => e.slug !== eq.slug).slice(0, 3);
   const variants = equipmentVariants[eq.code] ?? [];
 
@@ -78,12 +80,13 @@ function EquipmentDetailPage() {
                 {eq.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  to="/contacto"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition"
                 >
                   {t("detail.requestQuote")} <ArrowRight size={18} />
-                </Link>
+                </button>
                 <a
                   href={`/datasheets/${eq.slug}.pdf`}
                   download
@@ -174,10 +177,11 @@ function EquipmentDetailPage() {
             </p>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {variants.map((v) => (
-                <Link
+                <button
                   key={v}
-                  to="/contacto"
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1"
+                  type="button"
+                  onClick={openLead}
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 text-left"
                 >
                   <div className="text-xs uppercase tracking-widest text-primary font-semibold">
                     {eq.code}
@@ -188,7 +192,7 @@ function EquipmentDetailPage() {
                   <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
                     {t("detail.requestQuote")} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
@@ -230,12 +234,13 @@ function EquipmentDetailPage() {
           <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">
             {t("detail.cta.sub")}
           </p>
-          <Link
-            to="/contacto"
+          <button
+            type="button"
+            onClick={openLead}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
           >
             {t("home.cta.button")} <ArrowRight size={18} />
-          </Link>
+          </button>
         </div>
       </section>
     </SiteLayout>
