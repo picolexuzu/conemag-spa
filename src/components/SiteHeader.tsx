@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/logo-conemag.png";
 import { useI18n, locales } from "@/lib/i18n";
+import { useLeadModal } from "./LeadModalProvider";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { locale, setLocale, t } = useI18n();
+  const { openLead } = useLeadModal();
 
   const nav = [
     { to: "/", label: t("nav.home") },
@@ -76,12 +78,13 @@ export function SiteHeader() {
               </div>
             )}
           </div>
-          <Link
-            to="/contacto"
+          <button
+            type="button"
+            onClick={openLead}
             className="ml-4 inline-flex items-center rounded-full bg-lime text-lime-foreground px-5 py-2 text-sm font-semibold hover:bg-lime/90 transition shadow-lime-glow"
           >
             {t("nav.quote")}
-          </Link>
+          </button>
         </nav>
 
         <button
@@ -106,6 +109,13 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => { setOpen(false); openLead(); }}
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-lime text-lime-foreground px-5 py-3 text-base font-semibold"
+            >
+              {t("nav.quote")}
+            </button>
             <div className="mt-2 pt-3 border-t border-primary-foreground/10 flex gap-2">
               {locales.map((l) => (
                 <button
