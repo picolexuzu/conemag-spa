@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getEquipmentList, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
+import { useLeadModal } from "@/components/LeadModalProvider";
 
 type EquiposSearch = { cat?: CategoryKey };
 const CATEGORY_KEYS: CategoryKey[] = ["prensas", "tesouras", "briquetadeiras", "trituradores"];
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/equipos/")({
 });
 
 function EquiposPage() {
+  const { openLead } = useLeadModal();
   const { t, locale } = useI18n();
   const { cat } = Route.useSearch();
   const all = getEquipmentList(locale);
@@ -100,9 +102,9 @@ function EquiposPage() {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             {t("equipos.custom.sub")}
           </p>
-          <Link to="/contacto" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
+          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
             {t("equipos.custom.cta")} <ArrowRight size={18} />
-          </Link>
+          </button>
         </div>
       </section>
     </SiteLayout>
