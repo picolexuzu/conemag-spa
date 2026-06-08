@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Lock, Loader2, LogOut, RefreshCw, Users } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { Lock, Loader2, LogOut, RefreshCw, Users, Download } from "lucide-react";
+import * as XLSX from "xlsx";
 import { adminLogin, listLeads } from "@/lib/leads.functions";
 
 const STORAGE_KEY = "conemag-admin-session";
@@ -127,6 +128,48 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [rangeKey, setRangeKey] = useState<"today" | "week" | "month" | "custom" | "all">("all");
+  const [customFrom, setCustomFrom] = useState("");
+  const [customTo, setCustomTo] = useState("");
+
+  const filtered = useMemo(() => {
+    const now = new Date();
+    let from: Date | null = null;
+    let to: Date | null = null;
+    if (rangeKey === "today") {
+      from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    } else if (rangeKey === "week") {
+      const day = now.getDay(); // 0 = dom
+      const diff = (day + 6) % 7; // segunda como início
+      from = new Date(now.getFullYear(), now.getMonth(), now.getDate() - diff);
+    } else if (rangeKey === "month") {
+      from = new Date(now.getFullYear(), now.getMonth(), 1);
+    } else if (rangeKey === "custom") {
+      if (customFrom) from = new Date(customFrom + "T00:00:00");
+      if (customTo) to = new Date(customTo + "T23:59:59.999");
+    }
+    return leads.filter((l) => {
+      const d = new Date(l.created_at);
+      if (from && d < from) return false;
+      if (to && d > to) return false;
+      return true;
+    });
+  }, [leads, rangeKey, customFrom, customTo]);
+
+  function exportXlsx() {
+    const rows = filtered.map((l) => ({
+      Data: new Date(l.created_at).toLocaleString("pt-BR"),
+      Nome: l.name,
+      WhatsApp: l.whatsapp,
+      Empresa: l.company,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 20 }, { wch: 28 }, { wch: 20 }, { wch: 30 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Leads");
+    const stamp = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `leads-conemag-${stamp}.xlsx`);
+  }
 
   async function load() {
     setLoading(true);
@@ -156,10 +199,18 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
             </div>
             <div>
               <h1 className="text-lg font-bold text-foreground leading-tight">Leads Conemag</h1>
-              <p className="text-xs text-muted-foreground">{leads.length} contatos</p>
+              <p className="text-xs text-muted-foreground">{filtered.length} de {leads.length} contatos</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={exportXlsx}
+              disabled={filtered.length === 0}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-background px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50"
+            >
+              <Download size={14} /> Exportar Excel
+            </button>
             <button
               type="button"
               onClick={load}
@@ -180,6 +231,45 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
       </header>
 
       <main className="container mx-auto px-6 py-8">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          {([
+            ["today", "Hoje"],
+            ["week", "Esta semana"],
+            ["month", "Este mês"],
+            ["custom", "Personalizado"],
+            ["all", "Todo período"],
+          ] as const).map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setRangeKey(key)}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium border transition ${
+                rangeKey === key
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-foreground border-border hover:bg-muted"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+          {rangeKey === "custom" && (
+            <div className="flex items-center gap-2 ml-2">
+              <input
+                type="date"
+                value={customFrom}
+                onChange={(e) => setCustomFrom(e.target.value)}
+                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm"
+              />
+              <span className="text-muted-foreground text-sm">até</span>
+              <input
+                type="date"
+                value={customTo}
+                onChange={(e) => setCustomTo(e.target.value)}
+                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm"
+              />
+            </div>
+          )}
+        </div>
         {error && (
           <div className="mb-4 rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
             {error}
@@ -187,9 +277,9 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
         )}
         {loading && leads.length === 0 ? (
           <div className="flex justify-center py-20"><Loader2 className="animate-spin text-muted-foreground" /></div>
-        ) : leads.length === 0 ? (
+        ) : filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-            <p className="text-muted-foreground">Nenhum lead recebido ainda.</p>
+            <p className="text-muted-foreground">Nenhum lead no período selecionado.</p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-2xl border border-border bg-card">
@@ -203,7 +293,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
                 </tr>
               </thead>
               <tbody>
-                {leads.map((l) => (
+                {filtered.map((l) => (
                   <tr key={l.id} className="border-t border-border hover:bg-muted/30">
                     <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
                       {new Date(l.created_at).toLocaleString("pt-BR")}
