@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { LeadFormModal } from "@/components/LeadFormModal";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
@@ -19,6 +21,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const { t, locale } = useI18n();
+  const [leadOpen, setLeadOpen] = useState(false);
   const equipment = getEquipmentList(locale);
   const features = [
     { icon: Shield, title: t("home.feature1.title"), desc: t("home.feature1.desc") },
@@ -75,12 +78,13 @@ function HomePage() {
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link
-              to="/contacto"
+            <button
+              type="button"
+              onClick={() => setLeadOpen(true)}
               className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition"
             >
               {t("home.hero.cta2")}
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -349,14 +353,16 @@ function HomePage() {
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">
             {t("home.cta.sub")}
           </p>
-          <Link
-            to="/contacto"
+          <button
+            type="button"
+            onClick={() => setLeadOpen(true)}
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
           >
             {t("home.cta.button")} <ArrowRight size={18} />
-          </Link>
+          </button>
         </div>
       </section>
+      <LeadFormModal open={leadOpen} onClose={() => setLeadOpen(false)} />
     </SiteLayout>
   );
 }
