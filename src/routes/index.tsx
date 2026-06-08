@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { LeadFormModal } from "@/components/LeadFormModal";
+import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import gtxHero from "@/assets/gtx-hero.jpg";
