@@ -277,6 +277,68 @@ function HomePage() {
         </div>
       </section>
 
+      {/* INSTAGRAM */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.instagram.kicker")}</span>
+              <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.instagram.title")}</h2>
+              <p className="mt-4 text-muted-foreground">{t("home.instagram.sub")}</p>
+            </div>
+            <a
+              href="https://instagram.com/prensasconemag"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:shadow-elegant transition-all"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+              </svg>
+              {t("home.instagram.follow")}
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            {equipment.slice(0, 6).map((eq) => (
+              <a
+                key={eq.code}
+                href="https://instagram.com/prensasconemag"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative aspect-square rounded-xl overflow-hidden border border-border bg-secondary hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-card"
+              >
+                <img
+                  src={eq.image}
+                  alt={eq.name}
+                  className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary-foreground">
+                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center md:text-right">
+            <a
+              href="https://instagram.com/prensasconemag"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all"
+            >
+              {t("home.instagram.view")} <ChevronRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
