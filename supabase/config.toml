@@ -1,1 +1,7 @@
 project_id = "ibtbeymyucvrnfgfvrpd"
+
+[functions.process-email-queue]
+verify_jwt = false
+
+[functions.admin-leads]
+verify_jwt = false

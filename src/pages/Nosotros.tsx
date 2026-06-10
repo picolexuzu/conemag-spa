@@ -1,21 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useT } from "@/lib/i18n";
+import { usePageMeta } from "@/lib/usePageMeta";
 
-export const Route = createFileRoute("/nosotros")({
-  head: () => ({
-    meta: [
-      { title: "Sobre — Conemag" },
-      { name: "description", content: "Más de 26 años fabricando equipos para el procesamiento de chatarra metálica. Conozca la historia, misión y valores de Conemag." },
-      { property: "og:title", content: "Nosotros — Conemag" },
-      { property: "og:description", content: "Historia, misión y valores de Conemag, líder en equipos para reciclaje metálico." },
-    ],
-  }),
-  component: NosotrosPage,
-});
-
-function NosotrosPage() {
+export default function NosotrosPage() {
   const t = useT();
+  usePageMeta({
+    title: "Sobre — Conemag",
+    description: "Más de 26 años fabricando equipos para el procesamiento de chatarra metálica.",
+  });
   const values = [
     { title: t("about.v1.title"), desc: t("about.v1.desc") },
     { title: t("about.v2.title"), desc: t("about.v2.desc") },
@@ -28,12 +20,8 @@ function NosotrosPage() {
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative max-w-4xl">
           <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("about.kicker")}</span>
-          <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">
-            {t("about.title")}
-          </h1>
-          <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            {t("about.sub")}
-          </p>
+          <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">{t("about.title")}</h1>
+          <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">{t("about.sub")}</p>
         </div>
       </section>
 

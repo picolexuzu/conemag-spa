@@ -1,41 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Lock, Loader2, LogOut, RefreshCw, Users, Download } from "lucide-react";
 import * as XLSX from "xlsx";
-import { adminLogin, listLeads } from "@/lib/leads.functions";
+import { usePageMeta } from "@/lib/usePageMeta";
 
 const STORAGE_KEY = "conemag-admin-session";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/admin-leads`;
 
-interface Session {
-  username: string;
-  password: string;
+interface Session { username: string; password: string }
+interface Lead { id: string; name: string; whatsapp: string; company: string; created_at: string }
+
+async function callAdmin<T = any>(body: object): Promise<T> {
+  const res = await fetch(FUNCTION_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_PUBLISHABLE_KEY,
+    },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(json?.error ?? "Erro");
+  return json as T;
 }
 
-interface Lead {
-  id: string;
-  name: string;
-  whatsapp: string;
-  company: string;
-  created_at: string;
-}
-
-export const Route = createFileRoute("/admin")({
-  head: () => ({
-    meta: [
-      { title: "Admin — Leads Conemag" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
-  component: AdminPage,
-});
-
-function AdminPage() {
+export default function AdminPage() {
+  usePageMeta({ title: "Admin — Leads Conemag", noindex: true });
   const [session, setSession] = useState<Session | null>(null);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (raw) {
       try { setSession(JSON.parse(raw)); } catch { /* ignore */ }
@@ -56,7 +51,6 @@ function AdminPage() {
 }
 
 function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
-  const login = useServerFn(adminLogin);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -70,7 +64,7 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
     setError("");
     setLoading(true);
     try {
-      await login({ data: { username, password } });
+      await callAdmin({ action: "login", username, password });
       onLogin({ username, password });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro");
@@ -91,30 +85,15 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
           <p className="mt-1 text-sm text-muted-foreground">Acesso restrito — Leads Conemag</p>
         </div>
         <div className="space-y-3">
-          <input
-            ref={inputRef}
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Usuário"
-            autoComplete="username"
-            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Senha"
-            autoComplete="current-password"
-            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime"
-          />
+          <input ref={inputRef} type="text" value={username} onChange={(e) => setUsername(e.target.value)}
+            placeholder="Usuário" autoComplete="username"
+            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime" />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha" autoComplete="current-password"
+            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime" />
         </div>
         {error && <p className="mt-3 text-sm text-destructive text-center">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:opacity-90 transition disabled:opacity-60"
-        >
+        <button type="submit" disabled={loading} className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:opacity-90 transition disabled:opacity-60">
           {loading ? <Loader2 className="animate-spin" size={18} /> : null}
           {loading ? "Validando..." : "Entrar"}
         </button>
@@ -124,7 +103,6 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
 }
 
 function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () => void }) {
-  const fetchLeads = useServerFn(listLeads);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -136,15 +114,13 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
     const now = new Date();
     let from: Date | null = null;
     let to: Date | null = null;
-    if (rangeKey === "today") {
-      from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    } else if (rangeKey === "week") {
-      const day = now.getDay(); // 0 = dom
-      const diff = (day + 6) % 7; // segunda como início
+    if (rangeKey === "today") from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    else if (rangeKey === "week") {
+      const day = now.getDay();
+      const diff = (day + 6) % 7;
       from = new Date(now.getFullYear(), now.getMonth(), now.getDate() - diff);
-    } else if (rangeKey === "month") {
-      from = new Date(now.getFullYear(), now.getMonth(), 1);
-    } else if (rangeKey === "custom") {
+    } else if (rangeKey === "month") from = new Date(now.getFullYear(), now.getMonth(), 1);
+    else if (rangeKey === "custom") {
       if (customFrom) from = new Date(customFrom + "T00:00:00");
       if (customTo) to = new Date(customTo + "T23:59:59.999");
     }
@@ -159,9 +135,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
   function exportXlsx() {
     const rows = filtered.map((l) => ({
       Data: new Date(l.created_at).toLocaleString("pt-BR"),
-      Nome: l.name,
-      WhatsApp: l.whatsapp,
-      Empresa: l.company,
+      Nome: l.name, WhatsApp: l.whatsapp, Empresa: l.company,
     }));
     const ws = XLSX.utils.json_to_sheet(rows);
     ws["!cols"] = [{ wch: 20 }, { wch: 28 }, { wch: 20 }, { wch: 30 }];
@@ -175,13 +149,12 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
     setLoading(true);
     setError("");
     try {
-      const res = await fetchLeads({ data: session });
-      setLeads(res.leads as Lead[]);
+      const res = await callAdmin<{ leads: Lead[] }>({ action: "list", username: session.username, password: session.password });
+      setLeads(res.leads);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro");
-      if (err instanceof Error && err.message.toLowerCase().includes("autorizado")) {
-        onLogout();
-      }
+      const msg = err instanceof Error ? err.message : "Erro";
+      setError(msg);
+      if (msg.toLowerCase().includes("incorret") || msg.toLowerCase().includes("autoriz")) onLogout();
     } finally {
       setLoading(false);
     }
@@ -203,27 +176,16 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={exportXlsx}
-              disabled={filtered.length === 0}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-lime-foreground px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50"
-            >
+            <button type="button" onClick={exportXlsx} disabled={filtered.length === 0}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-lime-foreground px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50">
               <Download size={14} /> Exportar Excel
             </button>
-            <button
-              type="button"
-              onClick={load}
-              disabled={loading}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted transition disabled:opacity-60"
-            >
+            <button type="button" onClick={load} disabled={loading}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted transition disabled:opacity-60">
               <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> Atualizar
             </button>
-            <button
-              type="button"
-              onClick={onLogout}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted transition"
-            >
+            <button type="button" onClick={onLogout}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted transition">
               <LogOut size={14} /> Sair
             </button>
           </div>
@@ -239,34 +201,22 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
             ["custom", "Personalizado"],
             ["all", "Todo período"],
           ] as const).map(([key, label]) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setRangeKey(key)}
+            <button key={key} type="button" onClick={() => setRangeKey(key)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium border transition ${
                 rangeKey === key
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card text-foreground border-border hover:bg-muted"
-              }`}
-            >
+              }`}>
               {label}
             </button>
           ))}
           {rangeKey === "custom" && (
             <div className="flex items-center gap-2 ml-2">
-              <input
-                type="date"
-                value={customFrom}
-                onChange={(e) => setCustomFrom(e.target.value)}
-                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm"
-              />
+              <input type="date" value={customFrom} onChange={(e) => setCustomFrom(e.target.value)}
+                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm" />
               <span className="text-muted-foreground text-sm">até</span>
-              <input
-                type="date"
-                value={customTo}
-                onChange={(e) => setCustomTo(e.target.value)}
-                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm"
-              />
+              <input type="date" value={customTo} onChange={(e) => setCustomTo(e.target.value)}
+                className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm" />
             </div>
           )}
         </div>
@@ -300,12 +250,8 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
                     </td>
                     <td className="px-4 py-3 font-medium text-foreground">{l.name}</td>
                     <td className="px-4 py-3">
-                      <a
-                        href={`https://wa.me/${l.whatsapp.replace(/\D/g, "")}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
+                      <a href={`https://wa.me/${l.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer"
+                        className="text-primary hover:underline font-medium">
                         {l.whatsapp}
                       </a>
                     </td>

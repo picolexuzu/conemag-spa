@@ -1,97 +1,58 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, Download } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { equipmentRaw, equipmentSlugExists, equipmentVariants, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import { useLeadModal } from "@/components/LeadModalProvider";
+import { usePageMeta } from "@/lib/usePageMeta";
 
-export const Route = createFileRoute("/equipos/$slug")({
-  loader: ({ params }) => {
-    if (!equipmentSlugExists(params.slug)) throw notFound();
-    return { slug: params.slug };
-  },
-  head: ({ loaderData }) => {
-    const raw = loaderData?.slug ? equipmentRaw.find((e) => e.slug === loaderData.slug) : undefined;
-    if (!raw) return { meta: [{ title: "Conemag" }] };
-    const eq = raw.i18n.pt;
-    return {
-      meta: [
-        { title: `${raw.code} ${eq.name} — Conemag` },
-        { name: "description", content: eq.description },
-        { property: "og:title", content: `${raw.code} ${eq.name} — Conemag` },
-        { property: "og:description", content: eq.description },
-        { property: "og:image", content: raw.image },
-      ],
-    };
-  },
-  notFoundComponent: () => (
-    <SiteLayout>
-      <section className="pt-40 pb-24 container mx-auto px-6 text-center">
-        <h1 className="text-4xl font-bold">404</h1>
-        <Link to="/equipos" className="mt-6 inline-flex items-center gap-2 text-primary font-semibold">
-          <ArrowLeft size={18} /> ←
-        </Link>
-      </section>
-    </SiteLayout>
-  ),
-  errorComponent: ({ reset }) => (
-    <SiteLayout>
-      <section className="pt-40 pb-24 container mx-auto px-6 text-center">
-        <h1 className="text-4xl font-bold">Error</h1>
-        <button onClick={reset} className="mt-6 text-primary font-semibold">Retry</button>
-      </section>
-    </SiteLayout>
-  ),
-  component: EquipmentDetailPage,
-});
-
-function EquipmentDetailPage() {
-  const { slug } = Route.useLoaderData();
+export default function EquipmentDetailPage() {
+  const { slug = "" } = useParams<{ slug: string }>();
   const { t, locale } = useI18n();
-  const eq = getEquipmentBySlugLocalized(slug, locale)!;
   const { openLead } = useLeadModal();
+
+  const exists = equipmentSlugExists(slug);
+  const raw = exists ? equipmentRaw.find((e) => e.slug === slug) : undefined;
+  const eq = exists ? getEquipmentBySlugLocalized(slug, locale) : undefined;
+
+  usePageMeta(
+    raw && eq
+      ? {
+          title: `${raw.code} ${eq.name} — Conemag`,
+          description: eq.description,
+          ogImage: raw.image,
+        }
+      : { title: "Conemag" },
+  );
+
+  if (!exists || !eq) {
+    return <Navigate to="/equipos" replace />;
+  }
+
   const related = getEquipmentList(locale).filter((e) => e.slug !== eq.slug).slice(0, 3);
   const variants = equipmentVariants[eq.code] ?? [];
 
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="pt-32 pb-12 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative">
-          <Link
-            to="/equipos"
-            className="inline-flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition"
-          >
+          <Link to="/equipos" className="inline-flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition">
             <ArrowLeft size={16} /> {t("detail.back")}
           </Link>
           <div className="mt-6 grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-sm uppercase tracking-widest text-primary font-semibold">
-                {eq.category}
-              </span>
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold">{eq.category}</span>
               <h1 className="mt-3 text-5xl md:text-6xl font-bold text-balance">
                 {eq.code}
-                <span className="block text-2xl md:text-3xl font-normal text-primary-foreground/80 mt-2">
-                  {eq.name}
-                </span>
+                <span className="block text-2xl md:text-3xl font-normal text-primary-foreground/80 mt-2">{eq.name}</span>
               </h1>
-              <p className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">
-                {eq.description}
-              </p>
+              <p className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">{eq.description}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button
-                  type="button"
-                  onClick={openLead}
-                  className="inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition"
-                >
+                <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition">
                   {t("detail.requestQuote")} <ArrowRight size={18} />
                 </button>
-                <a
-                  href={`/datasheets/${eq.slug}.pdf`}
-                  download
-                  className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition"
-                >
+                <a href={`/datasheets/${eq.slug}.pdf`} download className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition">
                   <Download size={18} /> {t("detail.datasheet")}
                 </a>
               </div>
@@ -103,7 +64,6 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* OVERVIEW */}
       <section className="py-20">
         <div className="container mx-auto px-6 max-w-4xl">
           <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("detail.about")}</span>
@@ -114,7 +74,6 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* SPECS + ADVANTAGES */}
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12">
           <div>
@@ -147,7 +106,6 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* APPLICATIONS */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("detail.apps.kicker")}</span>
@@ -162,30 +120,16 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* MODELS / VARIATIONS */}
       {variants.length > 0 && (
         <section className="py-20 bg-secondary">
           <div className="container mx-auto px-6">
-            <span className="text-sm uppercase tracking-widest text-primary font-semibold">
-              {t("detail.models.kicker")}
-            </span>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-              {t("detail.models.title")}
-            </h2>
-            <p className="mt-4 text-muted-foreground max-w-2xl">
-              {t("detail.models.sub")}
-            </p>
+            <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("detail.models.kicker")}</span>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold">{t("detail.models.title")}</h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl">{t("detail.models.sub")}</p>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {variants.map((v) => (
-                <button
-                  key={v}
-                  type="button"
-                  onClick={openLead}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 text-left"
-                >
-                  <div className="text-xs uppercase tracking-widest text-primary font-semibold">
-                    {eq.code}
-                  </div>
+                <button key={v} type="button" onClick={openLead} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 text-left">
+                  <div className="text-xs uppercase tracking-widest text-primary font-semibold">{eq.code}</div>
                   <div className="mt-1 text-3xl md:text-4xl font-display font-bold">
                     {eq.code} <span className="text-muted-foreground font-normal">– {v}</span>
                   </div>
@@ -199,18 +143,12 @@ function EquipmentDetailPage() {
         </section>
       )}
 
-      {/* RELATED */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-10">{t("detail.other")}</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((r) => (
-              <Link
-                key={r.code}
-                to="/equipos/$slug"
-                params={{ slug: r.slug }}
-                className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1"
-              >
+              <Link key={r.code} to={`/equipos/${r.slug}`} className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1">
                 <div className="aspect-square bg-gradient-to-br from-secondary to-accent/30 p-6 grid place-items-center">
                   <img src={r.image} alt={r.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -226,19 +164,12 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 text-center relative">
           <h2 className="text-3xl md:text-5xl font-bold">{t("detail.cta.title")} {eq.code}?</h2>
-          <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">
-            {t("detail.cta.sub")}
-          </p>
-          <button
-            type="button"
-            onClick={openLead}
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
-          >
+          <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">{t("detail.cta.sub")}</p>
+          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
           </button>
         </div>
