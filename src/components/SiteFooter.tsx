@@ -51,9 +51,9 @@ export function SiteFooter() {
               {t("footer.contact")}
             </h4>
             <ul className="space-y-3 text-primary-foreground/80 text-sm">
-              <li className="flex gap-2"><Phone size={16} className="mt-0.5" /> +55 (16) 3333-8966</li>
+              <li className="flex gap-2"><Phone size={16} className="mt-0.5" /> (16) 3333-6966</li>
               <li className="flex gap-2"><Mail size={16} className="mt-0.5" /> contato@conemag.com</li>
-              <li className="flex gap-2"><MapPin size={16} className="mt-0.5" /> Araraquara, SP — Brasil</li>
+              <li className="flex gap-2"><MapPin size={16} className="mt-0.5" /> R. Sachs, 0315 - Chácara do trevo, Araraquara - SP, 14800-655</li>
             </ul>
           </div>
         </div>

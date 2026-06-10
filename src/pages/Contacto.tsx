@@ -24,7 +24,7 @@ export default function ContactoPage() {
         <div className="container mx-auto px-6 grid lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2 space-y-4">
             {[
-              { icon: Phone, title: t("contact.phone"), value: "+55 (16) 3333-8966" },
+              { icon: Phone, title: t("contact.phone"), value: "(16) 3333-6966" },
               { icon: MessageCircle, title: t("contact.whatsapp"), value: "+55 (16) 99999-0000" },
               { icon: Mail, title: t("contact.email"), value: "contato@conemag.com" },
               { icon: MapPin, title: t("contact.hq"), value: t("contact.hq.value") },
