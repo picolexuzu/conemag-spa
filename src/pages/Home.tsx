@@ -13,7 +13,7 @@ export default function HomePage() {
   const { openLead } = useLeadModal();
   usePageMeta({
     title: "Conemag — Equipamentos para reciclagem de sucata",
-    description: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 25+ anos de experiência, líder de mercado no Brasil.",
+    description: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 26+ anos de experiência, líder de mercado no Brasil.",
   });
   const equipment = getEquipmentList(locale);
   const features = [

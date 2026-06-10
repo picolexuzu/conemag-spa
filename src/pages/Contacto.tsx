@@ -26,7 +26,7 @@ export default function ContactoPage() {
             {[
               { icon: Phone, title: t("contact.phone"), value: "(16) 3333-6966" },
               { icon: MessageCircle, title: t("contact.whatsapp"), value: "+55 (16) 99999-0000" },
-              { icon: Mail, title: t("contact.email"), value: "contato@conemag.com" },
+              { icon: Mail, title: t("contact.email"), value: "contato@prensasconemag.com.br" },
               { icon: MapPin, title: t("contact.hq"), value: t("contact.hq.value") },
             ].map((c) => (
               <div key={c.title} className="p-6 bg-card border border-border rounded-2xl flex gap-4 hover:shadow-card transition">
