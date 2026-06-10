@@ -1,22 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useT } from "@/lib/i18n";
+import { usePageMeta } from "@/lib/usePageMeta";
 
-export const Route = createFileRoute("/contacto")({
-  head: () => ({
-    meta: [
-      { title: "Contato — Conemag" },
-      { name: "description", content: "Solicite um orçamento ou fale com um especialista. Atendimento no Brasil para equipamentos de reciclagem de sucata." },
-      { property: "og:title", content: "Contato — Conemag" },
-      { property: "og:description", content: "Fale com nossa equipe de especialistas no Brasil." },
-    ],
-  }),
-  component: ContactoPage,
-});
-
-function ContactoPage() {
+export default function ContactoPage() {
   const t = useT();
+  usePageMeta({
+    title: "Contato — Conemag",
+    description: "Solicite um orçamento ou fale com um especialista.",
+  });
   return (
     <SiteLayout>
       <section className="pt-40 pb-16 bg-primary text-primary-foreground relative overflow-hidden">
@@ -24,9 +16,7 @@ function ContactoPage() {
         <div className="container mx-auto px-6 relative max-w-4xl">
           <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("contact.kicker")}</span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance">{t("contact.title")}</h1>
-          <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">
-            {t("contact.sub")}
-          </p>
+          <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl">{t("contact.sub")}</p>
         </div>
       </section>
 
@@ -80,10 +70,7 @@ function ContactoPage() {
                 className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
               />
             </div>
-            <button
-              type="submit"
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-8 py-4 font-semibold hover:shadow-glow transition"
-            >
+            <button type="submit" className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-8 py-4 font-semibold hover:shadow-glow transition">
               {t("contact.form.submit")}
             </button>
           </form>

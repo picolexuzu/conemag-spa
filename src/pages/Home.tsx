@@ -1,27 +1,20 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
+import { usePageMeta } from "@/lib/usePageMeta";
 import gtxHero from "@/assets/gtx-hero.jpg";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Conemag — Equipamentos para reciclagem de sucata" },
-      { name: "description", content: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 25+ anos de experiência, líder de mercado no Brasil." },
-      { property: "og:title", content: "Conemag" },
-      { property: "og:description", content: "Equipos de alto rendimiento para el procesamiento de chatarra metálica." },
-    ],
-  }),
-  component: HomePage,
-});
-
-function HomePage() {
+export default function HomePage() {
   const { t, locale } = useI18n();
   const { openLead } = useLeadModal();
+  usePageMeta({
+    title: "Conemag — Equipamentos para reciclagem de sucata",
+    description: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 25+ anos de experiência, líder de mercado no Brasil.",
+  });
   const equipment = getEquipmentList(locale);
   const features = [
     { icon: Shield, title: t("home.feature1.title"), desc: t("home.feature1.desc") },
@@ -44,16 +37,8 @@ function HomePage() {
   ];
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={gtxHero}
-          className="absolute inset-0 w-full h-full object-cover"
-        >
+        <video autoPlay muted loop playsInline poster={gtxHero} className="absolute inset-0 w-full h-full object-cover">
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-hero" />
@@ -71,18 +56,11 @@ function HomePage() {
             {t("home.hero.sub")}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <Link
-              to="/equipos"
-              className="group inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition-all"
-            >
+            <Link to="/equipos" className="group inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition-all">
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button
-              type="button"
-              onClick={openLead}
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition"
-            >
+            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition">
               {t("home.hero.cta2")}
             </button>
           </div>
@@ -94,7 +72,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map(([num, label]) => (
@@ -106,21 +83,15 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FEATURES */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mb-16">
             <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.why")}</span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">
-              {t("home.why.title")}
-            </h2>
+            <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.why.title")}</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f) => (
-              <div
-                key={f.title}
-                className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/40 hover:shadow-card transition-all"
-              >
+              <div key={f.title} className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/40 hover:shadow-card transition-all">
                 <div className="w-12 h-12 rounded-xl bg-gradient-primary grid place-items-center text-primary-foreground mb-5 group-hover:shadow-glow transition">
                   <f.icon size={22} />
                 </div>
@@ -132,7 +103,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CATEGORIES */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mb-16">
@@ -144,12 +114,7 @@ function HomePage() {
             {categories.map((c) => {
               const count = getCategoryModelCount(c.key);
               return (
-                <Link
-                  key={c.key}
-                  to="/equipos"
-                  search={{ cat: c.key }}
-                  className="group relative p-8 rounded-2xl bg-primary text-primary-foreground overflow-hidden hover:shadow-elegant transition-all hover:-translate-y-1"
-                >
+                <Link key={c.key} to={`/equipos?cat=${c.key}`} className="group relative p-8 rounded-2xl bg-primary text-primary-foreground overflow-hidden hover:shadow-elegant transition-all hover:-translate-y-1">
                   <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
                   <div className="relative">
                     <div className="w-12 h-12 rounded-xl bg-lime text-lime-foreground grid place-items-center mb-5">
@@ -171,15 +136,12 @@ function HomePage() {
         </div>
       </section>
 
-      {/* EQUIPMENT */}
       <section className="py-24 md:py-32 bg-secondary">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-16">
             <div className="max-w-2xl">
               <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("home.products.kicker")}</span>
-              <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">
-                {t("home.products.title")}
-              </h2>
+              <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.products.title")}</h2>
             </div>
             <Link to="/equipos" className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all">
               {t("home.products.viewAll")} <ChevronRight size={18} />
@@ -188,18 +150,9 @@ function HomePage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {equipment.slice(0, 6).map((eq) => (
-              <Link
-                key={eq.code}
-                to="/equipos/$slug"
-                params={{ slug: eq.slug }}
-                className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1"
-              >
+              <Link key={eq.code} to={`/equipos/${eq.slug}`} className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1">
                 <div className="aspect-square bg-gradient-to-br from-secondary to-accent/30 p-6 grid place-items-center">
-                  <img
-                    src={eq.image}
-                    alt={eq.name}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <img src={eq.image} alt={eq.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
                   <div className="text-xs uppercase tracking-widest text-primary font-semibold">{eq.category}</div>
@@ -217,7 +170,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-16">
@@ -232,10 +184,7 @@ function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Link
-              to="/servicios"
-              className="group relative p-10 rounded-3xl bg-card border border-border hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden"
-            >
+            <Link to="/servicios" className="group relative p-10 rounded-3xl bg-card border border-border hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden">
               <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
               <div className="relative">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-primary text-primary-foreground grid place-items-center mb-6">
@@ -255,10 +204,7 @@ function HomePage() {
               </div>
             </Link>
 
-            <Link
-              to="/servicios"
-              className="group relative p-10 rounded-3xl bg-primary text-primary-foreground hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden"
-            >
+            <Link to="/servicios" className="group relative p-10 rounded-3xl bg-primary text-primary-foreground hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden">
               <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/20 group-hover:bg-lime/30 transition" />
               <div className="relative">
                 <div className="w-14 h-14 rounded-2xl bg-lime text-lime-foreground grid place-items-center mb-6">
@@ -281,7 +227,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* INSTAGRAM */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
@@ -290,12 +235,7 @@ function HomePage() {
               <h2 className="mt-3 text-4xl md:text-5xl font-bold text-balance">{t("home.instagram.title")}</h2>
               <p className="mt-4 text-muted-foreground">{t("home.instagram.sub")}</p>
             </div>
-            <a
-              href="https://instagram.com/prensasconemag"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:shadow-elegant transition-all"
-            >
+            <a href="https://instagram.com/prensasconemag" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:shadow-elegant transition-all">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
                 <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2"/>
                 <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/>
@@ -308,33 +248,19 @@ function HomePage() {
           <BeholdWidget feedId="CAFocuQCUqEea00KaUXW" />
 
           <div className="mt-8 text-center md:text-right">
-            <a
-              href="https://instagram.com/prensasconemag"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all"
-            >
+            <a href="https://instagram.com/prensasconemag" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary font-semibold hover:gap-2 transition-all">
               {t("home.instagram.view")} <ChevronRight size={18} />
             </a>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">
-            {t("home.cta.title")}
-          </h2>
-          <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">
-            {t("home.cta.sub")}
-          </p>
-          <button
-            type="button"
-            onClick={openLead}
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition"
-          >
+          <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">{t("home.cta.title")}</h2>
+          <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">{t("home.cta.sub")}</p>
+          <button type="button" onClick={openLead} className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
           </button>
         </div>
