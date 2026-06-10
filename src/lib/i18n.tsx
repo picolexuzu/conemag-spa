@@ -489,7 +489,7 @@ const dictionaries: Record<Locale, Dict> = {
     "contact.whatsapp": "WhatsApp",
     "contact.email": "E-mail",
     "contact.hq": "Sede",
-    "contact.hq.value": "Araraquara, SP — Brasil",
+    "contact.hq.value": "R. Sachs, 0315 - Chácara do trevo, Araraquara - SP, 14800-655",
     "contact.form.name": "Nombre completo",
     "contact.form.company": "Empresa",
     "contact.form.email": "E-mail",
