@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import logo from "@/assets/logo-conemag.png";
 import { useT } from "@/lib/i18n";

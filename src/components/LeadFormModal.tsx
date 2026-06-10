@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { X, Loader2, CheckCircle2 } from "lucide-react";
-import { submitLead } from "@/lib/leads.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LeadFormModalProps {
   open: boolean;
@@ -11,7 +10,6 @@ interface LeadFormModalProps {
 }
 
 export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalProps) {
-  const submit = useServerFn(submitLead);
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [company, setCompany] = useState("");
@@ -41,7 +39,21 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
     setError("");
     setLoading(true);
     try {
-      await submit({ data: { name, whatsapp, company } });
+      const trimmedName = name.trim();
+      const trimmedWa = whatsapp.trim();
+      const trimmedCo = company.trim();
+      if (!trimmedName || !trimmedWa || !trimmedCo) {
+        throw new Error("Preencha todos os campos.");
+      }
+      const { error: insertError } = await supabase.from("leads").insert({
+        name: trimmedName,
+        whatsapp: trimmedWa,
+        company: trimmedCo,
+      });
+      if (insertError) {
+        console.error("[lead] insert error", insertError);
+        throw new Error("Não foi possível registrar o contato. Tente novamente.");
+      }
       setDone(true);
       setName("");
       setWhatsapp("");

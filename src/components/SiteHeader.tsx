@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/logo-conemag.png";
@@ -42,15 +42,19 @@ export function SiteHeader() {
 
         <nav className="hidden lg:flex items-center gap-1">
           {nav.map((item) => (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/85 hover:text-lime transition-colors relative group"
-              activeProps={{ className: "text-lime" }}
+              end={item.to === "/"}
+              className={({ isActive }) =>
+                `px-4 py-2 text-sm font-medium transition-colors relative group ${
+                  isActive ? "text-lime" : "text-primary-foreground/85 hover:text-lime"
+                }`
+              }
             >
               {item.label}
               <span className="absolute inset-x-4 -bottom-0.5 h-px bg-lime scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-            </Link>
+            </NavLink>
           ))}
           <div className="relative ml-2">
             <button
