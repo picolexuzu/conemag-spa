@@ -57,7 +57,7 @@ export default function EquipmentDetailPage() {
                 </a>
               </div>
             </div>
-            <div className="aspect-square bg-gradient-to-br from-primary-foreground/10 to-primary-foreground/5 rounded-3xl p-10 grid place-items-center backdrop-blur-sm border border-primary-foreground/10">
+            <div className="aspect-square bg-white rounded-3xl p-10 grid place-items-center shadow-2xl border border-primary-foreground/10">
               <img src={eq.image} alt={`${eq.code} ${eq.name}`} className="max-h-full max-w-full object-contain" />
             </div>
           </div>
