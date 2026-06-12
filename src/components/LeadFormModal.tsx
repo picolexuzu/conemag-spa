@@ -121,7 +121,7 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
                   maxLength={120}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime"
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-gold"
                   placeholder="Seu nome completo"
                 />
               </div>
@@ -135,7 +135,7 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
                   maxLength={40}
                   value={whatsapp}
                   onChange={(e) => setWhatsapp(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime"
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-gold"
                   placeholder="(00) 00000-0000"
                 />
               </div>
@@ -149,7 +149,7 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
                   maxLength={160}
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime"
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-gold"
                   placeholder="Sua empresa"
                 />
               </div>
@@ -161,7 +161,7 @@ export function LeadFormModal({ open, onClose, title, subtitle }: LeadFormModalP
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-lime text-lime-foreground px-6 py-3 font-semibold hover:shadow-lime-glow transition disabled:opacity-60"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gold text-gold-foreground px-6 py-3 font-semibold hover:shadow-gold-glow transition disabled:opacity-60"
               >
                 {loading ? <Loader2 className="animate-spin" size={18} /> : null}
                 {loading ? "Enviando..." : "Enviar"}

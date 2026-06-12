@@ -49,7 +49,7 @@ export default function EquipmentDetailPage() {
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">{eq.description}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition">
+                <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-7 py-3.5 font-semibold hover:shadow-gold-glow transition">
                   {t("detail.requestQuote")} <ArrowRight size={18} />
                 </button>
                 <a href={`/datasheets/${eq.slug}.pdf`} download className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition">
@@ -169,7 +169,7 @@ export default function EquipmentDetailPage() {
         <div className="container mx-auto px-6 text-center relative">
           <h2 className="text-3xl md:text-5xl font-bold">{t("detail.cta.title")} {eq.code}?</h2>
           <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">{t("detail.cta.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition">
+          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
           </button>
         </div>

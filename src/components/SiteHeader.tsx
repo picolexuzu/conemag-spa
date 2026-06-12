@@ -48,18 +48,18 @@ export function SiteHeader() {
               end={item.to === "/"}
               className={({ isActive }) =>
                 `px-4 py-2 text-sm font-medium transition-colors relative group ${
-                  isActive ? "text-lime" : "text-primary-foreground/85 hover:text-lime"
+                  isActive ? "text-gold" : "text-primary-foreground/85 hover:text-gold"
                 }`
               }
             >
               {item.label}
-              <span className="absolute inset-x-4 -bottom-0.5 h-px bg-lime scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              <span className="absolute inset-x-4 -bottom-0.5 h-px bg-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </NavLink>
           ))}
           <div className="relative ml-2">
             <button
               onClick={() => setLangOpen((v) => !v)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-primary-foreground/85 hover:text-lime transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-primary-foreground/85 hover:text-gold transition-colors"
               aria-label="Language"
             >
               <Globe size={16} />
@@ -72,7 +72,7 @@ export function SiteHeader() {
                     key={l.code}
                     onClick={() => { setLocale(l.code); setLangOpen(false); }}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-primary-foreground/10 transition ${
-                      l.code === locale ? "text-lime" : "text-primary-foreground/85"
+                      l.code === locale ? "text-gold" : "text-primary-foreground/85"
                     }`}
                   >
                     <span>{l.flag}</span>
@@ -85,7 +85,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={openLead}
-            className="ml-4 inline-flex items-center rounded-full bg-lime text-lime-foreground px-5 py-2 text-sm font-semibold hover:bg-lime/90 transition shadow-lime-glow"
+            className="ml-4 inline-flex items-center rounded-full bg-gold text-gold-foreground px-5 py-2 text-sm font-semibold hover:bg-gold/90 transition shadow-gold-glow"
           >
             {t("nav.quote")}
           </button>
@@ -116,7 +116,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => { setOpen(false); openLead(); }}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-lime text-lime-foreground px-5 py-3 text-base font-semibold"
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-gold text-gold-foreground px-5 py-3 text-base font-semibold"
             >
               {t("nav.quote")}
             </button>
@@ -127,7 +127,7 @@ export function SiteHeader() {
                   onClick={() => setLocale(l.code)}
                   className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
                     l.code === locale
-                      ? "bg-lime text-lime-foreground border-lime"
+                      ? "bg-gold text-gold-foreground border-gold"
                       : "border-primary-foreground/20 text-primary-foreground/85"
                   }`}
                 >

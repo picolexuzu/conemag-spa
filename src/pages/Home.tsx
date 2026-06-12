@@ -45,8 +45,8 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-radial opacity-60" />
 
         <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-lime/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-lime">
-            <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-gold/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-gold">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
             {t("home.badge")}
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
@@ -56,7 +56,7 @@ export default function HomePage() {
             {t("home.hero.sub")}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <Link to="/equipos" className="group inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-7 py-3.5 font-semibold hover:shadow-lime-glow transition-all">
+            <Link to="/equipos" className="group inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-7 py-3.5 font-semibold hover:shadow-gold-glow transition-all">
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -76,7 +76,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map(([num, label]) => (
             <div key={label}>
-              <div className="text-4xl md:text-6xl font-display font-bold text-lime">{num}</div>
+              <div className="text-4xl md:text-6xl font-display font-bold text-gold">{num}</div>
               <div className="mt-2 text-sm uppercase tracking-widest text-primary-foreground/70">{label}</div>
             </div>
           ))}
@@ -115,16 +115,16 @@ export default function HomePage() {
               const count = getCategoryModelCount(c.key);
               return (
                 <Link key={c.key} to={`/equipos?cat=${c.key}`} className="group relative p-8 rounded-2xl bg-primary text-primary-foreground overflow-hidden hover:shadow-elegant transition-all hover:-translate-y-1">
-                  <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
+                  <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-gold/10 group-hover:bg-gold/20 transition" />
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-xl bg-lime text-lime-foreground grid place-items-center mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-gold text-gold-foreground grid place-items-center mb-5">
                       <c.icon size={22} />
                     </div>
                     <h3 className="text-2xl font-display font-bold">{t(`cat.${c.key}`)}</h3>
                     <p className="mt-3 text-sm text-primary-foreground/70 leading-relaxed">{t(`cat.${c.key}.desc`)}</p>
                     <div className="mt-6 flex items-center justify-between">
-                      <span className="text-xs uppercase tracking-widest text-lime">{count} {count === 1 ? "modelo" : "modelos"}</span>
-                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-lime group-hover:gap-2 transition-all">
+                      <span className="text-xs uppercase tracking-widest text-gold">{count} {count === 1 ? "modelo" : "modelos"}</span>
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold group-hover:gap-2 transition-all">
                         {t("home.cat.viewLine")} <ChevronRight size={14} />
                       </span>
                     </div>
@@ -185,7 +185,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 gap-6">
             <Link to="/servicios" className="group relative p-10 rounded-3xl bg-card border border-border hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden">
-              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/10 group-hover:bg-lime/20 transition" />
+              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-gold/10 group-hover:bg-gold/20 transition" />
               <div className="relative">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-primary text-primary-foreground grid place-items-center mb-6">
                   <KeyRound size={24} />
@@ -194,9 +194,9 @@ export default function HomePage() {
                 <h3 className="mt-2 text-2xl md:text-3xl font-display font-bold">{t("serv.rental.title")}</h3>
                 <p className="mt-4 text-muted-foreground leading-relaxed">{t("serv.rental.desc")}</p>
                 <ul className="mt-6 space-y-2 text-sm">
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b1")}</li>
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b2")}</li>
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.rental.b3")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.rental.b1")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.rental.b2")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.rental.b3")}</li>
                 </ul>
                 <div className="mt-8 inline-flex items-center gap-1 text-primary font-semibold group-hover:gap-2 transition-all">
                   {t("home.services.know")} <ChevronRight size={16} />
@@ -205,20 +205,20 @@ export default function HomePage() {
             </Link>
 
             <Link to="/servicios" className="group relative p-10 rounded-3xl bg-primary text-primary-foreground hover:shadow-elegant transition-all hover:-translate-y-1 overflow-hidden">
-              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-lime/20 group-hover:bg-lime/30 transition" />
+              <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-gold/20 group-hover:bg-gold/30 transition" />
               <div className="relative">
-                <div className="w-14 h-14 rounded-2xl bg-lime text-lime-foreground grid place-items-center mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-gold text-gold-foreground grid place-items-center mb-6">
                   <Landmark size={24} />
                 </div>
-                <span className="text-xs uppercase tracking-widest text-lime font-semibold">{t("serv.fin.kicker")}</span>
+                <span className="text-xs uppercase tracking-widest text-gold font-semibold">{t("serv.fin.kicker")}</span>
                 <h3 className="mt-2 text-2xl md:text-3xl font-display font-bold">{t("serv.fin.title")}</h3>
                 <p className="mt-4 text-primary-foreground/80 leading-relaxed">{t("serv.fin.desc")}</p>
                 <ul className="mt-6 space-y-2 text-sm">
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b1")}</li>
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b2")}</li>
-                  <li className="flex gap-2"><span className="text-lime">›</span>{t("serv.fin.b4")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.fin.b1")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.fin.b2")}</li>
+                  <li className="flex gap-2"><span className="text-gold">›</span>{t("serv.fin.b4")}</li>
                 </ul>
-                <div className="mt-8 inline-flex items-center gap-1 text-lime font-semibold group-hover:gap-2 transition-all">
+                <div className="mt-8 inline-flex items-center gap-1 text-gold font-semibold group-hover:gap-2 transition-all">
                   {t("home.services.know")} <ChevronRight size={16} />
                 </div>
               </div>
@@ -260,7 +260,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6 relative text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">{t("home.cta.title")}</h2>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">{t("home.cta.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-10 inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-8 py-4 font-semibold hover:shadow-lime-glow transition">
+          <button type="button" onClick={openLead} className="mt-10 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
           </button>
         </div>
