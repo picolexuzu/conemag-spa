@@ -79,7 +79,7 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-xl">
         <div className="flex flex-col items-center text-center mb-6">
           <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-3">
-            <Lock className="text-lime" size={24} />
+            <Lock className="text-gold" size={24} />
           </div>
           <h1 className="text-xl font-bold text-foreground">Painel Administrativo</h1>
           <p className="mt-1 text-sm text-muted-foreground">Acesso restrito — Leads Conemag</p>
@@ -87,10 +87,10 @@ function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
         <div className="space-y-3">
           <input ref={inputRef} type="text" value={username} onChange={(e) => setUsername(e.target.value)}
             placeholder="Usuário" autoComplete="username"
-            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime" />
+            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-gold" />
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha" autoComplete="current-password"
-            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-lime" />
+            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-gold" />
         </div>
         {error && <p className="mt-3 text-sm text-destructive text-center">{error}</p>}
         <button type="submit" disabled={loading} className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:opacity-90 transition disabled:opacity-60">
@@ -168,7 +168,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-              <Users className="text-lime" size={18} />
+              <Users className="text-gold" size={18} />
             </div>
             <div>
               <h1 className="text-lg font-bold text-foreground leading-tight">Leads Conemag</h1>
@@ -177,7 +177,7 @@ function LeadsDashboard({ session, onLogout }: { session: Session; onLogout: () 
           </div>
           <div className="flex items-center gap-2">
             <button type="button" onClick={exportXlsx} disabled={filtered.length === 0}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-lime text-lime-foreground px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50">
+              className="inline-flex items-center gap-1.5 rounded-lg bg-gold text-gold-foreground px-3 py-2 text-sm font-medium hover:opacity-90 transition disabled:opacity-50">
               <Download size={14} /> Exportar Excel
             </button>
             <button type="button" onClick={load} disabled={loading}
