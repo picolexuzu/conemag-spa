@@ -65,8 +65,8 @@
   --accent: oklch(0.92 0.06 268);
   --accent-foreground: oklch(0.22 0.1 268);
 
-  /* Gold secondary highlight */
-  --gold: oklch(0.84 0.16 92);
+  /* Lime secondary highlight */
+  --gold: #E0FE00;
   --gold-foreground: oklch(0.18 0.06 270);
 
   --destructive: oklch(0.58 0.22 27);
@@ -80,7 +80,7 @@
   --gradient-hero: linear-gradient(135deg, oklch(0.18 0.12 270 / 0.9), oklch(0.32 0.2 268 / 0.7) 50%, oklch(0.12 0.08 270 / 0.95));
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
   --gradient-radial: radial-gradient(ellipse at top, oklch(0.55 0.22 268 / 0.25), transparent 70%);
-  --gradient-gold: linear-gradient(135deg, var(--gold), oklch(0.76 0.17 95));
+  --gradient-gold: linear-gradient(135deg, var(--gold), #C5E600);
 
   --shadow-elegant: 0 20px 60px -20px oklch(0.32 0.18 268 / 0.35);
   --shadow-glow: 0 0 40px oklch(0.55 0.22 268 / 0.4);
@@ -108,7 +108,7 @@
   --border: oklch(1 0 0 / 0.1);
   --input: oklch(1 0 0 / 0.15);
   --ring: oklch(0.65 0.2 268);
-  --gold: oklch(0.80 0.17 82);
+  --gold: #E0FE00;
   --gold-foreground: oklch(0.18 0.06 270);
 }
 
@@ -139,7 +139,7 @@
   .bg-gradient-gold { background-image: var(--gradient-gold); }
   .shadow-elegant { box-shadow: var(--shadow-elegant); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
-  .shadow-gold-glow { box-shadow: 0 0 40px oklch(0.80 0.17 82 / 0.45); }
+  .shadow-gold-glow { box-shadow: 0 0 40px #E0FE0073; }
   .shadow-card { box-shadow: var(--shadow-card); }
   .text-balance { text-wrap: balance; }
 }
