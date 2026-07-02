@@ -6,7 +6,8 @@ import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import { usePageMeta } from "@/lib/usePageMeta";
-import gtxHero from "@/assets/gtx-hero.jpg";
+import heroVideo from "@/assets/hero.mp4.asset.json";
+import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
 export default function HomePage() {
   const { t, locale } = useI18n();
