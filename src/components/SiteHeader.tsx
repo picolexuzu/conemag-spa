@@ -29,10 +29,8 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-primary/95 backdrop-blur-xl shadow-elegant py-3"
-          : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-primary/95 backdrop-blur-xl ${
+        scrolled ? "shadow-elegant py-3" : "py-5"
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
