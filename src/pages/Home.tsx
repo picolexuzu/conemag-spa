@@ -46,10 +46,6 @@ export default function HomePage() {
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
         <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/70 backdrop-blur-md border border-gold/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-gold">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-            {t("home.badge")}
-          </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
             {t("home.hero.title")}
           </h1>
