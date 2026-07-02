@@ -30,7 +30,7 @@ export function SiteHeader() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-primary/95 backdrop-blur-xl shadow-elegant py-3" : "bg-primary/60 backdrop-blur-xl py-5"
+        scrolled ? "bg-primary/95 shadow-elegant py-3" : "bg-primary/60 py-5"
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -64,7 +64,7 @@ export function SiteHeader() {
               {locales.find((l) => l.code === locale)?.label}
             </button>
             {langOpen && (
-              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-primary/95 backdrop-blur-xl border border-primary-foreground/10 shadow-elegant overflow-hidden">
+              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-primary/95 border border-primary-foreground/10 shadow-elegant overflow-hidden">
                 {locales.map((l) => (
                   <button
                     key={l.code}
@@ -99,7 +99,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-primary/98 backdrop-blur-xl border-t border-primary-foreground/10">
+        <div className="lg:hidden bg-primary/98 border-t border-primary-foreground/10">
           <nav className="container mx-auto px-6 py-6 flex flex-col gap-2">
             {nav.map((item) => (
               <Link
