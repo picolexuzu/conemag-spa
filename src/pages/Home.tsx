@@ -57,7 +57,7 @@ export default function HomePage() {
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 backdrop-blur-md bg-primary/50 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary/70 transition">
+            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full backdrop-blur-md bg-primary/50 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary/70 transition">
               {t("home.hero.cta2")}
             </button>
           </div>
