@@ -39,8 +39,8 @@ export default function HomePage() {
   return (
     <SiteLayout>
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
-        <video autoPlay muted loop playsInline poster={gtxHero} className="absolute inset-0 w-full h-full object-cover">
-          <source src="/videos/hero.mp4" type="video/mp4" />
+        <video autoPlay muted loop playsInline preload="metadata" poster={heroPoster.url} className="absolute inset-0 w-full h-full object-cover">
+          <source src={heroVideo.url} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/30" />
