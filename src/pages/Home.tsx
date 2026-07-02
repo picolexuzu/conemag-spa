@@ -6,7 +6,8 @@ import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import { usePageMeta } from "@/lib/usePageMeta";
-import gtxHero from "@/assets/gtx-hero.jpg";
+import heroVideo from "@/assets/hero.mp4.asset.json";
+import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
 export default function HomePage() {
   const { t, locale } = useI18n();
@@ -38,8 +39,8 @@ export default function HomePage() {
   return (
     <SiteLayout>
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
-        <video autoPlay muted loop playsInline poster={gtxHero} className="absolute inset-0 w-full h-full object-cover">
-          <source src="/videos/hero.mp4" type="video/mp4" />
+        <video autoPlay muted loop playsInline preload="metadata" poster={heroPoster.url} className="absolute inset-0 w-full h-full object-cover">
+          <source src={heroVideo.url} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/30" />
