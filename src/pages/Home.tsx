@@ -41,18 +41,16 @@ export default function HomePage() {
         <video autoPlay muted loop playsInline poster={gtxHero} className="absolute inset-0 w-full h-full object-cover">
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute inset-0 bg-gradient-radial opacity-60" />
 
-        <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-md border border-gold/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-gold">
+        <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.55)" }}>
+          <span className="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md border border-gold/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-gold">
             <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
             {t("home.badge")}
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-balance max-w-5xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)]">
             {t("home.hero.title")}
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg md:text-xl text-primary-foreground/95 max-w-2xl mx-auto leading-relaxed">
             {t("home.hero.sub")}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
@@ -60,13 +58,13 @@ export default function HomePage() {
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition">
+            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 backdrop-blur-md bg-black/30 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-black/50 transition">
               {t("home.hero.cta2")}
             </button>
           </div>
         </div>
 
-        <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 text-xs uppercase tracking-widest flex-col items-center gap-2 animate-pulse">
+        <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/80 text-xs uppercase tracking-widest flex-col items-center gap-2 animate-pulse" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.6)" }}>
           <span>{t("home.scroll")}</span>
           <div className="w-px h-12 bg-gradient-to-b from-primary-foreground/60 to-transparent" />
         </div>
