@@ -64,7 +64,7 @@ export function SiteHeader() {
               {locales.find((l) => l.code === locale)?.label}
             </button>
             {langOpen && (
-              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-primary/95 backdrop-blur-xl border border-primary-foreground/10 shadow-elegant overflow-hidden">
+              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-primary/95 border border-primary-foreground/10 shadow-elegant overflow-hidden">
                 {locales.map((l) => (
                   <button
                     key={l.code}
