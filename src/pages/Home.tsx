@@ -42,7 +42,7 @@ export default function HomePage() {
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
 
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
         <div className="relative z-10 container mx-auto px-6 text-center text-primary-foreground">
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/70 backdrop-blur-md border border-gold/40 px-4 py-1.5 text-xs font-medium uppercase tracking-widest mb-8 text-gold">
