@@ -99,7 +99,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-primary/98 backdrop-blur-xl border-t border-primary-foreground/10">
+        <div className="lg:hidden bg-primary/98 border-t border-primary-foreground/10">
           <nav className="container mx-auto px-6 py-6 flex flex-col gap-2">
             {nav.map((item) => (
               <Link
