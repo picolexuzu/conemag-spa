@@ -507,6 +507,16 @@ const I18nContext = createContext<Ctx>({ locale: "pt", setLocale: () => {}, t: (
 
 const STORAGE_KEY = "conemag-locale";
 
+function detectBrowserLocale(): Locale {
+  if (typeof navigator === "undefined") return "pt";
+  const lang = navigator.language || (navigator as any).userLanguage;
+  if (!lang) return "pt";
+  const lower = lang.toLowerCase();
+  if (lower.startsWith("en")) return "en";
+  if (lower.startsWith("es")) return "es";
+  return "pt";
+}
+
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("pt");
 
@@ -515,6 +525,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
       if (stored && (stored === "pt" || stored === "en" || stored === "es")) {
         setLocaleState(stored);
+      } else {
+        const detected = detectBrowserLocale();
+        setLocaleState(detected);
+        try { localStorage.setItem(STORAGE_KEY, detected); } catch {}
       }
     } catch {}
   }, []);
