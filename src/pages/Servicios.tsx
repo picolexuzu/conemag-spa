@@ -1,14 +1,13 @@
 import { Check, ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useT } from "@/lib/i18n";
-import { useLeadModal } from "@/components/LeadModalProvider";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { WHATSAPP_SERVICE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 import rental from "@/assets/service-rental.jpg";
 import financing from "@/assets/service-financing.jpg";
 
 export default function ServiciosPage() {
   const t = useT();
-  const { openLead } = useLeadModal();
   usePageMeta({
     title: "Serviços — Conemag",
     description: "Alquiler de equipos, financiamiento, asistencia técnica y repuestos. Soluciones completas para el reciclaje industrial.",
@@ -76,9 +75,9 @@ export default function ServiciosPage() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">{t("serv.support.title")}</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t("serv.support.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
+          <a href={whatsappUrl(WHATSAPP_SERVICE_MESSAGE)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
             {t("serv.support.cta")} <ArrowRight size={18} />
-          </button>
+          </a>
         </div>
       </section>
     </SiteLayout>

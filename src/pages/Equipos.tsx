@@ -3,13 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getEquipmentList, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
-import { useLeadModal } from "@/components/LeadModalProvider";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { WHATSAPP_QUOTE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 
 const CATEGORY_KEYS: CategoryKey[] = ["prensas", "tesouras", "briquetadeiras", "trituradores"];
 
 export default function EquiposPage() {
-  const { openLead } = useLeadModal();
   const { t, locale } = useI18n();
   const [searchParams, setSearchParams] = useSearchParams();
   const rawCat = searchParams.get("cat");
@@ -94,9 +93,9 @@ export default function EquiposPage() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">{t("equipos.custom.title")}</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t("equipos.custom.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
+          <a href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
             {t("equipos.custom.cta")} <ArrowRight size={18} />
-          </button>
+          </a>
         </div>
       </section>
     </SiteLayout>

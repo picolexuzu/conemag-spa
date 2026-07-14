@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Recycle, Shield, Wrench, Zap, ChevronRight, Layers, Scissors, Package, Cog, KeyRound, Landmark } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { useLeadModal } from "@/components/LeadModalProvider";
 import { BeholdWidget } from "@/components/BeholdWidget";
 import { getEquipmentList, getTotalModelCount, getCategoryModelCount, type CategoryKey } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { WHATSAPP_QUOTE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 import heroVideo from "@/assets/hero.mp4.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
 export default function HomePage() {
   const { t, locale } = useI18n();
-  const { openLead } = useLeadModal();
   usePageMeta({
     title: "Conemag — Equipamentos para reciclagem de sucata",
     description: "Prensas, tesouras, briquetadeiras e trituradores Conemag. Tecnologia brasileira com 26+ anos de experiência, líder de mercado no Brasil.",
@@ -58,9 +57,9 @@ export default function HomePage() {
               {t("home.hero.cta1")}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full backdrop-blur-md bg-primary/50 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary/70 transition">
+            <a href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full backdrop-blur-md bg-primary/50 text-primary-foreground px-7 py-3.5 font-semibold hover:bg-primary/70 transition">
               {t("home.hero.cta2")}
-            </button>
+            </a>
           </div>
         </div>
 
@@ -258,9 +257,9 @@ export default function HomePage() {
         <div className="container mx-auto px-6 relative text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-balance max-w-3xl mx-auto">{t("home.cta.title")}</h2>
           <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">{t("home.cta.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-10 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
+          <a href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
-          </button>
+          </a>
         </div>
       </section>
     </SiteLayout>
