@@ -1,10 +1,8 @@
 import { MessageCircle } from "lucide-react";
-
-const PHONE = "551633336966";
-const MESSAGE = "Olá! Gostaria de suporte.";
+import { WHATSAPP_SUPPORT_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 
 export default function WhatsAppFloat() {
-  const href = `https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`;
+  const href = whatsappUrl(WHATSAPP_SUPPORT_MESSAGE);
   return (
     <a
       href={href}
