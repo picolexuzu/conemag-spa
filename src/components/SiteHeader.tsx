@@ -67,7 +67,10 @@ export function SiteHeader() {
                 {locales.map((l) => (
                   <button
                     key={l.code}
-                    onClick={() => { setLocale(l.code); setLangOpen(false); }}
+                    onClick={() => {
+                      setLocale(l.code);
+                      setLangOpen(false);
+                    }}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-primary-foreground/10 transition ${
                       l.code === locale ? "text-gold" : "text-primary-foreground/85"
                     }`}

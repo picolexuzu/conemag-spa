@@ -12,11 +12,13 @@ export default function EquiposPage() {
   const { t, locale } = useI18n();
   const [searchParams, setSearchParams] = useSearchParams();
   const rawCat = searchParams.get("cat");
-  const cat = rawCat && (CATEGORY_KEYS as string[]).includes(rawCat) ? (rawCat as CategoryKey) : undefined;
+  const cat =
+    rawCat && (CATEGORY_KEYS as string[]).includes(rawCat) ? (rawCat as CategoryKey) : undefined;
 
   usePageMeta({
     title: "Equipamentos — Conemag",
-    description: "Línea completa de equipos Conemag: prensas, cizallas, briquetadoras y trituradores para chatarra metálica.",
+    description:
+      "Línea completa de equipos Conemag: prensas, cizallas, briquetadoras y trituradores para chatarra metálica.",
   });
 
   const all = getEquipmentList(locale);
@@ -32,7 +34,9 @@ export default function EquiposPage() {
       <section className="pt-40 pb-16 bg-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-40" />
         <div className="container mx-auto px-6 relative">
-          <span className="text-sm uppercase tracking-widest text-primary font-semibold">{t("equipos.kicker")}</span>
+          <span className="text-sm uppercase tracking-widest text-primary font-semibold">
+            {t("equipos.kicker")}
+          </span>
           <h1 className="mt-3 text-5xl md:text-7xl font-bold text-balance max-w-4xl">
             {cat ? t(`cat.${cat}`) : t("equipos.title")}
           </h1>
@@ -71,14 +75,23 @@ export default function EquiposPage() {
                 className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-elegant transition-all hover:-translate-y-1"
               >
                 <div className="aspect-square bg-gradient-to-br from-secondary to-accent/30 p-6 grid place-items-center">
-                  <img src={eq.image} alt={eq.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" />
+                  <img
+                    src={eq.image}
+                    alt={eq.name}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
                 <div className="p-6">
-                  <div className="text-xs uppercase tracking-widest text-primary font-semibold">{eq.category}</div>
+                  <div className="text-xs uppercase tracking-widest text-primary font-semibold">
+                    {eq.category}
+                  </div>
                   <h3 className="mt-2 text-2xl font-display font-bold">
-                    {eq.code} <span className="text-muted-foreground font-normal text-base">— {eq.name}</span>
+                    {eq.code}{" "}
+                    <span className="text-muted-foreground font-normal text-base">— {eq.name}</span>
                   </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{eq.description}</p>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    {eq.description}
+                  </p>
                   <div className="mt-4 inline-flex items-center gap-1 text-primary font-semibold text-sm group-hover:gap-2 transition-all">
                     {t("card.viewDetails")} <ArrowRight size={14} />
                   </div>
@@ -93,7 +106,12 @@ export default function EquiposPage() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">{t("equipos.custom.title")}</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">{t("equipos.custom.sub")}</p>
-          <a href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition">
+          <a
+            href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold hover:shadow-glow transition"
+          >
             {t("equipos.custom.cta")} <ArrowRight size={18} />
           </a>
         </div>
