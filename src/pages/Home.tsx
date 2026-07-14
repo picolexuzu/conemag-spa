@@ -27,6 +27,10 @@ import { WHATSAPP_QUOTE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 import heroVideo from "@/assets/hero.mp4.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
+const LOVABLE_ASSET_ORIGIN = "https://conemag-spa.lovable.app";
+const resolveAssetUrl = (url: string) =>
+  url.startsWith("/__l5e/") ? `${LOVABLE_ASSET_ORIGIN}${url}` : url;
+
 export default function HomePage() {
   const { t, locale } = useI18n();
   usePageMeta({
@@ -48,6 +52,8 @@ export default function HomePage() {
     { key: "trituradores", icon: Cog },
   ];
   const totalModels = getTotalModelCount();
+  const heroVideoUrl = resolveAssetUrl(heroVideo.url);
+  const heroPosterUrl = resolveAssetUrl(heroPoster.url);
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
     [`+${totalModels}`, t("home.stats.lines")],
@@ -63,10 +69,10 @@ export default function HomePage() {
           loop
           playsInline
           preload="metadata"
-          poster={heroPoster.url}
+          poster={heroPosterUrl}
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={heroVideo.url} type="video/mp4" />
+          <source src={heroVideoUrl} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/30" />
