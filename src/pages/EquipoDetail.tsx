@@ -3,13 +3,12 @@ import { ArrowLeft, ArrowRight, Check, Download } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { equipmentRaw, equipmentSlugExists, equipmentVariants, getEquipmentBySlugLocalized, getEquipmentList } from "@/lib/equipment";
 import { useI18n } from "@/lib/i18n";
-import { useLeadModal } from "@/components/LeadModalProvider";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 export default function EquipmentDetailPage() {
   const { slug = "" } = useParams<{ slug: string }>();
   const { t, locale } = useI18n();
-  const { openLead } = useLeadModal();
 
   const exists = equipmentSlugExists(slug);
   const raw = exists ? equipmentRaw.find((e) => e.slug === slug) : undefined;
@@ -49,9 +48,9 @@ export default function EquipmentDetailPage() {
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">{eq.description}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button type="button" onClick={openLead} className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-7 py-3.5 font-semibold hover:shadow-gold-glow transition">
+                <a href={whatsappUrl(`Olá! Tenho interesse no equipamento ${eq.code} - ${eq.name}. Gostaria de receber um orçamento.`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-7 py-3.5 font-semibold hover:shadow-gold-glow transition">
                   {t("detail.requestQuote")} <ArrowRight size={18} />
-                </button>
+                </a>
                 <a href={`/datasheets/${eq.slug}.pdf`} download className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 backdrop-blur-md bg-primary-foreground/5 px-7 py-3.5 font-semibold hover:bg-primary-foreground/15 transition">
                   <Download size={18} /> {t("detail.datasheet")}
                 </a>
@@ -128,7 +127,7 @@ export default function EquipmentDetailPage() {
             <p className="mt-4 text-muted-foreground max-w-2xl">{t("detail.models.sub")}</p>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {variants.map((v) => (
-                <button key={v} type="button" onClick={openLead} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 text-left">
+                <a key={v} href={whatsappUrl(`Olá! Tenho interesse no equipamento ${eq.code} - ${v}. Gostaria de receber um orçamento.`)} target="_blank" rel="noopener noreferrer" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 text-left">
                   <div className="text-xs uppercase tracking-widest text-primary font-semibold">{eq.code}</div>
                   <div className="mt-1 text-3xl md:text-4xl font-display font-bold">
                     {eq.code} <span className="text-muted-foreground font-normal">– {v}</span>
@@ -136,7 +135,7 @@ export default function EquipmentDetailPage() {
                   <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
                     {t("detail.requestQuote")} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </div>
-                </button>
+                </a>
               ))}
             </div>
           </div>
@@ -169,9 +168,9 @@ export default function EquipmentDetailPage() {
         <div className="container mx-auto px-6 text-center relative">
           <h2 className="text-3xl md:text-5xl font-bold">{t("detail.cta.title")} {eq.code}?</h2>
           <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">{t("detail.cta.sub")}</p>
-          <button type="button" onClick={openLead} className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
+          <a href={whatsappUrl(`Olá! Tenho interesse no equipamento ${eq.code} - ${eq.name}. Gostaria de receber um orçamento.`)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-8 py-4 font-semibold hover:shadow-gold-glow transition">
             {t("home.cta.button")} <ArrowRight size={18} />
-          </button>
+          </a>
         </div>
       </section>
     </SiteLayout>
