@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/logo-conemag.png";
 import { useI18n, locales } from "@/lib/i18n";
-import { useLeadModal } from "./LeadModalProvider";
+import { WHATSAPP_QUOTE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { locale, setLocale, t } = useI18n();
-  const { openLead } = useLeadModal();
 
   const nav = [
     { to: "/", label: t("nav.home") },
@@ -68,7 +67,10 @@ export function SiteHeader() {
                 {locales.map((l) => (
                   <button
                     key={l.code}
-                    onClick={() => { setLocale(l.code); setLangOpen(false); }}
+                    onClick={() => {
+                      setLocale(l.code);
+                      setLangOpen(false);
+                    }}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-primary-foreground/10 transition ${
                       l.code === locale ? "text-gold" : "text-primary-foreground/85"
                     }`}
@@ -80,13 +82,14 @@ export function SiteHeader() {
               </div>
             )}
           </div>
-          <button
-            type="button"
-            onClick={openLead}
+          <a
+            href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="ml-4 inline-flex items-center rounded-full bg-gold text-gold-foreground px-5 py-2 text-sm font-semibold hover:bg-gold/90 transition shadow-gold-glow"
           >
             {t("nav.quote")}
-          </button>
+          </a>
         </nav>
 
         <button
@@ -111,13 +114,15 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <button
-              type="button"
-              onClick={() => { setOpen(false); openLead(); }}
+            <a
+              href={whatsappUrl(WHATSAPP_QUOTE_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center rounded-full bg-gold text-gold-foreground px-5 py-3 text-base font-semibold"
             >
               {t("nav.quote")}
-            </button>
+            </a>
             <div className="mt-2 pt-3 border-t border-primary-foreground/10 flex gap-2">
               {locales.map((l) => (
                 <button
