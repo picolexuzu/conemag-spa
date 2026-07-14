@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -27,8 +28,13 @@ import { WHATSAPP_QUOTE_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 import heroVideo from "@/assets/hero.mp4.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
+const LOVABLE_ASSET_ORIGIN = "https://conemag-spa.lovable.app";
+const resolveAssetUrl = (url: string) =>
+  url.startsWith("/__l5e/") ? `${LOVABLE_ASSET_ORIGIN}${url}` : url;
+
 export default function HomePage() {
   const { t, locale } = useI18n();
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   usePageMeta({
     title: "Conemag — Equipamentos para reciclagem de sucata",
     description:
@@ -48,6 +54,18 @@ export default function HomePage() {
     { key: "trituradores", icon: Cog },
   ];
   const totalModels = getTotalModelCount();
+  const heroVideoUrl = resolveAssetUrl(heroVideo.url);
+  const heroPosterUrl = resolveAssetUrl(heroPoster.url);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.load();
+    void video.play().catch(() => undefined);
+  }, []);
+
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
     [`+${totalModels}`, t("home.stats.lines")],
@@ -58,15 +76,16 @@ export default function HomePage() {
     <SiteLayout>
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
         <video
+          ref={heroVideoRef}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-          poster={heroPoster.url}
+          preload="auto"
+          poster={heroPosterUrl}
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={heroVideo.url} type="video/mp4" />
+          <source src={heroVideoUrl} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/30" />
