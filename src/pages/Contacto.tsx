@@ -21,8 +21,8 @@ export default function ContactoPage() {
       </section>
 
       <section className="py-20">
-        <div className="container mx-auto px-6 grid lg:grid-cols-5 gap-10">
-          <div className="lg:col-span-2 space-y-4">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { icon: Phone, title: t("contact.phone"), value: "(16) 3333-6966" },
               { icon: MessageCircle, title: t("contact.whatsapp"), value: "+55 (16) 99999-0000" },
@@ -40,56 +40,8 @@ export default function ContactoPage() {
               </div>
             ))}
           </div>
-
-          <form
-            className="lg:col-span-3 bg-card border border-border rounded-2xl p-8 shadow-card space-y-5"
-            onSubmit={(e) => { e.preventDefault(); alert(t("contact.form.success")); }}
-          >
-            <div className="grid md:grid-cols-2 gap-5">
-              <Field label={t("contact.form.name")} name="name" required />
-              <Field label={t("contact.form.company")} name="company" />
-              <Field label={t("contact.form.email")} name="email" type="email" required />
-              <Field label={t("contact.form.phone")} name="phone" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">{t("contact.form.country")}</label>
-              <select name="country" className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring">
-                <option>Brasil</option><option>México</option><option>Argentina</option><option>Chile</option>
-                <option>Colombia</option><option>Perú</option><option>Uruguay</option>
-                <option>Paraguay</option><option>Bolivia</option><option>Ecuador</option>
-                <option>Venezuela</option><option>—</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">{t("contact.form.help")}</label>
-              <textarea
-                name="message"
-                rows={5}
-                required
-                placeholder={t("contact.form.placeholder")}
-                className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-              />
-            </div>
-            <button type="submit" className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-8 py-4 font-semibold hover:shadow-glow transition">
-              {t("contact.form.submit")}
-            </button>
-          </form>
         </div>
       </section>
     </SiteLayout>
-  );
-}
-
-function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
-  return (
-    <div>
-      <label className="block text-sm font-medium mb-2">{label}{required && <span className="text-primary"> *</span>}</label>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-      />
-    </div>
   );
 }
