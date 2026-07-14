@@ -61,6 +61,7 @@ export default function HomePage() {
     const video = heroVideoRef.current;
     if (!video) return;
 
+    video.muted = true;
     video.load();
     void video.play().catch(() => undefined);
   }, []);
@@ -78,7 +79,6 @@ export default function HomePage() {
           ref={heroVideoRef}
           autoPlay
           muted
-          defaultMuted
           loop
           playsInline
           preload="auto"
