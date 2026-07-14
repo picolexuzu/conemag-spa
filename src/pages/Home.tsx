@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -33,6 +34,7 @@ const resolveAssetUrl = (url: string) =>
 
 export default function HomePage() {
   const { t, locale } = useI18n();
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   usePageMeta({
     title: "Conemag — Equipamentos para reciclagem de sucata",
     description:
@@ -54,6 +56,15 @@ export default function HomePage() {
   const totalModels = getTotalModelCount();
   const heroVideoUrl = resolveAssetUrl(heroVideo.url);
   const heroPosterUrl = resolveAssetUrl(heroPoster.url);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.load();
+    void video.play().catch(() => undefined);
+  }, []);
+
   const stats: [string, string][] = [
     ["+26", t("home.stats.years")],
     [`+${totalModels}`, t("home.stats.lines")],
@@ -64,11 +75,13 @@ export default function HomePage() {
     <SiteLayout>
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
         <video
+          ref={heroVideoRef}
           autoPlay
           muted
+          defaultMuted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={heroPosterUrl}
           className="absolute inset-0 w-full h-full object-cover"
         >
