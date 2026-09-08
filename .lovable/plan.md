@@ -1,23 +1,32 @@
-# Ajustes da apresentação institucional 2026 (conforme a ata da reunião)
+# Ajustes da apresentação institucional 2026 (ata da reunião + correções visuais)
 
-Comparei a ata com a versão atual (v44, 18 páginas). Abaixo o que já está de acordo, o que muda e o que ainda depende de material seu.
+Comparei a ata com a versão atual (v44, 18 páginas). Abaixo o que já está de acordo, o que muda e o que fica para depois.
 
 ## Já aprovado — não muda
 - Capa: marca, posicionamento, 26 anos, +1000 equipamentos, "Apresentação Institucional 2026", selo de compliance.
 - Missão e Visão.
 - Linha GTX (facas reversíveis de 4 posições).
-- Página de serviços ("Agregue valor à sua sucata") e página de localização (Araraquara/SP, Porto de Santos).
+- Página de serviços ("Agregue valor à sua sucata").
 
-## Páginas que saem do catálogo
-- THX Múltiplos Cortes (página atual 7).
-- Prensa Jacaré Manual (página atual 12) e todas as versões manuais.
-- Linha TPX (página atual 14).
+## Páginas que saem
+- THX Múltiplos Cortes.
+- Prensa Jacaré Manual e todas as versões manuais.
+- Linha TPX.
+- Localização · Onde estamos (o conteúdo já está na página final).
 
-A apresentação passa de 18 para 15 páginas, com a numeração do rodapé recalculada.
+A apresentação passa de 18 para 14 páginas, com a numeração do rodapé recalculada.
+
+## Correções visuais
+- Página 4 (linha de equipamentos): as fotos da fileira de baixo (PSX, PLX, PBX, BMX) estão cortadas — recompor os cards para a foto caber inteira.
+- Página 4: remover a faixa branca que fica por cima do rodapé (problema de ordem de camadas).
+- Página da GTX: remover o quadrado branco sobre a foto e usar a imagem enviada da GTX-1000.
+- Página da BMX: corrigir o corte da foto.
+- Página da THX: substituir o selo Best Seller pelo novo selo azul enviado (com o fundo removido).
+- Página da TJX: corrigir a cota da imagem de 600 mm para 1.000 mm.
 
 ## Textos a ajustar
-- Quem somos: usar o texto oficial aprovado — "Há 26 anos iniciamos nossa história com a Eduardo Bueno e hoje somos líderes de mercado em equipamentos para beneficiamento e preparação de sucatas..." (hoje há uma versão antiga sobreposta nessa página, que também será limpa).
-- Diferenciais: incluir "unidades a pronta-entrega (sob consulta)" e "venda, locação e prestação de serviços" com a redação da ata; manter "quase 3 décadas".
+- Quem somos: usar o texto oficial aprovado — "Há 26 anos iniciamos nossa história com a Eduardo Bueno e hoje somos líderes de mercado em equipamentos para beneficiamento e preparação de sucatas..." (também limpar a versão antiga sobreposta nessa página).
+- Diferenciais: incluir "unidades a pronta-entrega (sob consulta)" e "venda, locação e prestação de serviços"; manter "quase 3 décadas".
 - Abertura da linha de equipamentos: "Soluções para corte e cisalhamento, compactação e enfardamento, e briquetagem de sucatas em geral."
 - Nomenclatura: usar "Linha" antes de cada código (Linha THX, Linha TVX, Linha TJX, Linha GTX, Linha PSX, Linha PLX, Linha PBX, Linha BMX).
 - TVX: incluir "esqueletos de oxicorte, perfis estruturais e vergalhões lineares".
@@ -27,18 +36,8 @@ A apresentação passa de 18 para 15 páginas, com a numeração do rodapé reca
 
 Todas as alterações em português ganham a versão correspondente em chinês, no mesmo padrão bilíngue.
 
-## Ajustes visuais
-- Página da THX: manter apenas um selo Best Seller, centralizado, trocando o vermelho por azul-escuro com contorno.
-- Página da TJX: corrigir a cota da imagem de 600 mm para 1.000 mm.
-
-## Pendências que dependem de você
-Preciso dos arquivos de logo (de preferência em alta resolução ou vetor) para:
-- Minas Fer (incluir)
-- PH Transportes (nome correto e logo legível)
-- Mirafer (versão legível)
-- Friusa Metais (substituir a atual, que está em baixa resolução)
-
-Posso executar todo o resto e deixar a página de clientes pronta para receber esses quatro logos assim que chegarem.
+## Fica para depois
+As logos de clientes (Minas Fer, PH Transportes, Mirafer, Friusa Metais) serão tratadas em uma próxima versão, quando você enviar os arquivos.
 
 ## Detalhes técnicos
-Os ajustes serão aplicados sobre o PDF v44 com PyMuPDF, preservando geometria, fontes (Barlow Condensed e Noto Sans SC) e o rodapé bilíngue. A saída será `conemag-apresentacao-2026-ZH-PT-bilingue_v45.pdf`, com conferência visual página a página antes da entrega.
+Ajustes aplicados sobre o PDF v44 com PyMuPDF, preservando geometria, fontes (Barlow Condensed e Noto Sans SC) e o rodapé bilíngue. Saída: `conemag-apresentacao-2026-ZH-PT-bilingue_v45.pdf`, com conferência visual página a página antes da entrega.
