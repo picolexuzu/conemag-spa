@@ -1,4 +1,0 @@
-- [x] Criar versão integral em PT-BR da apresentação v36
-- [x] Reduzir e subir o selo LOVE $CRAP na capa
-- [x] Padronizar toda a redação em primeira pessoa do plural
-- [x] Renderizar e revisar visualmente as 18 páginas
