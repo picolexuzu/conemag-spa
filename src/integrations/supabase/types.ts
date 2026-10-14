@@ -101,6 +101,72 @@ export type Database = {
         }
         Relationships: []
       }
+      event_leads: {
+        Row: {
+          challenge: string
+          city_state: string
+          company: string
+          consent: boolean
+          consent_at: string
+          consent_version: string
+          created_at: string
+          current_process: string
+          equipment_interest: string | null
+          id: string
+          investment_timing: string
+          material: string
+          monthly_volume: string
+          name: string
+          qualification: string
+          sale_condition: string
+          source: string
+          submission_id: string
+          whatsapp: string
+        }
+        Insert: {
+          challenge: string
+          city_state: string
+          company: string
+          consent: boolean
+          consent_at?: string
+          consent_version?: string
+          created_at?: string
+          current_process: string
+          equipment_interest?: string | null
+          id?: string
+          investment_timing: string
+          material: string
+          monthly_volume: string
+          name: string
+          qualification: string
+          sale_condition: string
+          source?: string
+          submission_id: string
+          whatsapp: string
+        }
+        Update: {
+          challenge?: string
+          city_state?: string
+          company?: string
+          consent?: boolean
+          consent_at?: string
+          consent_version?: string
+          created_at?: string
+          current_process?: string
+          equipment_interest?: string | null
+          id?: string
+          investment_timing?: string
+          material?: string
+          monthly_volume?: string
+          name?: string
+          qualification?: string
+          sale_condition?: string
+          source?: string
+          submission_id?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           company: string
