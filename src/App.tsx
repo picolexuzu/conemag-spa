@@ -8,6 +8,11 @@ import Contacto from "@/pages/Contacto";
 import NotFound from "@/pages/NotFound";
 import EmConstrucao from "@/pages/EmConstrucao";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { useLocation } from "react-router-dom";
+import EventDiagnostic from "@/pages/EventDiagnostic";
+import EventCatalog from "@/pages/EventCatalog";
+import EventEquipment from "@/pages/EventEquipment";
+import EventPrivacy from "@/pages/EventPrivacy";
 
 // Modo "site em construção": ativo somente no build de produção (npm run build).
 // No preview do Lovable (dev) o site completo continua acessível.
@@ -15,6 +20,16 @@ const CONSTRUCTION_MODE =
   import.meta.env.VITE_CONSTRUCTION_MODE === "false" ? false : import.meta.env.PROD;
 
 export default function App() {
+  const { pathname } = useLocation();
+  if (pathname === "/landingpage" || pathname.startsWith("/landingpage/")) {
+    return <Routes>
+      <Route path="/landingpage" element={<EventDiagnostic />} />
+      <Route path="/landingpage/equipamentos" element={<EventCatalog />} />
+      <Route path="/landingpage/equipamentos/:slug" element={<EventEquipment />} />
+      <Route path="/landingpage/privacidade" element={<EventPrivacy />} />
+      <Route path="*" element={<Navigate to="/landingpage" replace />} />
+    </Routes>;
+  }
   if (CONSTRUCTION_MODE) {
     return (
       <Routes>
