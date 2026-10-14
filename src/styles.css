@@ -133,6 +133,7 @@
 }
 
 @layer utilities {
+  .event-page h1, .event-page h2, .event-page h3 { letter-spacing: 0; }
   .bg-gradient-hero { background-image: var(--gradient-hero); }
   .bg-gradient-primary { background-image: var(--gradient-primary); }
   .bg-gradient-radial { background-image: var(--gradient-radial); }

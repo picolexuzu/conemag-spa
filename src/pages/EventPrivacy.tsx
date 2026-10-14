@@ -1,0 +1,5 @@
+import { EventLayout } from "@/components/event/EventLayout";
+import { Link } from "react-router-dom";
+export default function EventPrivacy() {
+  return <EventLayout><article className="max-w-3xl mx-auto px-5 py-12 space-y-6"><Link to="/landingpage" className="text-primary text-sm underline">Voltar ao diagnóstico</Link><h1 className="text-3xl font-bold">Privacidade do diagnóstico</h1><p>Ao enviar o formulário, você autoriza a Conemag a tratar seu nome, empresa, WhatsApp, cidade e estado, respostas sobre sua operação e equipamento de interesse para responder à solicitação e entrar em contato sobre soluções relacionadas.</p><p>As informações ficam armazenadas com acesso restrito, não são exibidas no catálogo e não são disponibilizadas publicamente. A base legal deste atendimento é seu consentimento.</p><p>Você pode solicitar acesso, correção ou exclusão dos dados, ou retirar sua autorização, pelo WhatsApp da Conemag: (16) 3333-6966.</p></article></EventLayout>;
+}
