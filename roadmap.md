@@ -1,4 +1,7 @@
 # Feira ECO EXPO
+- [ ] Abrir diagnóstico no slug de cada máquina e direcionar para sua apresentação após envio.
+- [ ] Criar /admin restrito com conta única e consulta de todos os formulários.
+- [ ] Verificar envio real, autenticação e proteção dos contatos.
 - [x] Criar diagnóstico com as perguntas do anexo e registro seguro de leads.
 - [x] Criar catálogo e páginas individuais com apresentação e fotos, sem especificações.
 - [x] Aplicar logos Conemag Group e ECO EXPO e manter /landingpage acessível em produção.
