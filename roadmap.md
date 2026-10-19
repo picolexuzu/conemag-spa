@@ -1,6 +1,6 @@
 # Feira ECO EXPO
+- [x] Abrir apresentação no slug, usar Conhecer solução e agradecer após envio com retorno ao catálogo em 5 segundos.
 - [x] Remover fundos das 12 máquinas, otimizar imagens e destacar a volta ao catálogo.
-- [x] Abrir diagnóstico no slug de cada máquina e direcionar para sua apresentação após envio.
 - [x] Criar /admin restrito com conta única e consulta de todos os formulários.
 - [x] Verificar envio real, autenticação e proteção dos contatos.
 - [ ] Definir a senha definitiva do administrador: aguardando senha forte, pois a solicitada foi recusada pela proteção de segurança.

@@ -14,6 +14,7 @@ import EventCatalog from "@/pages/EventCatalog";
 import EventEquipment from "@/pages/EventEquipment";
 import EventPrivacy from "@/pages/EventPrivacy";
 import EventAdmin from "@/pages/EventAdmin";
+import EventThankYou from "@/pages/EventThankYou";
 
 // Modo "site em construção": ativo somente no build de produção (npm run build).
 // No preview do Lovable (dev) o site completo continua acessível.
@@ -30,7 +31,8 @@ export default function App() {
       <Route path="/landingpage" element={<EventCatalog />} />
       <Route path="/landingpage/diagnostico" element={<EventDiagnostic />} />
       <Route path="/landingpage/:slug/diagnostico" element={<EventDiagnostic />} />
-      <Route path="/landingpage/:slug" element={<EventDiagnostic />} />
+      <Route path="/landingpage/:slug" element={<EventEquipment />} />
+      <Route path="/landingpage/obrigado" element={<EventThankYou />} />
       <Route path="/landingpage/equipamentos" element={<EventCatalog />} />
       <Route path="/landingpage/equipamentos/:slug" element={<EventEquipment />} />
       <Route path="/landingpage/privacidade" element={<EventPrivacy />} />

@@ -4,5 +4,5 @@
 - Use an event-specific catalog sourced from the supplied event brochure; do not expose institutional technical specifications in event detail pages.
 - Use dedicated transparent WebP machine images with mobile variants for the event showcase, keeping institutional assets unchanged and avoiding brochure crops as machine cutouts.
 - Scope the event's visual tokens and editorial machine showcase styles to `.event-page` so institutional pages remain unchanged.
-- Open the equipment diagnostic at `/landingpage/:slug` and its `/diagnostico` alias, then send successful submissions to `/landingpage/equipamentos/:slug` to preserve machine attribution and legacy presentation URLs.
+- Open machine presentations at `/landingpage/:slug`, retain legacy `/landingpage/equipamentos/:slug` URLs, and open attributed diagnostics at `/landingpage/:slug/diagnostico`; successful submissions open `/landingpage/obrigado` with a cleanup-safe delayed return to the catalog, keeping the event journey and machine attribution consistent.
 - Keep `/admin` outside construction mode and use Cloud email/password authentication with public registration disabled; never embed credentials or derive privileges from client storage.
