@@ -1,24 +1,26 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, MessageCircle, Download, ArrowRight } from "lucide-react";
+import { ArrowLeft, MessageCircle, Download, ArrowRight } from "lucide-react";
 import { EventLayout } from "@/components/event/EventLayout";
+import { EventBenefits } from "@/components/event/EventMachineCard";
 import { Button } from "@/components/ui/button";
 import { eventEquipment } from "@/lib/event-catalog";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { usePageMeta } from "@/lib/usePageMeta";
 import catalog from "@/assets/event/catalogo.asset.json";
-
+import yard from "@/assets/event/scrap-yard.jpg";
 export default function EventEquipment() {
-  const { slug } = useParams(); const eq = eventEquipment.find(e => e.slug === slug);
-  usePageMeta({ title: eq ? `Linha ${eq.code} — Conemag Group` : "Equipamentos Conemag", description: eq?.description });
-  if (!eq) return <Navigate to="/landingpage/equipamentos" replace />;
-  const related = eventEquipment.filter(e => e.slug !== eq.slug && e.category === eq.category).slice(0, 2);
-  return <EventLayout>
-    <section className="event-stage"><div className="event-shell pt-7"><Button asChild variant="ghost" className="event-dim hover:bg-transparent hover:text-gold px-0"><Link to="/landingpage/equipamentos"><ArrowLeft /> Coleção Conemag</Link></Button></div>
-      <div className="event-shell event-spotlight"><div className="event-spotlight-copy"><p className="event-eyebrow event-dim mb-5">{eq.category} / ECO EXPO 2026</p><h1 className="event-spotlight-title"><span className="block text-sm event-dim font-medium mb-3">LINHA</span>{eq.code}</h1><h2 className="mt-5 text-xl sm:text-2xl font-medium">{eq.name}</h2><p className="event-dim mt-5 text-sm leading-relaxed">{eq.description}</p><Button asChild variant="event" className="mt-7 h-12 px-6"><a href={whatsappUrl(`Olá! Visitei a ECO EXPO e tenho interesse na Linha ${eq.code} — ${eq.name}.`)} target="_blank" rel="noopener noreferrer"><MessageCircle /> Falar com a Conemag</a></Button></div><div className="event-machine-stage"><span className="event-machine-word" aria-hidden="true">{eq.code}</span><img src={eq.image} alt={eq.name} fetchPriority="high" /></div></div>
-      <div className="event-shell"><div className="event-stage-bar grid sm:grid-cols-3 gap-6">{eq.benefits.map((b, i) => <div key={b} className="flex gap-4 items-center"><span className="text-gold text-xs event-number">0{i + 1}</span><p className="text-sm font-medium">{b}</p></div>)}</div></div>
-    </section>
-    <section className="event-shell py-14 sm:py-20"><div className="flex flex-wrap justify-between items-end gap-5 mb-8"><div><p className="event-eyebrow text-muted-foreground">Feita para o seu pátio</p><h2 className="text-3xl sm:text-4xl font-bold mt-3">{eq.code} em destaque.</h2></div><Button asChild variant="eventOutline" className="h-12"><a href={catalog.url} target="_blank" rel="noopener noreferrer"><Download /> Apresentação</a></Button></div><div className="bg-muted py-6 sm:py-10"><img src={eq.photo} alt={`Linha ${eq.code} na apresentação ECO EXPO`} className="event-detail-photo" loading="lazy" /></div></section>
-    <section className="event-catalog-band"><div className="event-shell py-12 flex flex-wrap justify-between items-center gap-6"><div><p className="event-eyebrow mb-3">Uma solução para cada operação</p><h2 className="text-3xl font-bold">Vamos transformar seu pátio?</h2></div><Button asChild variant="eventOutline" className="h-12"><Link to={`/landingpage?equipamento=${eq.slug}`}>Fazer meu diagnóstico <ArrowRight /></Link></Button></div></section>
-    {related.length > 0 && <section className="event-shell py-14"><h2 className="text-3xl font-bold mb-8">Explore também.</h2><div className="event-gallery">{related.map(machine => <Link key={machine.slug} to={`/landingpage/equipamentos/${machine.slug}`} className="event-machine-link"><div className="event-machine-photo"><img src={machine.image} alt={machine.name} loading="lazy" /></div><div className="flex justify-between items-center mt-5"><div><h3 className="text-2xl font-bold">Linha {machine.code}</h3><p className="text-sm text-muted-foreground mt-2">{machine.name}</p></div><span className="event-arrow"><ArrowUpRight size={20} /></span></div></Link>)}</div></section>}
-  </EventLayout>;
+ const {slug}=useParams(); const eq=eventEquipment.find(e=>e.slug===slug);
+ usePageMeta({title:eq?`Linha ${eq.code} — Conemag Group | ECO EXPO`:"Conemag Group",description:eq?.description});
+ if(!eq) return <Navigate to="/landingpage" replace />;
+ const diagnostic=`/landingpage/${eq.slug}/diagnostico`;
+ return <EventLayout><div className="event-backdrop"><img src={yard} alt="" className="event-yard" /><section className="event-machine-intro">
+ <Button asChild variant="ghost" className="px-0 mb-3 text-primary"><Link to="/landingpage"><ArrowLeft /> Todos os equipamentos</Link></Button>
+ <div className="event-machine-heading"><p className="event-eyebrow mb-4">Conemag Group · ECO EXPO 2026</p><span className="event-line-label">LINHA {eq.code}</span><h1>{eq.name}</h1><p className="text-sm leading-relaxed">{eq.description}</p></div>
+ <div className="event-machine-visual"><img src={eq.image} alt={eq.name} fetchPriority="high" /></div>
+ <EventBenefits benefits={eq.benefits} detail />
+ <div className="event-machine-actions"><Button asChild variant="default" className="h-14 text-base font-bold"><Link to={diagnostic}>Quero esta solução <ArrowRight /></Link></Button><p className="text-xs text-center font-medium text-primary">Diagnóstico personalizado da sua operação</p><Button asChild variant="outline" className="bg-card h-12"><a href={whatsappUrl(`Olá! Visitei a ECO EXPO e tenho interesse na Linha ${eq.code} — ${eq.name}.`)} target="_blank" rel="noopener noreferrer"><MessageCircle /> Falar com a Conemag</a></Button></div>
+ </section></div>
+ <section className="event-shell py-8"><div className="flex items-center justify-between gap-4 mb-5"><h2 className="text-xl font-bold">{eq.code} em destaque</h2><Button asChild variant="ghost"><a href={catalog.url} target="_blank" rel="noopener noreferrer"><Download /> Apresentação</a></Button></div><img src={eq.photo} alt={`Linha ${eq.code} no catálogo ECO EXPO`} className="event-detail-photo" loading="lazy" /></section>
+ <div className="event-sticky-action"><Button asChild variant="event"><Link to={diagnostic}>Quero esta solução <ArrowRight /></Link></Button></div>
+ </EventLayout>;
 }
