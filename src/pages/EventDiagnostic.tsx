@@ -8,6 +8,7 @@ import { diagnosticQuestions, eventLeadSchema } from "@/lib/event-diagnostic";
 import { eventEquipment } from "@/lib/event-catalog";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { eventPresentationPath } from "@/lib/event-flow";
 
 export default function EventDiagnostic() {
   const [step, setStep] = useState(0);
@@ -33,12 +34,12 @@ export default function EventDiagnostic() {
     try {
       const { data, error: sendError } = await supabase.functions.invoke("submit-event-lead", { body: { ...parsed.data, website } });
       if (sendError || !data?.success) throw new Error("Não foi possível enviar seu diagnóstico. Tente novamente.");
-      navigate("/landingpage/equipamentos", { state: { submitted: true } });
+      navigate(eventPresentationPath(interest?.slug), { state: { submitted: true } });
     } catch (err) { setError(err instanceof Error ? err.message : "Não foi possível enviar."); }
     finally { setBusy(false); }
   }
   return <EventLayout>
-    <section id="diagnostico" className="event-shell py-7 sm:py-12 max-w-3xl"><div className="mb-6"><Button asChild variant="ghost" className="px-0 mb-4"><Link to={interest ? `/landingpage/${interest.slug}` : "/landingpage"}><ArrowLeft /> Voltar ao equipamento</Link></Button><p className="event-eyebrow text-primary">Conemag Group · ECO EXPO 2026</p><h1 className="text-3xl font-bold mt-3">Diagnóstico do seu pátio.</h1></div><div>
+    <section id="diagnostico" className="event-shell py-7 sm:py-12 max-w-3xl"><div className="mb-6"><Button asChild variant="ghost" className="px-0 mb-4"><Link to="/landingpage"><ArrowLeft /> Todos os equipamentos</Link></Button><p className="event-eyebrow text-primary">Conemag Group · ECO EXPO 2026</p><h1 className="text-3xl font-bold mt-3">Diagnóstico do seu pátio.</h1></div><div>
       {interest && <p className="mb-6 border-l-4 border-primary pl-4 text-sm">Seu interesse: <strong>Linha {interest.code} · {interest.name}</strong></p>}
       <ol className="grid grid-cols-3 gap-3 mb-9">{["Seu desafio", "Sua operação", "Seu contato"].map((title, i) => <li key={title} className={`border-t-4 pt-3 text-xs sm:text-sm font-semibold ${i <= step ? "border-primary text-primary" : "border-border text-muted-foreground"}`}><span className="mr-2">0{i + 1}</span>{title}</li>)}</ol>
       <form onSubmit={submit}>
