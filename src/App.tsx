@@ -23,7 +23,10 @@ export default function App() {
   const { pathname } = useLocation();
   if (pathname === "/landingpage" || pathname.startsWith("/landingpage/")) {
     return <Routes>
-      <Route path="/landingpage" element={<EventDiagnostic />} />
+      <Route path="/landingpage" element={<EventCatalog />} />
+      <Route path="/landingpage/diagnostico" element={<EventDiagnostic />} />
+      <Route path="/landingpage/:slug/diagnostico" element={<EventDiagnostic />} />
+      <Route path="/landingpage/:slug" element={<EventEquipment />} />
       <Route path="/landingpage/equipamentos" element={<EventCatalog />} />
       <Route path="/landingpage/equipamentos/:slug" element={<EventEquipment />} />
       <Route path="/landingpage/privacidade" element={<EventPrivacy />} />
