@@ -1,9 +1,10 @@
-import { test, expect } from "bun:test";
+import { test } from "node:test";
+import { strict as assert } from "node:assert";
 import { eventPresentationPath } from "./event-flow";
 
 test("GGX diagnostic opens GGX presentation after submission", () => {
-  expect(eventPresentationPath("ggx")).toBe("/landingpage/equipamentos/ggx");
+  assert.equal(eventPresentationPath("ggx"), "/landingpage/equipamentos/ggx");
 });
 test("General diagnostic opens the catalog after submission", () => {
-  expect(eventPresentationPath()).toBe("/landingpage/equipamentos");
+  assert.equal(eventPresentationPath(), "/landingpage/equipamentos");
 });
