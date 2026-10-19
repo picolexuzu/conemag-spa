@@ -9,6 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        event: "bg-gold text-gold-foreground hover:bg-gold/90 rounded-none shadow-none font-bold",
+        eventOutline: "border border-current/25 bg-transparent text-inherit hover:bg-foreground/5 rounded-none shadow-none",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
