@@ -1,10 +1,16 @@
 import { test } from "node:test";
 import { strict as assert } from "node:assert";
-import { eventPresentationPath } from "./event-flow";
+import { eventPresentationPath, eventThankYouPath, eventCatalogRedirectDelay } from "./event-flow";
 
-test("GGX diagnostic opens GGX presentation after submission", () => {
-  assert.equal(eventPresentationPath("ggx"), "/landingpage/equipamentos/ggx");
+test("Machine presentation uses the machine main slug", () => {
+  assert.equal(eventPresentationPath("ggx"), "/landingpage/ggx");
 });
-test("General diagnostic opens the catalog after submission", () => {
-  assert.equal(eventPresentationPath(), "/landingpage/equipamentos");
+test("Thank-you redirects to the main equipment catalog", () => {
+  assert.equal(eventPresentationPath(), "/landingpage");
+});
+test("Successful submissions open the thank-you page", () => {
+  assert.equal(eventThankYouPath, "/landingpage/obrigado");
+});
+test("Thank-you redirect waits exactly five seconds", () => {
+  assert.equal(eventCatalogRedirectDelay, 5000);
 });

@@ -8,7 +8,7 @@ import { diagnosticQuestions, eventLeadSchema } from "@/lib/event-diagnostic";
 import { eventEquipment } from "@/lib/event-catalog";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageMeta } from "@/lib/usePageMeta";
-import { eventPresentationPath } from "@/lib/event-flow";
+import { eventThankYouPath } from "@/lib/event-flow";
 
 export default function EventDiagnostic() {
   const [step, setStep] = useState(0);
@@ -34,7 +34,7 @@ export default function EventDiagnostic() {
     try {
       const { data, error: sendError } = await supabase.functions.invoke("submit-event-lead", { body: { ...parsed.data, website } });
       if (sendError || !data?.success) throw new Error("Não foi possível enviar seu diagnóstico. Tente novamente.");
-      navigate(eventPresentationPath(interest?.slug), { state: { submitted: true } });
+      navigate(eventThankYouPath, { replace: true });
     } catch (err) { setError(err instanceof Error ? err.message : "Não foi possível enviar."); }
     finally { setBusy(false); }
   }
