@@ -5,6 +5,6 @@
 - [x] Verificar envio, catálogo e navegação no computador e celular.
 
 # Nova apresentação da feira
-- [ ] Renovar a identidade das páginas da feira, sem aparência do site institucional.
-- [ ] Criar apresentação marcante para catálogo e páginas das máquinas, preservando o diagnóstico.
-- [ ] Verificar navegação e apresentação em telas grandes e pequenas.
+- [x] Renovar a identidade das páginas da feira, sem aparência do site institucional.
+- [x] Criar apresentação marcante para catálogo e páginas das máquinas, preservando o diagnóstico.
+- [x] Verificar navegação e apresentação em telas grandes e pequenas.
