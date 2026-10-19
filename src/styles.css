@@ -76,9 +76,9 @@
 .event-spotlight { position: relative; display: grid; grid-template-columns: 0.9fr 1.35fr; min-height: 530px; align-items: center; padding-block: 28px; }
 .event-spotlight-copy { position: relative; z-index: 2; max-width: 410px; padding-bottom: 24px; }
 .event-spotlight-title { font-size: 92px; line-height: 1; font-weight: 700; }
-.event-machine-stage { position: relative; height: 480px; display: grid; place-items: center; }
+.event-machine-stage { position: relative; height: 480px; min-width: 0; display: grid; place-items: center; overflow: hidden; }
 .event-machine-word { position: absolute; font-size: 190px; line-height: 1; font-weight: 700; color: var(--event-ghost); }
-.event-machine-stage img { position: relative; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(var(--event-shadow)); animation: event-reveal 500ms ease-out; }
+.event-machine-stage img { position: relative; width: 100%; height: 100%; min-height: 0; max-height: 100%; object-fit: contain; filter: drop-shadow(var(--event-shadow)); animation: event-reveal 500ms ease-out; }
 .event-stage-bar { border-top: 1px solid var(--event-line); padding-block: 22px; }
 .event-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 44px; row-gap: 48px; }
 .event-machine-link { display: block; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
