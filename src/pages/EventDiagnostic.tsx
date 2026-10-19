@@ -23,7 +23,7 @@ export default function EventDiagnostic() {
   const { slug } = useParams();
   const rawInterest = slug ?? params.get("equipamento")?.toLowerCase();
   const interest = eventEquipment.find(e => e.slug === rawInterest);
-  usePageMeta({ title: "Conemag Group na ECO EXPO — Diagnóstico do pátio", description: "Converse com a Conemag na ECO EXPO 2026 e encontre soluções para sua operação de sucatas." });
+  usePageMeta({ title: "Conemag Group na ECO EXPO — Diagnóstico da sua produção", description: "Converse com a Conemag na ECO EXPO 2026 e encontre soluções para sua operação de sucatas." });
   const questions = step === 0 ? diagnosticQuestions.slice(0, 2) : diagnosticQuestions.slice(2);
   const canContinue = questions.every(q => answers[q.key]);
   async function submit(e: React.FormEvent) {
@@ -39,7 +39,7 @@ export default function EventDiagnostic() {
     finally { setBusy(false); }
   }
   return <EventLayout>
-    <section id="diagnostico" className="event-shell py-7 sm:py-12 max-w-3xl"><div className="mb-6"><Button asChild variant="ghost" className="px-0 mb-4"><Link to="/landingpage"><ArrowLeft /> Todos os equipamentos</Link></Button><p className="event-eyebrow text-primary">Conemag Group · ECO EXPO 2026</p><h1 className="text-3xl font-bold mt-3">Diagnóstico do seu pátio.</h1></div><div>
+    <section id="diagnostico" className="event-shell py-7 sm:py-12 max-w-3xl"><div className="mb-6"><Button asChild variant="ghost" className="px-0 mb-4"><Link to="/landingpage"><ArrowLeft /> Todos os equipamentos</Link></Button><p className="event-eyebrow text-primary">Conemag Group · ECO EXPO 2026</p><h1 className="text-3xl font-bold mt-3">Diagnóstico da sua produção.</h1></div><div>
       {interest && <p className="mb-6 border-l-4 border-primary pl-4 text-sm">Seu interesse: <strong>Linha {interest.code} · {interest.name}</strong></p>}
       <ol className="grid grid-cols-3 gap-3 mb-9">{["Seu desafio", "Sua operação", "Seu contato"].map((title, i) => <li key={title} className={`border-t-4 pt-3 text-xs sm:text-sm font-semibold ${i <= step ? "border-primary text-primary" : "border-border text-muted-foreground"}`}><span className="mr-2">0{i + 1}</span>{title}</li>)}</ol>
       <form onSubmit={submit}>
