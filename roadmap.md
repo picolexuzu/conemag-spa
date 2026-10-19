@@ -1,4 +1,5 @@
 # Feira ECO EXPO
+- [x] Remover fundos das 12 máquinas, otimizar imagens e destacar a volta ao catálogo.
 - [x] Abrir diagnóstico no slug de cada máquina e direcionar para sua apresentação após envio.
 - [x] Criar /admin restrito com conta única e consulta de todos os formulários.
 - [x] Verificar envio real, autenticação e proteção dos contatos.

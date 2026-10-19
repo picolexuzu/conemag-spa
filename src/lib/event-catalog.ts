@@ -1,16 +1,16 @@
-import { getEquipmentList } from "./equipment";
-import thx from "@/assets/event/thx.asset.json";
-import tvx from "@/assets/event/tvx.asset.json";
-import tjx from "@/assets/event/tjx.asset.json";
-import psx from "@/assets/event/psx.asset.json";
-import manual from "@/assets/event/psx-manual.asset.json";
-import plx from "@/assets/event/plx.asset.json";
-import pbx from "@/assets/event/pbx.asset.json";
-import bmx from "@/assets/event/bmx.asset.json";
-import tpx from "@/assets/event/tpx.asset.json";
-import gtx from "@/assets/event/gtx.asset.json";
-import ggx from "@/assets/event/ggx.asset.json";
-import gfx from "@/assets/event/gfx.asset.json";
+import { eventImages } from "./event-images";
+import thx from "@/assets/event/optimized/thx-photo.asset.json";
+import tvx from "@/assets/event/optimized/tvx-photo.asset.json";
+import tjx from "@/assets/event/optimized/tjx-photo.asset.json";
+import psx from "@/assets/event/optimized/psx-photo.asset.json";
+import manual from "@/assets/event/optimized/psx-manual-photo.asset.json";
+import plx from "@/assets/event/optimized/plx-photo.asset.json";
+import pbx from "@/assets/event/optimized/pbx-photo.asset.json";
+import bmx from "@/assets/event/optimized/bmx-photo.asset.json";
+import tpx from "@/assets/event/optimized/tpx-photo.asset.json";
+import gtx from "@/assets/event/optimized/gtx-photo.asset.json";
+import ggx from "@/assets/event/optimized/ggx-photo.asset.json";
+import gfx from "@/assets/event/optimized/gfx-photo.asset.json";
 
 const entries = [
   ["thx", "THX", "Tesourão horizontal múltiplos cortes", "Tesouras", "Corta e cisalha sucatas pesadas.", ["Robustez", "Alta produtividade", "Operação segura"], thx.url],
@@ -26,9 +26,9 @@ const entries = [
   ["ggx", "GGX", "Garra giratória", "Garras e manipulação", "Manipulação e movimentação de sucatas.", ["Rotação eficiente", "Maior alcance operacional", "Movimentação segura"], ggx.url],
   ["gfx", "GFX", "Garra fixa", "Garras e manipulação", "Manipulação e movimentação de sucatas.", ["Estrutura robusta", "Movimentação precisa", "Aplicação industrial"], gfx.url],
 ] as const;
-const existing = getEquipmentList("pt");
 export const eventEquipment = entries.map(([slug, code, name, category, description, benefits, photo]) => ({
   slug, code, name, category, description, benefits, photo,
-  image: existing.find(e => e.slug === slug)?.image ?? photo,
+  image: eventImages[slug][0],
+  imageMobile: eventImages[slug][1],
 }));
 export const eventCategories = ["Todos", "Tesouras", "Prensas", "Briquetagem e alumínio", "Garras e manipulação"];
